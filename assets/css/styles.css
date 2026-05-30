@@ -410,11 +410,9 @@ h1, h2, h3, h4 {
   flex-wrap:       wrap;
 }
 .dashboard__logo {
-  height:      72px;
+  height:      68px;
   width:       auto;
   display:     block;
-  object-fit:  contain;
-  /* logo PNG has transparent bg after processing */
 }
 .dashboard__title {
   font-size:  2.4rem;

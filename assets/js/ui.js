@@ -147,7 +147,7 @@ const UI = {
     <div class="dashboard">
       <header class="dashboard__header">
         <div class="dashboard__title-wrap">
-          <img src="assets/images/logo.png" alt="${config.siteTitle}" class="dashboard__logo" />
+          <img src="assets/images/logo.svg" alt="${config.siteTitle}" class="dashboard__logo" />
         </div>
         <div class="dashboard__actions">
           ${reviewBtn}
