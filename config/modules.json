@@ -36,7 +36,7 @@
     {
       "id": "CPM",
       "title": "CPM",
-      "fullTitle": "Cardio-Pulmonary Medicine",
+      "fullTitle": "Cardio-Pulmonary Module",
       "shortTitle": "CPM",
       "description": "Cardiovascular and pulmonary system questions",
       "color": "#dc2626",
@@ -67,7 +67,7 @@
       "shortTitle": "GIT",
       "description": "Gastrointestinal system and hepatobiliary questions",
       "color": "#d97706",
-      "icon": "🫁",
+      "icon": "🍏",
       "dataPath": "GIT",
       "subSubjects": {
         "end_module": {
@@ -111,7 +111,7 @@
     {
       "id": "ENDO_REPRO",
       "title": "ENDO & REPRO",
-      "fullTitle": "Endocrinology & Reproductive",
+      "fullTitle": "Endocrine & Reproduction",
       "shortTitle": "ENDO",
       "description": "Endocrine system and reproductive medicine questions",
       "color": "#4A9E8E",
