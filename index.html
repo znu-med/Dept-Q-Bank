@@ -17,6 +17,13 @@
     main branch. No build step required.
     ============================================================
   -->
+  <!-- Dark mode: apply theme before CSS renders to prevent flash -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('dqb_theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

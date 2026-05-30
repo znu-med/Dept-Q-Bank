@@ -1230,3 +1230,94 @@ h1, h2, h3, h4 {
   color:       var(--text-3);
   font-weight: 600;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   DARK MODE
+   Applied via [data-theme="dark"] on <html>.
+   Falls back to system preference if no manual toggle set.
+   ══════════════════════════════════════════════════════════════ */
+
+[data-theme="dark"] {
+  --primary:        #4A7FC1;
+  --primary-light:  #6399d4;
+  --primary-dark:   #2a5298;
+  --primary-50:     #1a2a3d;
+
+  --bg:             #0f1923;
+  --surface:        #162030;
+  --surface-2:      #1c2a3a;
+  --border:         #253548;
+  --border-dark:    #2e4060;
+  --text:           #e8eef5;
+  --text-2:         #b0bfd0;
+  --text-3:         #7a90a8;
+  --text-4:         #4e6178;
+
+  --success:        #4AB8A6;
+  --success-bg:     #0e2822;
+  --danger:         #e05c4b;
+  --danger-bg:      #2a1210;
+  --warning:        #e09a30;
+  --warning-bg:     #2a1f08;
+  --info:           #4AB8A6;
+  --info-bg:        #0e2822;
+
+  --shadow-sm:      0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
+  --shadow:         0 4px 12px rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.25);
+  --shadow-lg:      0 12px 32px rgba(0,0,0,.5), 0 4px 8px rgba(0,0,0,.3);
+  --shadow-xl:      0 24px 48px rgba(0,0,0,.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --primary:        #4A7FC1;
+    --primary-light:  #6399d4;
+    --primary-dark:   #2a5298;
+    --primary-50:     #1a2a3d;
+
+    --bg:             #0f1923;
+    --surface:        #162030;
+    --surface-2:      #1c2a3a;
+    --border:         #253548;
+    --border-dark:    #2e4060;
+    --text:           #e8eef5;
+    --text-2:         #b0bfd0;
+    --text-3:         #7a90a8;
+    --text-4:         #4e6178;
+
+    --success:        #4AB8A6;
+    --success-bg:     #0e2822;
+    --danger:         #e05c4b;
+    --danger-bg:      #2a1210;
+    --warning:        #e09a30;
+    --warning-bg:     #2a1f08;
+    --info:           #4AB8A6;
+    --info-bg:        #0e2822;
+
+    --shadow-sm:      0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
+    --shadow:         0 4px 12px rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.25);
+    --shadow-lg:      0 12px 32px rgba(0,0,0,.5), 0 4px 8px rgba(0,0,0,.3);
+    --shadow-xl:      0 24px 48px rgba(0,0,0,.6);
+  }
+}
+
+/* ── Dark mode toggle button ───────────────────────────────── */
+.dark-toggle {
+  background:    none;
+  border:        1px solid var(--border-dark);
+  border-radius: var(--radius);
+  color:         var(--text-2);
+  cursor:        pointer;
+  font-size:     1.1rem;
+  padding:       6px 10px;
+  line-height:   1;
+  transition:    background .2s, border-color .2s, color .2s;
+  display:       flex;
+  align-items:   center;
+  gap:           6px;
+}
+.dark-toggle:hover {
+  background:    var(--surface-2);
+  border-color:  var(--primary);
+  color:         var(--primary);
+}
