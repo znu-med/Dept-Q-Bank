@@ -153,7 +153,6 @@ const UI = {
           ${reviewBtn}
           ${flaggedBtn}
           <button class="btn btn--ghost btn--sm" data-nav="search" title="Search questions">🔍 Search</button>
-          <button class="dark-toggle" id="dark-toggle-btn" title="Toggle dark mode" aria-label="Toggle dark mode"></button>
         </div>
       </header>
       <section class="section">
