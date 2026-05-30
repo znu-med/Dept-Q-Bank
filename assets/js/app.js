@@ -70,7 +70,7 @@ const App = {
         const subject = params.subject;
         const et      = params.examType;
         if (!mod) { this.navigate('dashboard'); break; }
-        const subSubjects = (mod.subSubjects && mod.subSubjects[subject]) || [];
+        const subSubjects = (mod.subSubjects && mod.subSubjects[et] && mod.subSubjects[et][subject]) || [];
         const progress    = Storage.getProgress();
         UI.setContent(UI.renderSubject(mod, et, subject, subSubjects, progress, this.config));
         break;
