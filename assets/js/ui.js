@@ -317,15 +317,6 @@ const UI = {
             </div>` : ''}
           </div>
           <div class="exam-options-card">
-            <h3 class="exam-options-card__title">Exam Settings</h3>
-            <label class="toggle-row">
-              <span>Immediate Feedback</span>
-              <input type="checkbox" id="opt-feedback" class="toggle" ${config.examSettings.defaultImmediateFeedback ? 'checked' : ''}>
-            </label>
-            <label class="toggle-row">
-              <span>Randomise Questions</span>
-              <input type="checkbox" id="opt-random" class="toggle" ${config.examSettings.defaultRandomize ? 'checked' : ''}>
-            </label>
             <div class="exam-actions">
               <button class="btn btn--primary btn--lg" id="start-exam-btn">Start Exam →</button>
               ${progress ? `<button class="btn btn--ghost" id="retry-exam-btn">Retry Exam</button>` : ''}

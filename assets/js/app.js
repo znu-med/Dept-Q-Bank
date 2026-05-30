@@ -29,6 +29,15 @@ const App = {
 
     document.addEventListener('click', e => this._handleGlobalClick(e));
 
+    // Browser back/forward button support
+    window.addEventListener('popstate', e => {
+      if (e.state && e.state.page) {
+        this._navigateWithoutHistory(e.state.page, e.state.params || {});
+      } else {
+        this._navigateWithoutHistory('dashboard', {});
+      }
+    });
+
     const last = Storage.loadLastPage();
     if (last && last.page) {
       this.navigate(last.page, last.params);
@@ -40,6 +49,15 @@ const App = {
   // ─── Navigation ──────────────────────────────────────────────────────────
 
   navigate(page, params = {}) {
+    this.currentPage   = page;
+    this.currentParams = params;
+    Storage.saveLastPage({ page, params });
+    history.pushState({ page, params }, '', '#' + page);
+    this._renderPage(page, params);
+  },
+
+  // Navigate without pushing a new history entry (used by popstate)
+  _navigateWithoutHistory(page, params = {}) {
     this.currentPage   = page;
     this.currentParams = params;
     Storage.saveLastPage({ page, params });
@@ -143,15 +161,13 @@ const App = {
     const startBtn = document.getElementById('start-exam-btn');
     if (startBtn) {
       startBtn.addEventListener('click', () => {
-        const feedback = document.getElementById('opt-feedback')?.checked ?? false;
-        const random   = document.getElementById('opt-random')?.checked ?? false;
         this.navigate('exam', {
           moduleId:           mod.id,
           examType,
           subject,
           subSubject,
-          immediateFeedback:  feedback,
-          randomize:          random,
+          immediateFeedback:  true,
+          randomize:          false,
           retryIncorrectOnly: false,
         });
       });
@@ -159,15 +175,13 @@ const App = {
     const retryBtn = document.getElementById('retry-exam-btn');
     if (retryBtn) {
       retryBtn.addEventListener('click', () => {
-        const feedback = document.getElementById('opt-feedback')?.checked ?? false;
-        const random   = document.getElementById('opt-random')?.checked ?? false;
         this.navigate('exam', {
           moduleId:           mod.id,
           examType,
           subject,
           subSubject,
-          immediateFeedback:  feedback,
-          randomize:          random,
+          immediateFeedback:  true,
+          randomize:          false,
           retryIncorrectOnly: false,
         });
       });
@@ -292,7 +306,7 @@ const App = {
           examType:           btn.dataset.examType,
           subject:            btn.dataset.subject,
           subSubject:         btn.dataset.subSubject,
-          immediateFeedback:  this.lastResults?.config?.immediateFeedback ?? false,
+          immediateFeedback:  true,
           randomize:          true,
           retryIncorrectOnly: true,
         });
@@ -304,7 +318,7 @@ const App = {
           examType:           btn.dataset.examType,
           subject:            btn.dataset.subject,
           subSubject:         btn.dataset.subSubject,
-          immediateFeedback:  false,
+          immediateFeedback:  true,
           randomize:          false,
           retryIncorrectOnly: false,
         });
@@ -445,8 +459,8 @@ const App = {
         examType:          params.examType,
         subject:           params.subject,
         subSubject:        params.subSubject,
-        immediateFeedback: params.immediateFeedback ?? false,
-        randomize:         params.randomize ?? true,
+        immediateFeedback: true,
+        randomize:         params.randomize ?? false,
       };
       ExamEngine.questions = params.randomize ? ExamEngine._shuffle([...all]) : all;
       ExamEngine.state = {
@@ -465,7 +479,7 @@ const App = {
       examType:          params.examType,
       subject:           params.subject,
       subSubject:        params.subSubject,
-      immediateFeedback: params.immediateFeedback ?? false,
+      immediateFeedback: true,
       randomize:         params.randomize ?? false,
     });
 
