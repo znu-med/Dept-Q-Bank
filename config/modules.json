@@ -1,18 +1,7 @@
 {
-  "_comment": "=============================================================",
-  "_comment2": "DEPT. Q. BANK — Configuration File",
-  "_comment3": "=============================================================",
-  "_comment4": "HOW TO ADD A NEW MODULE:",
-  "_comment5": "1. Copy one of the module objects below and paste it at the end of the 'modules' array.",
-  "_comment6": "2. Change the 'id', 'title', 'shortTitle', 'color', 'icon', and 'subSubjects' fields.",
-  "_comment7": "3. Create the matching folder under /data/ (e.g. /data/NEW_MODULE/end_module/anatomy/heart.json).",
-  "_comment8": "HOW TO ADD SUB-SUBJECTS: Edit the 'subSubjects' array inside the module.",
-  "_comment9": "HOW TO CHANGE SITE TITLE: Edit 'siteTitle' below.",
-
   "siteTitle": "Dept. Q. Bank",
   "siteSubtitle": "Professional Medical Question Bank",
   "version": "2.0.0",
-
   "examSettings": {
     "defaultImmediateFeedback": false,
     "defaultRandomize": false,
@@ -23,7 +12,6 @@
     "allowFlagging": true,
     "allowNavigation": true
   },
-
   "examTypes": [
     {
       "id": "end_module",
@@ -38,14 +26,32 @@
       "color": "#7c3aed"
     }
   ],
-
   "subjects": [
-    { "id": "anatomy",      "label": "Anatomy",      "icon": "🦴", "color": "#0891b2" },
-    { "id": "physiology",   "label": "Physiology",   "icon": "💓", "color": "#059669" },
-    { "id": "biochemistry", "label": "Biochemistry", "icon": "🧬", "color": "#d97706" },
-    { "id": "histology",    "label": "Histology",    "icon": "🔬", "color": "#dc2626" }
+    {
+      "id": "anatomy",
+      "label": "Anatomy",
+      "icon": "\ud83e\uddb4",
+      "color": "#0891b2"
+    },
+    {
+      "id": "physiology",
+      "label": "Physiology",
+      "icon": "\ud83d\udc93",
+      "color": "#059669"
+    },
+    {
+      "id": "biochemistry",
+      "label": "Biochemistry",
+      "icon": "\ud83e\uddec",
+      "color": "#d97706"
+    },
+    {
+      "id": "histology",
+      "label": "Histology",
+      "icon": "\ud83d\udd2c",
+      "color": "#dc2626"
+    }
   ],
-
   "modules": [
     {
       "id": "CPM",
@@ -54,28 +60,24 @@
       "shortTitle": "CPM",
       "description": "Cardiovascular and pulmonary system questions",
       "color": "#dc2626",
-      "icon": "❤️",
+      "icon": "\u2764\ufe0f",
       "dataPath": "CPM",
       "subSubjects": {
-        "anatomy":      [
-          { "id": "heart",              "label": "Heart",                  "icon": "❤️" },
-          { "id": "lungs",              "label": "Lungs",                  "icon": "🫁" },
-          { "id": "great_vessels",      "label": "Great Vessels",          "icon": "🩸" },
-          { "id": "pericardium",        "label": "Pericardium",            "icon": "🫀" }
+        "anatomy": [],
+        "physiology": [
+          {
+            "id": "cvs",
+            "label": "CVS",
+            "icon": "\u2764\ufe0f"
+          },
+          {
+            "id": "respiration",
+            "label": "Respiration",
+            "icon": "\ud83e\udec1"
+          }
         ],
-        "physiology":   [
-          { "id": "cardiac_cycle",      "label": "Cardiac Cycle",          "icon": "📈" },
-          { "id": "hemodynamics",       "label": "Hemodynamics",           "icon": "💧" },
-          { "id": "respiratory",        "label": "Respiratory Physiology", "icon": "💨" }
-        ],
-        "biochemistry": [
-          { "id": "lipid_metabolism",   "label": "Lipid Metabolism",       "icon": "🧪" },
-          { "id": "coagulation",        "label": "Coagulation",            "icon": "🩺" }
-        ],
-        "histology":    [
-          { "id": "cardiac_muscle",     "label": "Cardiac Muscle",         "icon": "🔬" },
-          { "id": "vascular_wall",      "label": "Vascular Wall",          "icon": "🔬" }
-        ]
+        "biochemistry": [],
+        "histology": []
       }
     },
     {
@@ -85,29 +87,13 @@
       "shortTitle": "GIT",
       "description": "Gastrointestinal system and hepatobiliary questions",
       "color": "#d97706",
-      "icon": "🫁",
+      "icon": "\ud83e\udec1",
       "dataPath": "GIT",
       "subSubjects": {
-        "anatomy":      [
-          { "id": "esophagus",          "label": "Esophagus",              "icon": "🟤" },
-          { "id": "stomach",            "label": "Stomach",                "icon": "🫃" },
-          { "id": "small_intestine",    "label": "Small Intestine",        "icon": "🟡" },
-          { "id": "large_intestine",    "label": "Large Intestine",        "icon": "🟠" },
-          { "id": "liver",              "label": "Liver",                  "icon": "🟫" },
-          { "id": "pancreas",           "label": "Pancreas",               "icon": "🫘" }
-        ],
-        "physiology":   [
-          { "id": "digestion",          "label": "Digestion & Absorption", "icon": "📊" },
-          { "id": "gut_motility",       "label": "Gut Motility",           "icon": "〰️" }
-        ],
-        "biochemistry": [
-          { "id": "bile_acids",         "label": "Bile Acids",             "icon": "🧬" },
-          { "id": "enzyme_digestion",   "label": "Digestive Enzymes",      "icon": "⚗️" }
-        ],
-        "histology":    [
-          { "id": "gut_wall",           "label": "Gut Wall Layers",        "icon": "🔬" },
-          { "id": "liver_histo",        "label": "Liver Histology",        "icon": "🔬" }
-        ]
+        "anatomy": [],
+        "physiology": [],
+        "biochemistry": [],
+        "histology": []
       }
     },
     {
@@ -117,27 +103,13 @@
       "shortTitle": "CNS",
       "description": "Neuroscience and central nervous system questions",
       "color": "#7c3aed",
-      "icon": "🧠",
+      "icon": "\ud83e\udde0",
       "dataPath": "CNS",
       "subSubjects": {
-        "anatomy":      [
-          { "id": "brainstem",          "label": "Brainstem",              "icon": "🧠" },
-          { "id": "cerebrum",           "label": "Cerebrum",               "icon": "🧠" },
-          { "id": "cerebellum",         "label": "Cerebellum",             "icon": "🧠" },
-          { "id": "spinal_cord",        "label": "Spinal Cord",            "icon": "🦴" },
-          { "id": "cranial_nerves",     "label": "Cranial Nerves",         "icon": "⚡" }
-        ],
-        "physiology":   [
-          { "id": "action_potential",   "label": "Action Potential",       "icon": "⚡" },
-          { "id": "synaptic_transmission", "label": "Synaptic Transmission", "icon": "🔗" }
-        ],
-        "biochemistry": [
-          { "id": "neurotransmitters",  "label": "Neurotransmitters",      "icon": "🧬" }
-        ],
-        "histology":    [
-          { "id": "neurons",            "label": "Neurons & Glia",         "icon": "🔬" },
-          { "id": "myelin",             "label": "Myelin & White Matter",  "icon": "🔬" }
-        ]
+        "anatomy": [],
+        "physiology": [],
+        "biochemistry": [],
+        "histology": []
       }
     },
     {
@@ -147,25 +119,13 @@
       "shortTitle": "ENDO",
       "description": "Endocrine system and reproductive medicine questions",
       "color": "#059669",
-      "icon": "⚗️",
+      "icon": "\u2697\ufe0f",
       "dataPath": "ENDO_REPRO",
       "subSubjects": {
-        "anatomy":      [
-          { "id": "pituitary",          "label": "Pituitary Gland",        "icon": "⚗️" },
-          { "id": "thyroid",            "label": "Thyroid & Parathyroid",  "icon": "⚗️" },
-          { "id": "adrenal",            "label": "Adrenal Gland",          "icon": "⚗️" },
-          { "id": "reproductive_organs","label": "Reproductive Organs",    "icon": "🔬" }
-        ],
-        "physiology":   [
-          { "id": "hormones",           "label": "Hormone Signalling",     "icon": "📡" },
-          { "id": "menstrual_cycle",    "label": "Menstrual Cycle",        "icon": "📅" }
-        ],
-        "biochemistry": [
-          { "id": "steroid_synthesis",  "label": "Steroid Synthesis",      "icon": "🧪" }
-        ],
-        "histology":    [
-          { "id": "endocrine_histo",    "label": "Endocrine Histology",    "icon": "🔬" }
-        ]
+        "anatomy": [],
+        "physiology": [],
+        "biochemistry": [],
+        "histology": []
       }
     },
     {
@@ -175,25 +135,13 @@
       "shortTitle": "URIN",
       "description": "Renal and urinary tract questions",
       "color": "#0891b2",
-      "icon": "🫘",
+      "icon": "\ud83e\uded8",
       "dataPath": "URINARY",
       "subSubjects": {
-        "anatomy":      [
-          { "id": "kidney",             "label": "Kidney",                 "icon": "🫘" },
-          { "id": "ureter",             "label": "Ureter & Bladder",       "icon": "🔵" },
-          { "id": "nephron",            "label": "Nephron",                "icon": "🔬" }
-        ],
-        "physiology":   [
-          { "id": "filtration",         "label": "Glomerular Filtration",  "icon": "💧" },
-          { "id": "tubular_function",   "label": "Tubular Function",       "icon": "🔄" },
-          { "id": "acid_base",          "label": "Acid-Base Balance",      "icon": "⚖️" }
-        ],
-        "biochemistry": [
-          { "id": "renal_biochem",      "label": "Renal Biochemistry",     "icon": "🧬" }
-        ],
-        "histology":    [
-          { "id": "renal_histo",        "label": "Renal Histology",        "icon": "🔬" }
-        ]
+        "anatomy": [],
+        "physiology": [],
+        "biochemistry": [],
+        "histology": []
       }
     }
   ]
