@@ -137,6 +137,12 @@ const UI = {
           <span class="badge">${incorrect.length}</span>
         </button>` : '';
 
+    const flaggedBtn = flagged.length > 0
+      ? `<button class="btn btn--ghost review-btn" data-nav="flagged-review" style="border-color:#0891b2;color:#0891b2">
+          <span>🚩</span> Review Flagged Questions
+          <span class="badge" style="background:#0891b2">${flagged.length}</span>
+        </button>` : '';
+
     return `
     <div class="dashboard">
       <header class="dashboard__header">
@@ -146,6 +152,7 @@ const UI = {
         </div>
         <div class="dashboard__actions">
           ${reviewBtn}
+          ${flaggedBtn}
           <button class="btn btn--ghost btn--sm" data-nav="search" title="Search questions">🔍 Search</button>
         </div>
       </header>
@@ -321,6 +328,17 @@ const UI = {
               <button class="btn btn--primary btn--lg" id="start-exam-btn">Start Exam →</button>
               ${progress ? `<button class="btn btn--ghost" id="retry-exam-btn">Retry Exam</button>` : ''}
             </div>
+            <div class="exam-actions" style="margin-top:.5rem">
+              <button class="btn btn--danger btn--sm" data-nav="scoped-review"
+                data-params='${JSON.stringify({ moduleId: mod.id, examType, subject: subjectId, subSubject: subSubjectId, label: ss.label })}'>
+                🔄 Incorrect (this topic)
+              </button>
+              <button class="btn btn--ghost btn--sm" data-nav="scoped-flagged"
+                data-params='${JSON.stringify({ moduleId: mod.id, examType, subject: subjectId, subSubject: subSubjectId, label: ss.label })}'
+                style="border-color:#0891b2;color:#0891b2">
+                🚩 Flagged (this topic)
+              </button>
+            </div>
           </div>`
       }
     </div>`;
@@ -461,7 +479,15 @@ const UI = {
         </div>
       </div>
       <div class="results-actions">
-        ${results.incorrect > 0 ? `<button class="btn btn--danger" data-nav="review">🔄 Review Incorrect</button>` : ''}
+        ${results.incorrect > 0 ? `<button class="btn btn--danger" data-nav="scoped-review"
+          data-params='${JSON.stringify({ moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject, subSubject: results.config.subSubject, label: ss.label })}'>
+          🔄 Review Incorrect (this topic)</button>` : ''}
+        ${Storage.getFlagged().some(f => f.module === results.config.module && f.examType === results.config.examType && f.subject === results.config.subject && f.subSubject === results.config.subSubject)
+          ? `<button class="btn btn--ghost" data-nav="scoped-flagged"
+              data-params='${JSON.stringify({ moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject, subSubject: results.config.subSubject, label: ss.label })}'
+              style="border-color:#0891b2;color:#0891b2">
+              🚩 Review Flagged (this topic)</button>`
+          : ''}
         <button class="btn btn--primary" id="retry-incorrect-btn"
           data-module="${results.config.module}"
           data-exam-type="${results.config.examType}"
@@ -484,11 +510,18 @@ const UI = {
 
   // ─── Review page ──────────────────────────────────────────────────────────
 
-  renderReview(incorrectList, config) {
+  renderReview(incorrectList, config, filter = null) {
+    const backPage  = filter ? 'subsubject' : 'dashboard';
+    const backParams = filter ? { moduleId: filter.moduleId, examType: filter.examType, subject: filter.subject, subSubject: filter.subSubject } : {};
+    const title     = filter ? `Incorrect — ${filter.label}` : 'Review Incorrect Questions';
+    const crumbs    = filter
+      ? [{ label: 'Dashboard', nav: 'dashboard' }, { label: filter.label, nav: 'subsubject', params: backParams }, { label: 'Incorrect Questions' }]
+      : [{ label: 'Dashboard', nav: 'dashboard' }, { label: 'Review' }];
+
     if (incorrectList.length === 0) {
       return `<div class="page">
-        ${this.backBtn('dashboard')}
-        ${this.breadcrumb([{ label: 'Dashboard', nav: 'dashboard' }, { label: 'Review' }])}
+        ${this.backBtn(backPage, backParams)}
+        ${this.breadcrumb(crumbs)}
         ${this.emptyState('Nothing to Review', 'Complete some exams and incorrect answers will appear here.', '🎉')}
       </div>`;
     }
@@ -512,17 +545,7 @@ const UI = {
       </div>`;
     }).join('');
 
-    return `
-    <div class="page review-page">
-      ${this.backBtn('dashboard')}
-      ${this.breadcrumb([{ label: 'Dashboard', nav: 'dashboard' }, { label: 'Review Incorrect Questions' }])}
-      <header class="page__header" style="--mod-color:#dc2626">
-        <span class="page__icon">🔄</span>
-        <div>
-          <h1 class="page__title">Review Incorrect Questions</h1>
-          <p class="page__subtitle">${incorrectList.length} questions pending review</p>
-        </div>
-      </header>
+    const filtersHTML = filter ? '' : `
       <div class="review-filters">
         <input type="text" id="review-search" class="input" placeholder="Search questions…">
         <select id="review-filter-module" class="select">
@@ -534,8 +557,89 @@ const UI = {
           ${config.subjects.map(s => `<option value="${s.id}">${s.label}</option>`).join('')}
         </select>
         <button class="btn btn--danger btn--sm" id="clear-all-review">Clear All</button>
-      </div>
+      </div>`;
+
+    return `
+    <div class="page review-page">
+      ${this.backBtn(backPage, backParams)}
+      ${this.breadcrumb(crumbs)}
+      <header class="page__header" style="--mod-color:#dc2626">
+        <span class="page__icon">🔄</span>
+        <div>
+          <h1 class="page__title">${title}</h1>
+          <p class="page__subtitle">${incorrectList.length} questions pending review</p>
+        </div>
+      </header>
+      ${filtersHTML}
       <div class="review-list" id="review-list">${listHTML}</div>
+    </div>`;
+  },
+
+  // ─── Flagged review page ─────────────────────────────────────────────────
+
+  renderFlagged(flaggedList, config, filter = null) {
+    const backPage   = filter ? 'subsubject' : 'dashboard';
+    const backParams = filter ? { moduleId: filter.moduleId, examType: filter.examType, subject: filter.subject, subSubject: filter.subSubject } : {};
+    const title      = filter ? `Flagged — ${filter.label}` : 'Flagged Questions';
+    const crumbs     = filter
+      ? [{ label: 'Dashboard', nav: 'dashboard' }, { label: filter.label, nav: 'subsubject', params: backParams }, { label: 'Flagged Questions' }]
+      : [{ label: 'Dashboard', nav: 'dashboard' }, { label: 'Flagged Questions' }];
+
+    if (flaggedList.length === 0) {
+      return `<div class="page">
+        ${this.backBtn(backPage, backParams)}
+        ${this.breadcrumb(crumbs)}
+        ${this.emptyState('No Flagged Questions', 'Flag questions during an exam to review them later.', '🚩')}
+      </div>`;
+    }
+
+    const listHTML = flaggedList.map(q => {
+      const sub = config.subjects.find(s => s.id === q.subject);
+      const et  = config.examTypes.find(e => e.id === q.examType);
+      return `<div class="review-item" data-uid="${q.uid}">
+        <div class="review-item__meta">
+          <span class="badge" style="background:${sub?.color}20;color:${sub?.color}">${sub?.icon} ${sub?.label}</span>
+          <span class="badge badge--ghost">${q.module}</span>
+          ${q.subSubjectLabel ? `<span class="badge badge--ghost">${q.subSubjectLabel}</span>` : ''}
+          <span class="badge badge--ghost">${et?.label}</span>
+          <span class="badge" style="background:#0891b220;color:#0891b2">🚩 Flagged</span>
+        </div>
+        <p class="review-item__question">${q.question}</p>
+        <div class="review-item__options">
+          ${q.options.map((opt, i) => `<span class="review-opt ${i === q.answer ? 'review-opt--correct' : ''}">${['A','B','C','D'][i]}. ${opt}</span>`).join('')}
+        </div>
+        <div class="review-item__explanation">${q.explanation}</div>
+        <button class="btn btn--ghost btn--sm review-item__remove" data-remove-uid="${q.uid}">🚩 Remove Flag</button>
+      </div>`;
+    }).join('');
+
+    const flagFiltersHTML = filter ? '' : `
+      <div class="review-filters">
+        <input type="text" id="flagged-search" class="input" placeholder="Search questions…">
+        <select id="flagged-filter-module" class="select">
+          <option value="">All Modules</option>
+          ${config.modules.map(m => `<option value="${m.id}">${m.title}</option>`).join('')}
+        </select>
+        <select id="flagged-filter-subject" class="select">
+          <option value="">All Subjects</option>
+          ${config.subjects.map(s => `<option value="${s.id}">${s.label}</option>`).join('')}
+        </select>
+        <button class="btn btn--danger btn--sm" id="clear-all-flagged">Remove All Flags</button>
+      </div>`;
+
+    return `
+    <div class="page review-page">
+      ${this.backBtn(backPage, backParams)}
+      ${this.breadcrumb(crumbs)}
+      <header class="page__header" style="--mod-color:#0891b2">
+        <span class="page__icon">🚩</span>
+        <div>
+          <h1 class="page__title">${title}</h1>
+          <p class="page__subtitle">${flaggedList.length} flagged for review</p>
+        </div>
+      </header>
+      ${flagFiltersHTML}
+      <div class="review-list" id="flagged-list">${listHTML}</div>
     </div>`;
   },
 

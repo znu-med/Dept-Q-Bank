@@ -132,6 +132,39 @@ const App = {
         break;
       }
 
+      case 'scoped-review': {
+        const filter   = params;
+        const incorrect = Storage.getIncorrect().filter(q =>
+          q.module     === filter.moduleId   &&
+          q.examType   === filter.examType   &&
+          q.subject    === filter.subject    &&
+          q.subSubject === filter.subSubject
+        );
+        UI.setContent(UI.renderReview(incorrect, this.config, filter));
+        this._bindReviewEvents();
+        break;
+      }
+
+      case 'flagged-review': {
+        const flagged = Storage.getFlagged();
+        UI.setContent(UI.renderFlagged(flagged, this.config));
+        this._bindFlaggedReviewEvents();
+        break;
+      }
+
+      case 'scoped-flagged': {
+        const filter  = params;
+        const flagged = Storage.getFlagged().filter(q =>
+          q.module     === filter.moduleId   &&
+          q.examType   === filter.examType   &&
+          q.subject    === filter.subject    &&
+          q.subSubject === filter.subSubject
+        );
+        UI.setContent(UI.renderFlagged(flagged, this.config, filter));
+        this._bindFlaggedReviewEvents();
+        break;
+      }
+
       case 'search': {
         UI.setContent(UI.renderSearch(this.config));
         this._bindSearchEvents();
@@ -384,6 +417,70 @@ const App = {
         Storage.removeIncorrect(btn.dataset.removeUid);
         btn.closest('.review-item')?.remove();
         UI.toast('Marked as mastered.', 'success');
+      }
+    });
+  },
+
+  // ─── Flagged review events ───────────────────────────────────────────────
+
+  _bindFlaggedReviewEvents() {
+    const list    = document.getElementById('flagged-list');
+    const search  = document.getElementById('flagged-search');
+    const fMod    = document.getElementById('flagged-filter-module');
+    const fSub    = document.getElementById('flagged-filter-subject');
+    const clearAll = document.getElementById('clear-all-flagged');
+
+    const filterAndRender = () => {
+      let items = Storage.getFlagged();
+      const q = search?.value.toLowerCase() ?? '';
+      const m = fMod?.value ?? '';
+      const s = fSub?.value ?? '';
+      if (q) items = items.filter(i => i.question.toLowerCase().includes(q));
+      if (m) items = items.filter(i => i.module === m);
+      if (s) items = items.filter(i => i.subject === s);
+      if (list) {
+        list.innerHTML = items.length === 0
+          ? UI.emptyState('No Matches', 'Try adjusting your filters.', '🔍')
+          : items.map(q => {
+              const sub = this.config.subjects.find(s => s.id === q.subject);
+              const et  = this.config.examTypes.find(e => e.id === q.examType);
+              return `<div class="review-item" data-uid="${q.uid}">
+                <div class="review-item__meta">
+                  <span class="badge" style="background:${sub?.color}20;color:${sub?.color}">${sub?.icon} ${sub?.label}</span>
+                  <span class="badge badge--ghost">${q.module}</span>
+                  ${q.subSubjectLabel ? `<span class="badge badge--ghost">${q.subSubjectLabel}</span>` : ''}
+                  <span class="badge badge--ghost">${et?.label}</span>
+                  <span class="badge" style="background:#0891b220;color:#0891b2">🚩 Flagged</span>
+                </div>
+                <p class="review-item__question">${q.question}</p>
+                <div class="review-item__options">
+                  ${q.options.map((opt, i) => `<span class="review-opt ${i === q.answer ? 'review-opt--correct' : ''}">${['A','B','C','D'][i]}. ${opt}</span>`).join('')}
+                </div>
+                <div class="review-item__explanation">${q.explanation}</div>
+                <button class="btn btn--ghost btn--sm review-item__remove" data-remove-uid="${q.uid}">🚩 Remove Flag</button>
+              </div>`;
+            }).join('');
+      }
+    };
+
+    search?.addEventListener('input', filterAndRender);
+    fMod?.addEventListener('change', filterAndRender);
+    fSub?.addEventListener('change', filterAndRender);
+
+    clearAll?.addEventListener('click', () => {
+      if (confirm('Remove all flags? This cannot be undone.')) {
+        Storage.getFlagged().forEach(f => Storage.toggleFlag(f));
+        this.navigate('dashboard');
+      }
+    });
+
+    list?.addEventListener('click', e => {
+      const btn = e.target.closest('[data-remove-uid]');
+      if (btn) {
+        const item = Storage.getFlagged().find(f => f.uid === btn.dataset.removeUid);
+        if (item) Storage.toggleFlag(item);
+        btn.closest('.review-item')?.remove();
+        UI.toast('Flag removed.', 'info');
       }
     });
   },
