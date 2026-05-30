@@ -169,7 +169,7 @@ const UI = {
     const examTypesHTML = config.examTypes.map(et => {
       const subjectsHTML = config.subjects.map(sub => {
         // Count total sub-subjects and completed ones for this combo
-        const subSubs   = (mod.subSubjects && mod.subSubjects[sub.id]) || [];
+        const subSubs   = (mod.subSubjects && mod.subSubjects[et.id] && mod.subSubjects[et.id][sub.id]) || [];
         const completed = subSubs.filter(ss => {
           const key = `${mod.id}|${et.id}|${sub.id}|${ss.id}`;
           return progressMap[key]?.completed;
@@ -272,7 +272,7 @@ const UI = {
   renderSubSubject(mod, examType, subjectId, subSubjectId, questionCount, progress, config) {
     const sub    = config.subjects.find(s => s.id === subjectId);
     const et     = config.examTypes.find(e => e.id === examType);
-    const subSubs = (mod.subSubjects && mod.subSubjects[subjectId]) || [];
+    const subSubs = (mod.subSubjects && mod.subSubjects[examType] && mod.subSubjects[examType][subjectId]) || [];
     const ss     = subSubs.find(s => s.id === subSubjectId) || { label: subSubjectId, icon: '📄' };
     const pct    = progress && progress.total ? Math.round((progress.correct / progress.total) * 100) : 0;
     const noQ    = questionCount === 0;
@@ -346,7 +346,7 @@ const UI = {
     const answered  = engine.getCurrentAnswer();
     const isFlagged = engine.isFlagged(idx);
     const progress  = engine.getProgress();
-    const subSubs   = (config.modules.find(m => m.id === engine.config.module)?.subSubjects || {})[engine.config.subject] || [];
+    const subSubs   = (config.modules.find(m => m.id === engine.config.module)?.subSubjects?.[engine.config.examType]?.[engine.config.subject]) || [];
     const ss        = subSubs.find(s => s.id === engine.config.subSubject) || { label: engine.config.subSubject, icon: '📄' };
 
     const paletteHTML = engine.questions.map((_, i) => {
@@ -425,7 +425,7 @@ const UI = {
     const sub   = config.subjects.find(s => s.id === results.config.subject);
     const et    = config.examTypes.find(e => e.id === results.config.examType);
     const mod   = config.modules.find(m => m.id === results.config.module);
-    const subSubs = (mod?.subSubjects || {})[results.config.subject] || [];
+    const subSubs = (mod?.subSubjects?.[results.config.examType]?.[results.config.subject]) || [];
     const ss    = subSubs.find(s => s.id === results.config.subSubject) || { label: results.config.subSubject };
 
     const reviewHTML = results.perQuestion.map((pq, i) => {
@@ -574,12 +574,12 @@ const UI = {
   // ─── Internal helpers ─────────────────────────────────────────────────────
 
   _calcModuleProgress(mod, config, progressMap) {
-    const subSubs  = mod.subSubjects || {};
+    const subSubjects = mod.subSubjects || {};
     let completed  = 0;
     let total      = 0;
     config.examTypes.forEach(et => {
       config.subjects.forEach(sub => {
-        const list = subSubs[sub.id] || [];
+        const list = (subSubjects[et.id] && subSubjects[et.id][sub.id]) || [];
         total += list.length;
         list.forEach(ss => {
           const key = `${mod.id}|${et.id}|${sub.id}|${ss.id}`;
