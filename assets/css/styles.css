@@ -413,6 +413,15 @@ h1, h2, h3, h4 {
   height:      68px;
   width:       auto;
   display:     block;
+  transition:  filter .3s;
+}
+[data-theme="dark"] .dashboard__logo {
+  filter: brightness(0) invert(1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .dashboard__logo {
+    filter: brightness(0) invert(1);
+  }
 }
 .dashboard__title {
   font-size:  2.4rem;
