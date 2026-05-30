@@ -27,6 +27,8 @@ const App = {
       return;
     }
 
+    // ─── Theme (dark/light) ───────────────────────────────────────────────
+    this._initTheme();
     document.addEventListener('click', e => this._handleGlobalClick(e));
 
     // Browser back/forward button support
@@ -44,6 +46,29 @@ const App = {
     } else {
       this.navigate('dashboard');
     }
+  },
+
+  // ─── Theme toggle ────────────────────────────────────────────────────────
+
+  _initTheme() {
+    const saved = localStorage.getItem('dqb_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', saved);
+    this._applyThemeIcon(saved);
+  },
+
+  _applyThemeIcon(theme) {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    const icon = btn.querySelector('.theme-toggle__icon');
+    if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+  },
+
+  _toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    const next    = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('dqb_theme', next);
+    this._applyThemeIcon(next);
   },
 
   // ─── Navigation ──────────────────────────────────────────────────────────
@@ -71,6 +96,7 @@ const App = {
         const progress = Storage.getProgress();
         const stats    = Storage.getStats();
         UI.setContent(UI.renderDashboard(this.config, progress, stats));
+        this._applyThemeIcon(document.documentElement.getAttribute('data-theme') || 'light');
         break;
       }
 
@@ -179,6 +205,11 @@ const App = {
   // ─── Global click delegation ─────────────────────────────────────────────
 
   _handleGlobalClick(e) {
+    // Theme toggle — check before data-nav routing
+    if (e.target.closest('#theme-toggle')) {
+      this._toggleTheme();
+      return;
+    }
     const el = e.target.closest('[data-nav]');
     if (!el) return;
     e.preventDefault();

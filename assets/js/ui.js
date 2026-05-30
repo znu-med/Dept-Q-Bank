@@ -147,12 +147,15 @@ const UI = {
     <div class="dashboard">
       <header class="dashboard__header">
         <div class="dashboard__title-wrap">
-          <img src="assets/images/logo.svg" alt="${config.siteTitle}" class="dashboard__logo" />
+          <img src="assets/images/logo.svg"      alt="${config.siteTitle}" class="dashboard__logo dashboard__logo--light" />
+          <img src="assets/images/logo-dark.svg" alt="${config.siteTitle}" class="dashboard__logo dashboard__logo--dark" />
         </div>
         <div class="dashboard__actions">
           ${reviewBtn}
           ${flaggedBtn}
-          <button class="btn btn--ghost btn--sm" data-nav="search" title="Search questions">🔍 Search</button>
+          <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+            <span class="theme-toggle__icon">🌙</span>
+          </button>
         </div>
       </header>
       <section class="section">

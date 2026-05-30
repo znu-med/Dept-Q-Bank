@@ -1230,3 +1230,165 @@ h1, h2, h3, h4 {
   color:       var(--text-3);
   font-weight: 600;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   DARK MODE
+   Palette extracted from the dark-mode header SVG:
+     bg          #0F080C  (dominant dark maroon-navy)
+     bg-2        #090B10  (deep navy-black)
+     surface     #1A1520  (elevated surface)
+     surface-2   #211E23  (card / panel)
+     border      #2E2A33  (subtle border)
+     teal        #369A91  (accent — from SVG logo)
+     teal-light  #3EA596
+     muted text  #8493A0
+     body text   #FAFBFB
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Theme toggle button ──────────────────────────────────── */
+.theme-toggle {
+  background:    none;
+  border:        1px solid var(--border);
+  border-radius: var(--radius);
+  color:         var(--text-3);
+  cursor:        pointer;
+  font-size:     1.05rem;
+  line-height:   1;
+  padding:       6px 10px;
+  transition:    background .2s, border-color .2s, color .2s;
+  display:       flex;
+  align-items:   center;
+  gap:           5px;
+}
+.theme-toggle:hover {
+  background:    var(--surface-2);
+  border-color:  var(--primary);
+  color:         var(--primary);
+}
+
+/* ── Dark token overrides ─────────────────────────────────── */
+[data-theme="dark"] {
+  /* Brand */
+  --primary:        #3EA596;
+  --primary-light:  #48b8a8;
+  --primary-dark:   #2a7a72;
+  --primary-50:     #0d2422;
+
+  /* Neutrals — from SVG palette */
+  --bg:             #0F080C;
+  --surface:        #1A1520;
+  --surface-2:      #211E23;
+  --border:         #2E2A33;
+  --border-dark:    #3a3540;
+  --text:           #FAFBFB;
+  --text-2:         #d4d8e0;
+  --text-3:         #8493A0;
+  --text-4:         #5a6472;
+
+  /* Semantic */
+  --success:        #369A91;
+  --success-bg:     #0d2422;
+  --danger:         #e05252;
+  --danger-bg:      #2a1010;
+  --warning:        #d4943a;
+  --warning-bg:     #291a05;
+  --info:           #369A91;
+  --info-bg:        #0d2422;
+
+  /* Shadows — deeper for dark bg */
+  --shadow-sm:      0 1px 3px rgba(0,0,0,.4);
+  --shadow:         0 4px 12px rgba(0,0,0,.5);
+  --shadow-lg:      0 12px 32px rgba(0,0,0,.6);
+  --shadow-xl:      0 24px 48px rgba(0,0,0,.7);
+}
+
+/* ── Dark — component tweaks ──────────────────────────────── */
+[data-theme="dark"] body {
+  background: var(--bg);
+  color:      var(--text);
+}
+
+/* Inputs */
+[data-theme="dark"] .input {
+  background:   var(--surface-2);
+  border-color: var(--border);
+  color:        var(--text);
+}
+[data-theme="dark"] .input:focus {
+  border-color: var(--primary);
+  box-shadow:   0 0 0 3px rgba(58,165,150,.18);
+}
+[data-theme="dark"] .input::placeholder { color: var(--text-4); }
+
+/* Buttons */
+[data-theme="dark"] .btn--ghost {
+  border-color: var(--border);
+  color:        var(--text-3);
+}
+[data-theme="dark"] .btn--ghost:hover {
+  background:   var(--surface-2);
+  border-color: var(--primary);
+  color:        var(--primary);
+}
+
+/* Cards */
+[data-theme="dark"] .module-card,
+[data-theme="dark"] .subject-card,
+[data-theme="dark"] .subsubject-card,
+[data-theme="dark"] .exam-type-card {
+  background:   var(--surface);
+  border-color: var(--border);
+}
+[data-theme="dark"] .module-card:hover,
+[data-theme="dark"] .subject-card:hover,
+[data-theme="dark"] .subsubject-card:hover,
+[data-theme="dark"] .exam-type-card:hover {
+  border-color: var(--primary);
+}
+
+/* Stats grid */
+[data-theme="dark"] .stat-card {
+  background:   var(--surface);
+  border-color: var(--border);
+}
+
+/* Progress bars */
+[data-theme="dark"] .progress-track { background: var(--surface-2); }
+
+/* Exam UI */
+[data-theme="dark"] .exam-topbar,
+[data-theme="dark"] .exam-sidebar  { background: var(--surface); border-color: var(--border); }
+[data-theme="dark"] .option-btn    { background: var(--surface); border-color: var(--border); color: var(--text); }
+[data-theme="dark"] .option-btn:hover:not(:disabled) { background: var(--surface-2); border-color: var(--primary); }
+[data-theme="dark"] .question-card { background: var(--surface); border-color: var(--border); }
+[data-theme="dark"] .palette-btn   { background: var(--surface-2); color: var(--text-3); }
+
+/* Explanation box */
+[data-theme="dark"] .explanation   { background: #0d2422; border-color: #2a4a47; color: var(--text-2); }
+
+/* Results page */
+[data-theme="dark"] .results-header { background: linear-gradient(135deg, #0d2422 0%, #090B10 100%); }
+[data-theme="dark"] .result-item    { background: var(--surface); border-color: var(--border); }
+
+/* Breadcrumb */
+[data-theme="dark"] .breadcrumb { color: var(--text-4); }
+[data-theme="dark"] .breadcrumb__link { color: var(--primary); }
+
+/* Toast */
+[data-theme="dark"] .toast { background: var(--surface-2); color: var(--text); box-shadow: var(--shadow-lg); }
+
+/* Dashboard header logo swap */
+[data-theme="dark"] .dashboard__logo--light { display: none;  }
+[data-theme="dark"] .dashboard__logo--dark  { display: block; }
+[data-theme="light"] .dashboard__logo--light,
+:root:not([data-theme]) .dashboard__logo--light { display: block; }
+[data-theme="light"] .dashboard__logo--dark,
+:root:not([data-theme]) .dashboard__logo--dark  { display: none;  }
+
+/* Dashboard footer */
+[data-theme="dark"] .dashboard__footer { border-color: var(--border); }
+
+/* Scrollbar (Chromium) */
+[data-theme="dark"] ::-webkit-scrollbar-track { background: var(--surface); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 4px; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: var(--text-4); }
