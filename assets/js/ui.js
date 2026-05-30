@@ -1,32 +1,19 @@
 /**
  * ============================================================
- * DEPT. Q. BANK — ui.js
- * ============================================================
- * Pure UI rendering functions. No business logic here.
- * All renders return HTML strings or modify the DOM directly.
- *
- * HOW TO ADD A NEW PAGE:
- * 1. Add a render function UI.renderMyPage(data) below.
- * 2. In app.js, call App.navigate('myPage', data) and
- *    add a case to App._renderPage().
+ * DEPT. Q. BANK — ui.js  (v2 — sub-subject support)
  * ============================================================
  */
 
 const UI = {
 
-  // ─── Root container ──────────────────────────────────────────────────────
-
   get root() { return document.getElementById('app'); },
 
   setContent(html) {
     this.root.innerHTML = html;
-    // Small entry animation
     this.root.classList.remove('page-enter');
-    void this.root.offsetWidth; // force reflow
+    void this.root.offsetWidth;
     this.root.classList.add('page-enter');
   },
-
-  // ─── Toast notifications ─────────────────────────────────────────────────
 
   toast(message, type = 'info', duration = 2800) {
     const existing = document.querySelector('.toast');
@@ -36,20 +23,13 @@ const UI = {
     t.innerHTML = `<span class="toast__icon">${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}</span>${message}`;
     document.body.appendChild(t);
     requestAnimationFrame(() => t.classList.add('toast--visible'));
-    setTimeout(() => {
-      t.classList.remove('toast--visible');
-      setTimeout(() => t.remove(), 400);
-    }, duration);
+    setTimeout(() => { t.classList.remove('toast--visible'); setTimeout(() => t.remove(), 400); }, duration);
   },
-
-  // ─── Breadcrumb ──────────────────────────────────────────────────────────
 
   breadcrumb(crumbs) {
     if (!crumbs || crumbs.length === 0) return '';
     const items = crumbs.map((c, i) => {
-      if (i === crumbs.length - 1) {
-        return `<span class="breadcrumb__current">${c.label}</span>`;
-      }
+      if (i === crumbs.length - 1) return `<span class="breadcrumb__current">${c.label}</span>`;
       return `<a class="breadcrumb__link" data-nav="${c.nav}" data-params='${JSON.stringify(c.params || {})}'>${c.label}</a>`;
     });
     return `<nav class="breadcrumb" aria-label="Breadcrumb">
@@ -58,15 +38,11 @@ const UI = {
     </nav>`;
   },
 
-  // ─── Back button ─────────────────────────────────────────────────────────
-
   backBtn(nav, params = {}) {
     return `<button class="btn btn--ghost btn--sm back-btn" data-nav="${nav}" data-params='${JSON.stringify(params)}'>
       <span class="btn__icon">←</span> Back
     </button>`;
   },
-
-  // ─── Loading spinner ─────────────────────────────────────────────────────
 
   loading(message = 'Loading…') {
     this.setContent(`<div class="loading-screen">
@@ -74,8 +50,6 @@ const UI = {
       <p class="loading-screen__text">${message}</p>
     </div>`);
   },
-
-  // ─── Empty state ─────────────────────────────────────────────────────────
 
   emptyState(title, body, icon = '📭') {
     return `<div class="empty-state">
@@ -85,8 +59,6 @@ const UI = {
     </div>`;
   },
 
-  // ─── Stat card ───────────────────────────────────────────────────────────
-
   statCard(label, value, icon, color) {
     return `<div class="stat-card" style="--accent:${color}">
       <div class="stat-card__icon">${icon}</div>
@@ -95,8 +67,6 @@ const UI = {
     </div>`;
   },
 
-  // ─── Progress bar ────────────────────────────────────────────────────────
-
   progressBar(percent, color = 'var(--primary)') {
     const p = Math.min(100, Math.max(0, percent));
     return `<div class="progress-bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100">
@@ -104,13 +74,10 @@ const UI = {
     </div>`;
   },
 
-  // ─── Score ring ──────────────────────────────────────────────────────────
-
   scoreRing(percent) {
-    const r = 52;
-    const circ = 2 * Math.PI * r;
+    const r = 52, circ = 2 * Math.PI * r;
     const offset = circ - (percent / 100) * circ;
-    const color = percent >= 70 ? '#059669' : percent >= 50 ? '#d97706' : '#dc2626';
+    const color  = percent >= 70 ? '#059669' : percent >= 50 ? '#d97706' : '#dc2626';
     return `<div class="score-ring">
       <svg viewBox="0 0 120 120" width="120" height="120">
         <circle cx="60" cy="60" r="${r}" fill="none" stroke="var(--border)" stroke-width="10"/>
@@ -125,23 +92,22 @@ const UI = {
     </div>`;
   },
 
-  // ─── Dashboard ───────────────────────────────────────────────────────────
+  // ─── Dashboard ────────────────────────────────────────────────────────────
 
   renderDashboard(config, progressMap, stats) {
-    const accuracy = stats.totalAttempted > 0
-      ? Math.round((stats.totalCorrect / stats.totalAttempted) * 100)
-      : 0;
+    const accuracy  = stats.totalAttempted > 0
+      ? Math.round((stats.totalCorrect / stats.totalAttempted) * 100) : 0;
     const incorrect = Storage.getIncorrect();
     const flagged   = Storage.getFlagged();
 
     const statsHTML = [
-      this.statCard('Questions Attempted', stats.totalAttempted,   '📝', '#2563eb'),
-      this.statCard('Correct Answers',     stats.totalCorrect,     '✅', '#059669'),
-      this.statCard('Incorrect Answers',   stats.totalIncorrect,   '❌', '#dc2626'),
-      this.statCard('Overall Accuracy',    `${accuracy}%`,         '🎯', '#7c3aed'),
-      this.statCard('Exams Completed',     stats.completedExams,   '🏆', '#d97706'),
-      this.statCard('Flagged Questions',   flagged.length,         '🚩', '#0891b2'),
-      this.statCard('For Review',          incorrect.length,       '🔄', '#be185d'),
+      this.statCard('Questions Attempted', stats.totalAttempted,  '📝', '#2563eb'),
+      this.statCard('Correct Answers',     stats.totalCorrect,    '✅', '#059669'),
+      this.statCard('Incorrect Answers',   stats.totalIncorrect,  '❌', '#dc2626'),
+      this.statCard('Overall Accuracy',    `${accuracy}%`,        '🎯', '#7c3aed'),
+      this.statCard('Exams Completed',     stats.completedExams,  '🏆', '#d97706'),
+      this.statCard('Flagged Questions',   flagged.length,        '🚩', '#0891b2'),
+      this.statCard('For Review',          incorrect.length,      '🔄', '#be185d'),
     ].join('');
 
     const modulesHTML = config.modules.map(mod => {
@@ -183,36 +149,45 @@ const UI = {
           <button class="btn btn--ghost btn--sm" data-nav="search" title="Search questions">🔍 Search</button>
         </div>
       </header>
-
       <section class="section">
         <h2 class="section__title">Overview</h2>
         <div class="stats-grid">${statsHTML}</div>
       </section>
-
       <section class="section">
         <h2 class="section__title">Modules</h2>
         <div class="modules-grid">${modulesHTML}</div>
       </section>
+      <footer class="dashboard__footer">
+        <p>Made by <strong>Kareem Farouk</strong> · Questions by Department Heads</p>
+      </footer>
     </div>`;
   },
 
-  // ─── Module page ─────────────────────────────────────────────────────────
+  // ─── Module page ──────────────────────────────────────────────────────────
 
   renderModule(mod, config, progressMap) {
     const examTypesHTML = config.examTypes.map(et => {
       const subjectsHTML = config.subjects.map(sub => {
-        const prog = progressMap[`${mod.id}|${et.id}|${sub.id}`] || {};
-        const pct  = prog.total ? Math.round((prog.correct || 0) / prog.total * 100) : 0;
-        return `<div class="subject-card" data-nav="subject" data-params='${JSON.stringify({ moduleId: mod.id, examType: et.id, subject: sub.id })}' tabindex="0" role="button">
+        // Count total sub-subjects and completed ones for this combo
+        const subSubs   = (mod.subSubjects && mod.subSubjects[sub.id]) || [];
+        const completed = subSubs.filter(ss => {
+          const key = `${mod.id}|${et.id}|${sub.id}|${ss.id}`;
+          return progressMap[key]?.completed;
+        }).length;
+        const pct = subSubs.length > 0 ? Math.round((completed / subSubs.length) * 100) : 0;
+
+        return `<div class="subject-card" data-nav="subject"
+          data-params='${JSON.stringify({ moduleId: mod.id, examType: et.id, subject: sub.id })}'
+          tabindex="0" role="button">
           <div class="subject-card__left">
             <span class="subject-card__icon" style="background:${sub.color}20;color:${sub.color}">${sub.icon}</span>
             <div>
               <div class="subject-card__name">${sub.label}</div>
-              ${prog.completed ? `<div class="subject-card__score" style="color:${sub.color}">${pct}% · Last: ${new Date(prog.lastAttempt).toLocaleDateString()}</div>` : '<div class="subject-card__score">Not attempted</div>'}
+              <div class="subject-card__score">${subSubs.length > 0 ? `${completed}/${subSubs.length} topics` : 'No topics yet'}</div>
             </div>
           </div>
           <div class="subject-card__right">
-            ${prog.completed ? `<span class="badge badge--success">Done</span>` : ''}
+            ${completed === subSubs.length && subSubs.length > 0 ? `<span class="badge badge--success">Done</span>` : ''}
             <span class="subject-card__arrow">›</span>
           </div>
         </div>`;
@@ -245,15 +220,32 @@ const UI = {
     </div>`;
   },
 
-  // ─── Subject page ─────────────────────────────────────────────────────────
+  // ─── Subject page — shows sub-subject cards ───────────────────────────────
 
-  renderSubject(mod, examType, subject, questionCount, progress, config) {
-    const sub = config.subjects.find(s => s.id === subject);
+  renderSubject(mod, examType, subjectId, subSubjects, progressMap, config) {
+    const sub = config.subjects.find(s => s.id === subjectId);
     const et  = config.examTypes.find(e => e.id === examType);
-    const pct = progress && progress.total
-      ? Math.round((progress.correct / progress.total) * 100) : 0;
 
-    const noQuestions = questionCount === 0;
+    const content = subSubjects.length === 0
+      ? this.emptyState('No Topics Yet', `No sub-subjects defined for ${sub.label} in ${mod.title}. Add them to modules.json.`, sub.icon)
+      : `<div class="subsubjects-grid">
+          ${subSubjects.map(ss => {
+            const prog = progressMap[`${mod.id}|${examType}|${subjectId}|${ss.id}`] || {};
+            const pct  = prog.total ? Math.round((prog.correct / prog.total) * 100) : 0;
+            return `<div class="subsubject-card" data-nav="subsubject"
+              data-params='${JSON.stringify({ moduleId: mod.id, examType, subject: subjectId, subSubject: ss.id })}'
+              tabindex="0" role="button">
+              <div class="subsubject-card__icon">${ss.icon}</div>
+              <div class="subsubject-card__name">${ss.label}</div>
+              ${prog.completed
+                ? `<div class="subsubject-card__score" style="color:${pct >= 70 ? '#059669' : pct >= 50 ? '#d97706' : '#dc2626'}">${pct}%</div>
+                   <span class="badge badge--success" style="font-size:.7rem">Done</span>`
+                : `<div class="subsubject-card__score" style="color:var(--text-4)">Not attempted</div>`
+              }
+              <span class="subsubject-card__arrow">›</span>
+            </div>`;
+          }).join('')}
+        </div>`;
 
     return `
     <div class="page subject-page">
@@ -268,15 +260,46 @@ const UI = {
         <span class="page__icon">${sub.icon}</span>
         <div>
           <h1 class="page__title">${sub.label}</h1>
-          <p class="page__subtitle">${mod.title} · ${et.label}</p>
+          <p class="page__subtitle">${mod.title} · ${et.label} — Choose a topic</p>
+        </div>
+      </header>
+      ${content}
+    </div>`;
+  },
+
+  // ─── Sub-subject page — exam start screen ────────────────────────────────
+
+  renderSubSubject(mod, examType, subjectId, subSubjectId, questionCount, progress, config) {
+    const sub    = config.subjects.find(s => s.id === subjectId);
+    const et     = config.examTypes.find(e => e.id === examType);
+    const subSubs = (mod.subSubjects && mod.subSubjects[subjectId]) || [];
+    const ss     = subSubs.find(s => s.id === subSubjectId) || { label: subSubjectId, icon: '📄' };
+    const pct    = progress && progress.total ? Math.round((progress.correct / progress.total) * 100) : 0;
+    const noQ    = questionCount === 0;
+
+    return `
+    <div class="page subject-page">
+      ${this.backBtn('subject', { moduleId: mod.id, examType, subject: subjectId })}
+      ${this.breadcrumb([
+        { label: 'Dashboard', nav: 'dashboard' },
+        { label: mod.title, nav: 'module', params: { moduleId: mod.id } },
+        { label: et.label, nav: 'module', params: { moduleId: mod.id } },
+        { label: sub.label, nav: 'subject', params: { moduleId: mod.id, examType, subject: subjectId } },
+        { label: ss.label },
+      ])}
+      <header class="page__header" style="--mod-color:${sub.color}">
+        <span class="page__icon">${ss.icon}</span>
+        <div>
+          <h1 class="page__title">${ss.label}</h1>
+          <p class="page__subtitle">${mod.title} · ${sub.label} · ${et.label}</p>
         </div>
       </header>
 
-      ${noQuestions
+      ${noQ
         ? this.emptyState(
-            'No Questions Available',
-            'Upload questions to <code>data/${mod.dataPath}/${examType}/${subject}.json</code> in your GitHub repository.',
-            sub.icon
+            'No Questions Yet',
+            `Add questions to <code>data/${mod.dataPath}/${examType}/${subjectId}/${subSubjectId}.json</code> in your repo.`,
+            ss.icon
           )
         : `<div class="subject-info-cards">
             <div class="info-card">
@@ -304,53 +327,44 @@ const UI = {
               <input type="checkbox" id="opt-random" class="toggle" ${config.examSettings.defaultRandomize ? 'checked' : ''}>
             </label>
             <div class="exam-actions">
-              <button class="btn btn--primary btn--lg" id="start-exam-btn"
-                data-module="${mod.id}"
-                data-exam-type="${examType}"
-                data-subject="${subject}">
-                Start Exam →
-              </button>
-              ${progress ? `<button class="btn btn--ghost" id="retry-exam-btn"
-                data-module="${mod.id}"
-                data-exam-type="${examType}"
-                data-subject="${subject}">
-                Retry Exam
-              </button>` : ''}
+              <button class="btn btn--primary btn--lg" id="start-exam-btn">Start Exam →</button>
+              ${progress ? `<button class="btn btn--ghost" id="retry-exam-btn">Retry Exam</button>` : ''}
             </div>
           </div>`
       }
     </div>`;
   },
 
-  // ─── Exam interface ──────────────────────────────────────────────────────
+  // ─── Exam interface ───────────────────────────────────────────────────────
 
   renderExam(engine, config) {
-    const q     = engine.getCurrent();
-    const idx   = engine.state.currentIndex;
-    const total = engine.questions.length;
-    const sub   = config.subjects.find(s => s.id === engine.config.subject);
-    const et    = config.examTypes.find(e => e.id === engine.config.examType);
-    const answered = engine.getCurrentAnswer();
+    const q        = engine.getCurrent();
+    const idx      = engine.state.currentIndex;
+    const total    = engine.questions.length;
+    const sub      = config.subjects.find(s => s.id === engine.config.subject);
+    const et       = config.examTypes.find(e => e.id === engine.config.examType);
+    const answered  = engine.getCurrentAnswer();
     const isFlagged = engine.isFlagged(idx);
     const progress  = engine.getProgress();
+    const subSubs   = (config.modules.find(m => m.id === engine.config.module)?.subSubjects || {})[engine.config.subject] || [];
+    const ss        = subSubs.find(s => s.id === engine.config.subSubject) || { label: engine.config.subSubject, icon: '📄' };
 
     const paletteHTML = engine.questions.map((_, i) => {
       let cls = 'palette-btn';
-      if (i === idx)                  cls += ' palette-btn--current';
-      else if (engine.isAnswered(i))  cls += ' palette-btn--answered';
-      if (engine.isFlagged(i))        cls += ' palette-btn--flagged';
+      if (i === idx)                 cls += ' palette-btn--current';
+      else if (engine.isAnswered(i)) cls += ' palette-btn--answered';
+      if (engine.isFlagged(i))       cls += ' palette-btn--flagged';
       return `<button class="${cls}" data-goto="${i}" title="Question ${i + 1}">${i + 1}</button>`;
     }).join('');
 
     const optionsHTML = q.options.map((opt, i) => {
       let cls = 'option';
       if (answered !== undefined) {
-        if (i === q.answer)               cls += ' option--correct';
-        else if (i === answered)          cls += ' option--wrong';
+        if (i === q.answer)      cls += ' option--correct';
+        else if (i === answered) cls += ' option--wrong';
       }
-      const letter = ['A', 'B', 'C', 'D'][i];
       return `<button class="${cls}" data-option="${i}" ${answered !== undefined ? 'disabled' : ''}>
-        <span class="option__letter">${letter}</span>
+        <span class="option__letter">${['A','B','C','D'][i]}</span>
         <span class="option__text">${opt}</span>
       </button>`;
     }).join('');
@@ -367,8 +381,8 @@ const UI = {
     <div class="exam-layout">
       <aside class="exam-sidebar">
         <div class="exam-sidebar__header">
-          <div class="exam-sidebar__title">${sub.icon} ${sub.label}</div>
-          <div class="exam-sidebar__sub">${et.label}</div>
+          <div class="exam-sidebar__title">${ss.icon} ${ss.label}</div>
+          <div class="exam-sidebar__sub">${sub.icon} ${sub.label} · ${et.label}</div>
         </div>
         <div class="exam-progress-info">
           <span>${progress.answered}/${total} answered</span>
@@ -391,15 +405,12 @@ const UI = {
             🚩 ${isFlagged ? 'Flagged' : 'Flag'}
           </button>
         </div>
-
         <div class="question-card">
           <div class="question-card__number">Q${idx + 1}</div>
           <p class="question-card__text">${q.question}</p>
         </div>
-
         <div class="options-list">${optionsHTML}</div>
         ${explanationHTML}
-
         <div class="exam-nav">
           <button class="btn btn--ghost" id="prev-btn" ${idx === 0 ? 'disabled' : ''}>← Previous</button>
           <button class="btn btn--primary" id="next-btn" ${idx === total - 1 ? 'disabled' : ''}>Next →</button>
@@ -411,11 +422,14 @@ const UI = {
   // ─── Results page ─────────────────────────────────────────────────────────
 
   renderResults(results, config) {
-    const sub = config.subjects.find(s => s.id === results.config.subject);
-    const et  = config.examTypes.find(e => e.id === results.config.examType);
+    const sub   = config.subjects.find(s => s.id === results.config.subject);
+    const et    = config.examTypes.find(e => e.id === results.config.examType);
+    const mod   = config.modules.find(m => m.id === results.config.module);
+    const subSubs = (mod?.subSubjects || {})[results.config.subject] || [];
+    const ss    = subSubs.find(s => s.id === results.config.subSubject) || { label: results.config.subSubject };
 
     const reviewHTML = results.perQuestion.map((pq, i) => {
-      const cls = pq.correct ? 'result-item--correct' : pq.answered ? 'result-item--wrong' : 'result-item--skipped';
+      const cls    = pq.correct ? 'result-item--correct' : pq.answered ? 'result-item--wrong' : 'result-item--skipped';
       const status = pq.correct ? '✅' : pq.answered ? '❌' : '—';
       return `<div class="result-item ${cls}">
         <div class="result-item__header">
@@ -433,45 +447,43 @@ const UI = {
 
     return `
     <div class="page results-page">
-      ${this.backBtn('subject', { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject })}
+      ${this.backBtn('subsubject', { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject, subSubject: results.config.subSubject })}
       ${this.breadcrumb([
         { label: 'Dashboard', nav: 'dashboard' },
         { label: results.config.module, nav: 'module', params: { moduleId: results.config.module } },
-        { label: et.label },
-        { label: sub.label },
+        { label: et.label, nav: 'module', params: { moduleId: results.config.module } },
+        { label: sub.label, nav: 'subject', params: { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject } },
+        { label: ss.label, nav: 'subsubject', params: { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject, subSubject: results.config.subSubject } },
         { label: 'Results' },
       ])}
-
       <div class="results-summary">
-        <div class="results-summary__ring">
-          ${this.scoreRing(results.score)}
-        </div>
+        <div class="results-summary__ring">${this.scoreRing(results.score)}</div>
         <div class="results-summary__stats">
           <h2 class="results-summary__title">Exam Complete</h2>
-          <p class="results-summary__subtitle">${sub.label} · ${et.label}</p>
+          <p class="results-summary__subtitle">${ss.label} · ${sub.label} · ${et.label}</p>
           <div class="results-summary__grid">
-            ${this.statCard('Correct',   results.correct,   '✅', '#059669')}
-            ${this.statCard('Incorrect', results.incorrect, '❌', '#dc2626')}
-            ${this.statCard('Skipped',   results.unanswered,'—',  '#6b7280')}
+            ${this.statCard('Correct',   results.correct,    '✅', '#059669')}
+            ${this.statCard('Incorrect', results.incorrect,  '❌', '#dc2626')}
+            ${this.statCard('Skipped',   results.unanswered, '—',  '#6b7280')}
             ${this.statCard('Time',      ExamEngine.formatTime(results.timeSec), '⏱', '#2563eb')}
           </div>
         </div>
       </div>
-
       <div class="results-actions">
         ${results.incorrect > 0 ? `<button class="btn btn--danger" data-nav="review">🔄 Review Incorrect</button>` : ''}
         <button class="btn btn--primary" id="retry-incorrect-btn"
           data-module="${results.config.module}"
           data-exam-type="${results.config.examType}"
           data-subject="${results.config.subject}"
+          data-sub-subject="${results.config.subSubject}"
           ${results.incorrect === 0 ? 'disabled' : ''}>Retry Incorrect Only</button>
         <button class="btn btn--ghost" id="retry-all-btn"
           data-module="${results.config.module}"
           data-exam-type="${results.config.examType}"
-          data-subject="${results.config.subject}">Retry Full Exam</button>
+          data-subject="${results.config.subject}"
+          data-sub-subject="${results.config.subSubject}">Retry Full Exam</button>
         <button class="btn btn--ghost" data-nav="dashboard">Dashboard</button>
       </div>
-
       <section class="section">
         <h2 class="section__title">Question Review</h2>
         <div class="results-list">${reviewHTML}</div>
@@ -486,16 +498,9 @@ const UI = {
       return `<div class="page">
         ${this.backBtn('dashboard')}
         ${this.breadcrumb([{ label: 'Dashboard', nav: 'dashboard' }, { label: 'Review' }])}
-        ${this.emptyState('Nothing to Review', 'Complete some exams and any incorrect answers will appear here for review.', '🎉')}
+        ${this.emptyState('Nothing to Review', 'Complete some exams and incorrect answers will appear here.', '🎉')}
       </div>`;
     }
-
-    const grouped = {};
-    incorrectList.forEach(q => {
-      const key = q.module;
-      if (!grouped[key]) grouped[key] = [];
-      grouped[key].push(q);
-    });
 
     const listHTML = incorrectList.map(q => {
       const sub = config.subjects.find(s => s.id === q.subject);
@@ -504,6 +509,7 @@ const UI = {
         <div class="review-item__meta">
           <span class="badge" style="background:${sub?.color}20;color:${sub?.color}">${sub?.icon} ${sub?.label}</span>
           <span class="badge badge--ghost">${q.module}</span>
+          ${q.subSubjectLabel ? `<span class="badge badge--ghost">${q.subSubjectLabel}</span>` : ''}
           <span class="badge badge--ghost">${et?.label}</span>
         </div>
         <p class="review-item__question">${q.question}</p>
@@ -514,10 +520,6 @@ const UI = {
         <button class="btn btn--ghost btn--sm review-item__remove" data-remove-uid="${q.uid}">✓ Mark as Mastered</button>
       </div>`;
     }).join('');
-
-    const filterOptions = config.modules.map(m =>
-      `<option value="${m.id}">${m.title}</option>`
-    ).join('');
 
     return `
     <div class="page review-page">
@@ -530,12 +532,11 @@ const UI = {
           <p class="page__subtitle">${incorrectList.length} questions pending review</p>
         </div>
       </header>
-
       <div class="review-filters">
         <input type="text" id="review-search" class="input" placeholder="Search questions…">
         <select id="review-filter-module" class="select">
           <option value="">All Modules</option>
-          ${filterOptions}
+          ${config.modules.map(m => `<option value="${m.id}">${m.title}</option>`).join('')}
         </select>
         <select id="review-filter-subject" class="select">
           <option value="">All Subjects</option>
@@ -543,7 +544,6 @@ const UI = {
         </select>
         <button class="btn btn--danger btn--sm" id="clear-all-review">Clear All</button>
       </div>
-
       <div class="review-list" id="review-list">${listHTML}</div>
     </div>`;
   },
@@ -571,15 +571,20 @@ const UI = {
     </div>`;
   },
 
-  // ─── Internal helpers ────────────────────────────────────────────────────
+  // ─── Internal helpers ─────────────────────────────────────────────────────
 
   _calcModuleProgress(mod, config, progressMap) {
-    let completed = 0;
-    const total = config.examTypes.length * config.subjects.length;
+    const subSubs  = mod.subSubjects || {};
+    let completed  = 0;
+    let total      = 0;
     config.examTypes.forEach(et => {
       config.subjects.forEach(sub => {
-        const key = `${mod.id}|${et.id}|${sub.id}`;
-        if (progressMap[key]?.completed) completed++;
+        const list = subSubs[sub.id] || [];
+        total += list.length;
+        list.forEach(ss => {
+          const key = `${mod.id}|${et.id}|${sub.id}|${ss.id}`;
+          if (progressMap[key]?.completed) completed++;
+        });
       });
     });
     return {
