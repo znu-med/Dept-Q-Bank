@@ -177,6 +177,13 @@ const App = {
   // ─── Exam events ──────────────────────────────────────────────────────────
 
   _bindExamEvents() {
+    // Remove any previously-attached handler before adding a new one,
+    // so clicks on Next/Prev don't stack up duplicate listeners.
+    if (this._examClickHandler) {
+      document.removeEventListener('click', this._examClickHandler);
+      this._examClickHandler = null;
+    }
+
     document.addEventListener('click', this._examClickHandler = e => {
       const optBtn = e.target.closest('.option:not([disabled])');
       if (optBtn) {
@@ -210,18 +217,18 @@ const App = {
       if (palBtn && palBtn.dataset.goto !== undefined) {
         ExamEngine.goTo(parseInt(palBtn.dataset.goto, 10));
         UI.setContent(UI.renderExam(ExamEngine, this.config));
-        this._bindExamEvents();
+        // No need to re-bind — the existing listener on document is still active.
       }
 
       if (e.target.id === 'next-btn') {
         ExamEngine.next();
         UI.setContent(UI.renderExam(ExamEngine, this.config));
-        this._bindExamEvents();
+        // No need to re-bind — the existing listener on document is still active.
       }
       if (e.target.id === 'prev-btn') {
         ExamEngine.prev();
         UI.setContent(UI.renderExam(ExamEngine, this.config));
-        this._bindExamEvents();
+        // No need to re-bind — the existing listener on document is still active.
       }
 
       if (e.target.id === 'flag-btn' || e.target.closest('#flag-btn')) {
