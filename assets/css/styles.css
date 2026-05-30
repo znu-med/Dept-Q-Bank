@@ -404,16 +404,17 @@ h1, h2, h3, h4 {
 .dashboard__header {
   display:         flex;
   justify-content: space-between;
-  align-items:     flex-start;
+  align-items:     center;
   margin-bottom:   32px;
   gap:             16px;
   flex-wrap:       wrap;
 }
 .dashboard__logo {
-  height:      52px;
+  height:      72px;
   width:       auto;
   display:     block;
   object-fit:  contain;
+  /* logo PNG has transparent bg after processing */
 }
 .dashboard__title {
   font-size:  2.4rem;
