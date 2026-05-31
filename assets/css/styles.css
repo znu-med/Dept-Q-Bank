@@ -1407,3 +1407,133 @@ h1, h2, h3, h4 {
     padding: 16px;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   WIDE EXAM (subject-level & exam-type-level) — v3 additions
+   ══════════════════════════════════════════════════════════════ */
+
+/* "Start Full Exam" button area on module page */
+.exam-type-header__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.wide-exam-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge--count {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  font-size: .7rem;
+  padding: .15rem .45rem;
+  border-radius: 99px;
+}
+
+/* "Start Subject Exam" CTA on subject page */
+.wide-exam-cta {
+  margin-bottom: 1.25rem;
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+/* Question count badge on sub-subject cards */
+.subsubject-card__qcount {
+  font-size: .72rem;
+  color: var(--text-4);
+  margin-top: .1rem;
+}
+
+/* Wide exam start page */
+.wide-exam-start-page .subject-info-cards {
+  margin-bottom: 1.5rem;
+}
+
+.wide-exam-breakdown {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.wide-exam-breakdown__title {
+  font-size: .8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text-4);
+  margin: 0 0 .85rem;
+}
+
+.wide-breakdown-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .75rem;
+}
+
+.wide-breakdown-item {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  color: var(--text-2);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .3rem .7rem;
+}
+
+.wide-breakdown-count {
+  font-size: .75rem;
+  color: var(--text-4);
+}
+
+.wide-exam-note {
+  font-size: .85rem;
+  color: var(--text-3);
+  margin: 0 0 1rem;
+}
+
+/* Topic badge inside question card (wide exams) */
+.exam-question-topic {
+  font-size: .78rem;
+  color: var(--text-4);
+  margin-bottom: .5rem;
+  padding: .2rem .6rem;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  display: inline-block;
+}
+
+/* Topic badge inside explanation box */
+.explanation-box__topic {
+  font-size: .78rem;
+  color: var(--text-3);
+  margin: .3rem 0 .6rem;
+  font-style: italic;
+}
+
+/* Topic tag inside result items */
+.result-item__topic {
+  font-size: .72rem;
+  background: var(--surface-2);
+  color: var(--text-4);
+  border-radius: var(--radius);
+  padding: .15rem .5rem;
+  margin-left: .4rem;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .wide-exam-breakdown { background: var(--surface); border-color: var(--border); }
+[data-theme="dark"] .wide-breakdown-item { background: var(--surface-2); border-color: var(--border); }
+[data-theme="dark"] .exam-question-topic { background: var(--surface-2); }
+[data-theme="dark"] .result-item__topic  { background: var(--surface-2); }
