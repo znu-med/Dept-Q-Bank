@@ -1,6 +1,6 @@
 /**
  * ============================================================
- * DEPT. Q. BANK — ui.js  (v2 — sub-subject support)
+ * DEPT. Q. BANK — ui.js  (v3 — subject & exam-type wide exams)
  * ============================================================
  */
 
@@ -112,7 +112,6 @@ const UI = {
 
     const modulesHTML = config.modules.filter(mod => {
       if (!countMap) return true;
-      // hide module if every single subsubject has 0 questions
       return Object.keys(countMap).some(k => k.startsWith(mod.id + '|') && countMap[k] > 0);
     }).map(mod => {
       const modProgress = this._calcModuleProgress(mod, config, progressMap);
@@ -183,16 +182,13 @@ const UI = {
       const subjectsHTML = config.subjects.filter(sub => {
         if (!countMap) return true;
         const subSubs = (mod.subSubjects && mod.subSubjects[et.id] && mod.subSubjects[et.id][sub.id]) || [];
-        // hide subject if none of its subsubjects have questions
         return subSubs.some(ss => (countMap[`${mod.id}|${et.id}|${sub.id}|${ss.id}`] || 0) > 0);
       }).map(sub => {
-        // Count total sub-subjects and completed ones for this combo
         const subSubs   = (mod.subSubjects && mod.subSubjects[et.id] && mod.subSubjects[et.id][sub.id]) || [];
         const completed = subSubs.filter(ss => {
           const key = `${mod.id}|${et.id}|${sub.id}|${ss.id}`;
           return progressMap[key]?.completed;
         }).length;
-        const pct = subSubs.length > 0 ? Math.round((completed / subSubs.length) * 100) : 0;
 
         return `<div class="subject-card" data-nav="subject"
           data-params='${JSON.stringify({ moduleId: mod.id, examType: et.id, subject: sub.id })}'
@@ -211,11 +207,32 @@ const UI = {
         </div>`;
       }).join('');
 
-      if (!subjectsHTML) return ''; // all subjects hidden
+      if (!subjectsHTML) return '';
+
+      // Total questions for this exam type
+      const etTotalQ = countMap
+        ? Object.entries(countMap)
+            .filter(([k]) => k.startsWith(`${mod.id}|${et.id}|`))
+            .reduce((acc, [, n]) => acc + n, 0)
+        : null;
+
+      const fullExamBtn = etTotalQ > 0
+        ? `<button class="btn btn--primary wide-exam-btn"
+            data-nav="wide-exam-start"
+            data-params='${JSON.stringify({ moduleId: mod.id, examType: et.id, scope: 'examtype' })}'>
+            📋 Start Full ${et.label} <span class="badge badge--count">${etTotalQ} Q</span>
+          </button>`
+        : '';
+
       return `<div class="exam-type-section">
         <div class="exam-type-header" style="--et-color:${et.color}">
-          <h3 class="exam-type-header__title">${et.label}</h3>
-          <p class="exam-type-header__desc">${et.description}</p>
+          <div class="exam-type-header__top">
+            <div>
+              <h3 class="exam-type-header__title">${et.label}</h3>
+              <p class="exam-type-header__desc">${et.description}</p>
+            </div>
+            ${fullExamBtn}
+          </div>
         </div>
         <div class="subjects-list">${subjectsHTML}</div>
       </div>`;
@@ -239,7 +256,7 @@ const UI = {
     </div>`;
   },
 
-  // ─── Subject page — shows sub-subject cards ───────────────────────────────
+  // ─── Subject page — shows sub-subject cards + "Start Subject Exam" ────────
 
   renderSubject(mod, examType, subjectId, subSubjects, progressMap, config, countMap = null) {
     const sub = config.subjects.find(s => s.id === subjectId);
@@ -249,17 +266,30 @@ const UI = {
       !countMap || (countMap[`${mod.id}|${examType}|${subjectId}|${ss.id}`] || 0) > 0
     );
 
+    const totalSubjectQ = countMap
+      ? visibleSubSubs.reduce((acc, ss) => acc + (countMap[`${mod.id}|${examType}|${subjectId}|${ss.id}`] || 0), 0)
+      : 0;
+
+    const subjectExamBtn = totalSubjectQ > 0
+      ? `<button class="btn btn--primary wide-exam-btn" id="start-subject-exam-btn">
+          🧬 Start Full ${sub.label} Exam <span class="badge badge--count">${totalSubjectQ} Q</span>
+        </button>`
+      : '';
+
     const content = visibleSubSubs.length === 0
       ? this.emptyState('No Topics Yet', `No questions added yet for ${sub.label} in ${mod.title}.`, sub.icon)
-      : `<div class="subsubjects-grid">
+      : `${subjectExamBtn ? `<div class="wide-exam-cta">${subjectExamBtn}</div>` : ''}
+         <div class="subsubjects-grid">
           ${visibleSubSubs.map(ss => {
             const prog = progressMap[`${mod.id}|${examType}|${subjectId}|${ss.id}`] || {};
             const pct  = prog.total ? Math.round((prog.correct / prog.total) * 100) : 0;
+            const qCount = countMap ? (countMap[`${mod.id}|${examType}|${subjectId}|${ss.id}`] || 0) : '';
             return `<div class="subsubject-card" data-nav="subsubject"
               data-params='${JSON.stringify({ moduleId: mod.id, examType, subject: subjectId, subSubject: ss.id })}'
               tabindex="0" role="button">
               <div class="subsubject-card__icon">${ss.icon}</div>
               <div class="subsubject-card__name">${ss.label}</div>
+              ${qCount ? `<div class="subsubject-card__qcount">${qCount} Q</div>` : ''}
               ${prog.completed
                 ? `<div class="subsubject-card__score" style="color:${pct >= 70 ? '#4A9E8E' : pct >= 50 ? '#d97706' : '#dc2626'}">${pct}%</div>
                    <span class="badge badge--success" style="font-size:.7rem">Done</span>`
@@ -301,7 +331,7 @@ const UI = {
     const noQ    = questionCount === 0;
 
     return `
-    <div class="page subject-page">
+    <div class="page subsubject-page">
       ${this.backBtn('subject', { moduleId: mod.id, examType, subject: subjectId })}
       ${this.breadcrumb([
         { label: 'Dashboard', nav: 'dashboard' },
@@ -360,19 +390,139 @@ const UI = {
     </div>`;
   },
 
+  // ─── NEW: Wide exam start page (subject-level or examtype-level) ──────────
+
+  renderWideExamStart(mod, params, totalCount, config) {
+    const et  = config.examTypes.find(e => e.id === params.examType);
+    const isSubjectScope = params.scope === 'subject';
+    const sub = isSubjectScope ? config.subjects.find(s => s.id === params.subject) : null;
+
+    const icon     = isSubjectScope ? sub.icon : mod.icon;
+    const title    = isSubjectScope ? `${sub.label} — Full Exam` : `${et.label} — Full Exam`;
+    const subtitle = isSubjectScope
+      ? `${mod.title} · ${et.label} · All ${sub.label} Topics`
+      : `${mod.title} · All Subjects`;
+    const color    = isSubjectScope ? sub.color : mod.color;
+
+    const backNav    = isSubjectScope ? 'subject' : 'module';
+    const backParams = isSubjectScope
+      ? { moduleId: mod.id, examType: params.examType, subject: params.subject }
+      : { moduleId: mod.id };
+
+    const noQ = totalCount === 0;
+
+    // Build topic breakdown
+    let breakdownHTML = '';
+    if (isSubjectScope) {
+      const ssList = (mod.subSubjects?.[params.examType]?.[params.subject]) || [];
+      breakdownHTML = ssList.map(ss => `
+        <div class="wide-breakdown-item">
+          <span>${ss.icon} ${ss.label}</span>
+        </div>`).join('');
+    } else {
+      breakdownHTML = config.subjects.map(sub => {
+        const ssList = (mod.subSubjects?.[params.examType]?.[sub.id]) || [];
+        if (ssList.length === 0) return '';
+        return `<div class="wide-breakdown-item">
+          <span style="color:${sub.color}">${sub.icon} ${sub.label}</span>
+          <span class="wide-breakdown-count">${ssList.length} topics</span>
+        </div>`;
+      }).join('');
+    }
+
+    return `
+    <div class="page wide-exam-start-page">
+      ${this.backBtn(backNav, backParams)}
+      ${this.breadcrumb([
+        { label: 'Dashboard', nav: 'dashboard' },
+        { label: mod.title, nav: 'module', params: { moduleId: mod.id } },
+        ...(isSubjectScope ? [
+          { label: et.label, nav: 'module', params: { moduleId: mod.id } },
+          { label: sub.label, nav: 'subject', params: { moduleId: mod.id, examType: params.examType, subject: params.subject } },
+        ] : [
+          { label: et.label, nav: 'module', params: { moduleId: mod.id } },
+        ]),
+        { label: 'Full Exam' },
+      ])}
+      <header class="page__header" style="--mod-color:${color}">
+        <span class="page__icon">${icon}</span>
+        <div>
+          <h1 class="page__title">${title}</h1>
+          <p class="page__subtitle">${subtitle}</p>
+        </div>
+      </header>
+
+      ${noQ
+        ? this.emptyState('No Questions Available', 'No questions have been added to this section yet.', icon)
+        : `<div class="subject-info-cards">
+            <div class="info-card">
+              <div class="info-card__label">Total Questions</div>
+              <div class="info-card__value">${totalCount}</div>
+            </div>
+            <div class="info-card">
+              <div class="info-card__label">Question Order</div>
+              <div class="info-card__value info-card__value--sm">Randomized</div>
+            </div>
+            <div class="info-card">
+              <div class="info-card__label">Feedback</div>
+              <div class="info-card__value info-card__value--sm">Immediate</div>
+            </div>
+          </div>
+
+          <div class="wide-exam-breakdown">
+            <h3 class="wide-exam-breakdown__title">Covered Topics</h3>
+            <div class="wide-breakdown-grid">${breakdownHTML}</div>
+          </div>
+
+          <div class="exam-options-card">
+            <p class="wide-exam-note">Questions from all topics are shuffled together into one randomized exam.</p>
+            <div class="exam-actions">
+              <button class="btn btn--primary btn--lg" id="start-wide-exam-btn">
+                Start Exam → <span style="opacity:.7;font-size:.85em">${totalCount} questions</span>
+              </button>
+            </div>
+          </div>`
+      }
+    </div>`;
+  },
+
   // ─── Exam interface ───────────────────────────────────────────────────────
 
   renderExam(engine, config) {
     const q        = engine.getCurrent();
     const idx      = engine.state.currentIndex;
     const total    = engine.questions.length;
-    const sub      = config.subjects.find(s => s.id === engine.config.subject);
     const et       = config.examTypes.find(e => e.id === engine.config.examType);
     const answered  = engine.getCurrentAnswer();
     const isFlagged = engine.isFlagged(idx);
     const progress  = engine.getProgress();
-    const subSubs   = (config.modules.find(m => m.id === engine.config.module)?.subSubjects?.[engine.config.examType]?.[engine.config.subject]) || [];
-    const ss        = subSubs.find(s => s.id === engine.config.subSubject) || { label: engine.config.subSubject, icon: '📄' };
+
+    // Wide exam vs single sub-subject
+    const isWide = !!engine.config.scope;
+    let sidebarTitle, sidebarSub;
+
+    if (isWide) {
+      const modObj = config.modules.find(m => m.id === engine.config.module);
+      if (engine.config.scope === 'subject') {
+        const sub = config.subjects.find(s => s.id === engine.config.subject);
+        sidebarTitle = `${sub?.icon} ${sub?.label}`;
+        sidebarSub   = `${modObj?.shortTitle} · ${et?.label} · All Topics`;
+      } else {
+        sidebarTitle = `${modObj?.icon} ${modObj?.shortTitle}`;
+        sidebarSub   = `${et?.label} · All Subjects`;
+      }
+    } else {
+      const sub   = config.subjects.find(s => s.id === engine.config.subject);
+      const subSubs = (config.modules.find(m => m.id === engine.config.module)?.subSubjects?.[engine.config.examType]?.[engine.config.subject]) || [];
+      const ss    = subSubs.find(s => s.id === engine.config.subSubject) || { label: engine.config.subSubject, icon: '📄' };
+      sidebarTitle = `${ss.icon} ${ss.label}`;
+      sidebarSub   = `${sub?.icon} ${sub?.label} · ${et?.label}`;
+    }
+
+    // Show topic badge for wide exams
+    const topicBadge = (isWide && q._subSubjectLabel)
+      ? `<div class="exam-question-topic">📌 ${q._subSubjectLabel}</div>`
+      : '';
 
     const paletteHTML = engine.questions.map((_, i) => {
       let cls = 'palette-btn';
@@ -399,15 +549,26 @@ const UI = {
           <div class="explanation-box__header">
             ${answered === q.answer ? '✅ Correct!' : `❌ Incorrect — Correct answer: <strong>${['A','B','C','D'][q.answer]}</strong>`}
           </div>
+          ${isWide && q._subSubjectLabel ? `<div class="explanation-box__topic">📌 ${q._subSubjectLabel}</div>` : ''}
           <p class="explanation-box__text">${q.explanation}</p>
         </div>` : '';
+
+    // Back nav for wide exams goes to the right place
+    const backParams = isWide
+      ? (engine.config.scope === 'subject'
+          ? { moduleId: engine.config.module, examType: engine.config.examType, subject: engine.config.subject }
+          : { moduleId: engine.config.module })
+      : { moduleId: engine.config.module, examType: engine.config.examType, subject: engine.config.subject };
+    const backNav = isWide
+      ? (engine.config.scope === 'subject' ? 'subject' : 'module')
+      : 'subject';
 
     return `
     <div class="exam-layout">
       <aside class="exam-sidebar">
         <div class="exam-sidebar__header">
-          <div class="exam-sidebar__title">${ss.icon} ${ss.label}</div>
-          <div class="exam-sidebar__sub">${sub.icon} ${sub.label} · ${et.label}</div>
+          <div class="exam-sidebar__title">${sidebarTitle}</div>
+          <div class="exam-sidebar__sub">${sidebarSub}</div>
         </div>
         <div class="exam-progress-info">
           <span>${progress.answered}/${total} answered</span>
@@ -424,7 +585,7 @@ const UI = {
 
       <main class="exam-main">
         <div class="exam-topbar">
-          ${this.backBtn('subject', { moduleId: engine.config.module, examType: engine.config.examType, subject: engine.config.subject })}
+          ${this.backBtn(backNav, backParams)}
           <div class="exam-counter">Question <strong>${idx + 1}</strong> of <strong>${total}</strong></div>
           <button class="flag-btn ${isFlagged ? 'flag-btn--active' : ''}" id="flag-btn" title="${isFlagged ? 'Unflag' : 'Flag'} question">
             🚩 ${isFlagged ? 'Flagged' : 'Flag'}
@@ -432,6 +593,7 @@ const UI = {
         </div>
         <div class="question-card">
           <div class="question-card__number">Q${idx + 1}</div>
+          ${topicBadge}
           <p class="question-card__text">${q.question}</p>
         </div>
         <div class="options-list">${optionsHTML}</div>
@@ -447,18 +609,65 @@ const UI = {
   // ─── Results page ─────────────────────────────────────────────────────────
 
   renderResults(results, config) {
-    const sub   = config.subjects.find(s => s.id === results.config.subject);
     const et    = config.examTypes.find(e => e.id === results.config.examType);
     const mod   = config.modules.find(m => m.id === results.config.module);
-    const subSubs = (mod?.subSubjects?.[results.config.examType]?.[results.config.subject]) || [];
-    const ss    = subSubs.find(s => s.id === results.config.subSubject) || { label: results.config.subSubject };
+    const isWide = !!results.config.scope;
+
+    let titleLabel, subtitleLabel, backNav, backParams, crumbs;
+    if (isWide) {
+      if (results.config.scope === 'subject') {
+        const sub = config.subjects.find(s => s.id === results.config.subject);
+        titleLabel    = `${sub?.label} — Full Exam`;
+        subtitleLabel = `${mod?.title} · ${et?.label}`;
+        backNav       = 'subject';
+        backParams    = { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject };
+        crumbs        = [
+          { label: 'Dashboard', nav: 'dashboard' },
+          { label: mod?.title, nav: 'module', params: { moduleId: results.config.module } },
+          { label: et?.label, nav: 'module', params: { moduleId: results.config.module } },
+          { label: sub?.label, nav: 'subject', params: backParams },
+          { label: 'Results' },
+        ];
+      } else {
+        titleLabel    = `${et?.label} — Full Exam`;
+        subtitleLabel = mod?.title;
+        backNav       = 'module';
+        backParams    = { moduleId: results.config.module };
+        crumbs        = [
+          { label: 'Dashboard', nav: 'dashboard' },
+          { label: mod?.title, nav: 'module', params: { moduleId: results.config.module } },
+          { label: et?.label, nav: 'module', params: { moduleId: results.config.module } },
+          { label: 'Results' },
+        ];
+      }
+    } else {
+      const sub     = config.subjects.find(s => s.id === results.config.subject);
+      const subSubs = (mod?.subSubjects?.[results.config.examType]?.[results.config.subject]) || [];
+      const ss      = subSubs.find(s => s.id === results.config.subSubject) || { label: results.config.subSubject };
+      titleLabel    = ss.label;
+      subtitleLabel = `${sub?.label} · ${et?.label}`;
+      backNav       = 'subsubject';
+      backParams    = { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject, subSubject: results.config.subSubject };
+      crumbs        = [
+        { label: 'Dashboard', nav: 'dashboard' },
+        { label: results.config.module, nav: 'module', params: { moduleId: results.config.module } },
+        { label: et?.label, nav: 'module', params: { moduleId: results.config.module } },
+        { label: sub?.label, nav: 'subject', params: { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject } },
+        { label: ss.label, nav: 'subsubject', params: backParams },
+        { label: 'Results' },
+      ];
+    }
 
     const reviewHTML = results.perQuestion.map((pq, i) => {
       const cls    = pq.correct ? 'result-item--correct' : pq.answered ? 'result-item--wrong' : 'result-item--skipped';
       const status = pq.correct ? '✅' : pq.answered ? '❌' : '—';
+      // For wide exams show topic badge
+      const topicTag = (isWide && pq._subSubjectLabel)
+        ? `<span class="result-item__topic">📌 ${pq._subSubjectLabel}</span>` : '';
       return `<div class="result-item ${cls}">
         <div class="result-item__header">
           <span class="result-item__num">${status} Q${i + 1}</span>
+          ${topicTag}
           ${pq.flagged ? '<span class="result-item__flag">🚩</span>' : ''}
         </div>
         <p class="result-item__question">${pq.question}</p>
@@ -472,20 +681,13 @@ const UI = {
 
     return `
     <div class="page results-page">
-      ${this.backBtn('subsubject', { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject, subSubject: results.config.subSubject })}
-      ${this.breadcrumb([
-        { label: 'Dashboard', nav: 'dashboard' },
-        { label: results.config.module, nav: 'module', params: { moduleId: results.config.module } },
-        { label: et.label, nav: 'module', params: { moduleId: results.config.module } },
-        { label: sub.label, nav: 'subject', params: { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject } },
-        { label: ss.label, nav: 'subsubject', params: { moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject, subSubject: results.config.subSubject } },
-        { label: 'Results' },
-      ])}
+      ${this.backBtn(backNav, backParams)}
+      ${this.breadcrumb(crumbs)}
       <div class="results-summary">
         <div class="results-summary__ring">${this.scoreRing(results.score)}</div>
         <div class="results-summary__stats">
           <h2 class="results-summary__title">Exam Complete</h2>
-          <p class="results-summary__subtitle">${ss.label} · ${sub.label} · ${et.label}</p>
+          <p class="results-summary__subtitle">${titleLabel} · ${subtitleLabel}</p>
           <div class="results-summary__grid">
             ${this.statCard('Correct',   results.correct,    '✅', '#4A9E8E')}
             ${this.statCard('Incorrect', results.incorrect,  '❌', '#dc2626')}
@@ -495,26 +697,12 @@ const UI = {
         </div>
       </div>
       <div class="results-actions">
-        ${results.incorrect > 0 ? `<button class="btn btn--danger" data-nav="scoped-review"
-          data-params='${JSON.stringify({ moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject, subSubject: results.config.subSubject, label: ss.label })}'>
-          🔄 Review Incorrect (this topic)</button>` : ''}
-        ${Storage.getFlagged().some(f => f.module === results.config.module && f.examType === results.config.examType && f.subject === results.config.subject && f.subSubject === results.config.subSubject)
-          ? `<button class="btn btn--ghost" data-nav="scoped-flagged"
-              data-params='${JSON.stringify({ moduleId: results.config.module, examType: results.config.examType, subject: results.config.subject, subSubject: results.config.subSubject, label: ss.label })}'
-              style="border-color:#4A9E8E;color:#4A9E8E">
-              🚩 Review Flagged (this topic)</button>`
-          : ''}
-        <button class="btn btn--primary" id="retry-incorrect-btn"
-          data-module="${results.config.module}"
-          data-exam-type="${results.config.examType}"
-          data-subject="${results.config.subject}"
-          data-sub-subject="${results.config.subSubject}"
-          ${results.incorrect === 0 ? 'disabled' : ''}>Retry Incorrect Only</button>
         <button class="btn btn--ghost" id="retry-all-btn"
           data-module="${results.config.module}"
           data-exam-type="${results.config.examType}"
-          data-subject="${results.config.subject}"
-          data-sub-subject="${results.config.subSubject}">Retry Full Exam</button>
+          data-subject="${results.config.subject || ''}"
+          data-sub-subject="${results.config.subSubject || ''}"
+          data-scope="${results.config.scope || ''}">Retry Full Exam</button>
         <button class="btn btn--ghost" data-nav="dashboard">Dashboard</button>
       </div>
       <section class="section">
