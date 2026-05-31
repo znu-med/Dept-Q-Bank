@@ -94,7 +94,7 @@ const UI = {
 
   // ─── Dashboard ────────────────────────────────────────────────────────────
 
-  renderDashboard(config, progressMap, stats) {
+  renderDashboard(config, progressMap, stats, countMap = null) {
     const accuracy  = stats.totalAttempted > 0
       ? Math.round((stats.totalCorrect / stats.totalAttempted) * 100) : 0;
     const incorrect = Storage.getIncorrect();
@@ -110,7 +110,11 @@ const UI = {
       this.statCard('For Review',          incorrect.length,      '🔄', '#be185d'),
     ].join('');
 
-    const modulesHTML = config.modules.map(mod => {
+    const modulesHTML = config.modules.filter(mod => {
+      if (!countMap) return true;
+      // hide module if every single subsubject has 0 questions
+      return Object.keys(countMap).some(k => k.startsWith(mod.id + '|') && countMap[k] > 0);
+    }).map(mod => {
       const modProgress = this._calcModuleProgress(mod, config, progressMap);
       return `<div class="module-card" data-nav="module" data-params='${JSON.stringify({ moduleId: mod.id })}' style="--mod-color:${mod.color}" tabindex="0" role="button" aria-label="Open ${mod.title}">
         <div class="module-card__header">
@@ -174,9 +178,14 @@ const UI = {
 
   // ─── Module page ──────────────────────────────────────────────────────────
 
-  renderModule(mod, config, progressMap) {
+  renderModule(mod, config, progressMap, countMap = null) {
     const examTypesHTML = config.examTypes.map(et => {
-      const subjectsHTML = config.subjects.map(sub => {
+      const subjectsHTML = config.subjects.filter(sub => {
+        if (!countMap) return true;
+        const subSubs = (mod.subSubjects && mod.subSubjects[et.id] && mod.subSubjects[et.id][sub.id]) || [];
+        // hide subject if none of its subsubjects have questions
+        return subSubs.some(ss => (countMap[`${mod.id}|${et.id}|${sub.id}|${ss.id}`] || 0) > 0);
+      }).map(sub => {
         // Count total sub-subjects and completed ones for this combo
         const subSubs   = (mod.subSubjects && mod.subSubjects[et.id] && mod.subSubjects[et.id][sub.id]) || [];
         const completed = subSubs.filter(ss => {
@@ -202,6 +211,7 @@ const UI = {
         </div>`;
       }).join('');
 
+      if (!subjectsHTML) return ''; // all subjects hidden
       return `<div class="exam-type-section">
         <div class="exam-type-header" style="--et-color:${et.color}">
           <h3 class="exam-type-header__title">${et.label}</h3>
@@ -231,14 +241,18 @@ const UI = {
 
   // ─── Subject page — shows sub-subject cards ───────────────────────────────
 
-  renderSubject(mod, examType, subjectId, subSubjects, progressMap, config) {
+  renderSubject(mod, examType, subjectId, subSubjects, progressMap, config, countMap = null) {
     const sub = config.subjects.find(s => s.id === subjectId);
     const et  = config.examTypes.find(e => e.id === examType);
 
-    const content = subSubjects.length === 0
-      ? this.emptyState('No Topics Yet', `No sub-subjects defined for ${sub.label} in ${mod.title}. Add them to modules.json.`, sub.icon)
+    const visibleSubSubs = subSubjects.filter(ss =>
+      !countMap || (countMap[`${mod.id}|${examType}|${subjectId}|${ss.id}`] || 0) > 0
+    );
+
+    const content = visibleSubSubs.length === 0
+      ? this.emptyState('No Topics Yet', `No questions added yet for ${sub.label} in ${mod.title}.`, sub.icon)
       : `<div class="subsubjects-grid">
-          ${subSubjects.map(ss => {
+          ${visibleSubSubs.map(ss => {
             const prog = progressMap[`${mod.id}|${examType}|${subjectId}|${ss.id}`] || {};
             const pct  = prog.total ? Math.round((prog.correct / prog.total) * 100) : 0;
             return `<div class="subsubject-card" data-nav="subsubject"

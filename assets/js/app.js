@@ -95,7 +95,9 @@ const App = {
       case 'dashboard': {
         const progress = Storage.getProgress();
         const stats    = Storage.getStats();
-        UI.setContent(UI.renderDashboard(this.config, progress, stats));
+        UI.loading('Loading…');
+        const countMap = await this._buildCountMap(this.config);
+        UI.setContent(UI.renderDashboard(this.config, progress, stats, countMap));
         this._applyThemeIcon(document.documentElement.getAttribute('data-theme') || 'light');
         break;
       }
@@ -104,7 +106,9 @@ const App = {
         const mod = this._getModule(params.moduleId);
         if (!mod) { this.navigate('dashboard'); break; }
         const progress = Storage.getProgress();
-        UI.setContent(UI.renderModule(mod, this.config, progress));
+        UI.loading('Loading…');
+        const countMap = await this._buildCountMap(this.config, mod);
+        UI.setContent(UI.renderModule(mod, this.config, progress, countMap));
         break;
       }
 
@@ -116,7 +120,9 @@ const App = {
         if (!mod) { this.navigate('dashboard'); break; }
         const subSubjects = (mod.subSubjects && mod.subSubjects[et] && mod.subSubjects[et][subject]) || [];
         const progress    = Storage.getProgress();
-        UI.setContent(UI.renderSubject(mod, et, subject, subSubjects, progress, this.config));
+        UI.loading('Loading…');
+        const countMap = await this._buildCountMap(this.config, mod);
+        UI.setContent(UI.renderSubject(mod, et, subject, subSubjects, progress, this.config, countMap));
         break;
       }
 
@@ -624,6 +630,27 @@ const App = {
     const res = await fetch('config/modules.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
+  },
+
+  // Build a map of { 'modId|examType|subject|ssId': questionCount }
+  // Pass a specific mod to limit fetches to that module only
+  async _buildCountMap(config, mod = null) {
+    const mods = mod ? [mod] : (config.modules || []);
+    const entries = [];
+    for (const m of mods) {
+      for (const et of (config.examTypes || [])) {
+        for (const sub of (config.subjects || [])) {
+          const subs = (m.subSubjects && m.subSubjects[et.id] && m.subSubjects[et.id][sub.id]) || [];
+          for (const ss of subs) {
+            entries.push({ key: `${m.id}|${et.id}|${sub.id}|${ss.id}`, m, et: et.id, sub: sub.id, ss: ss.id });
+          }
+        }
+      }
+    }
+    const results = await Promise.all(
+      entries.map(e => this._getQuestionCount(e.m, e.et, e.sub, e.ss).then(n => [e.key, n]))
+    );
+    return Object.fromEntries(results);
   },
 
   async _getQuestionCount(mod, examType, subject, subSubject) {
