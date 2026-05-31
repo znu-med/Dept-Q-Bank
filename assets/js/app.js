@@ -1,6 +1,6 @@
 /**
  * ============================================================
- * DEPT. Q. BANK — app.js  (v2 — sub-subject support)
+ * DEPT. Q. BANK — app.js  (v3 — subject & exam-type wide exams)
  * ============================================================
  */
 
@@ -27,11 +27,9 @@ const App = {
       return;
     }
 
-    // ─── Theme (dark/light) ───────────────────────────────────────────────
     this._initTheme();
     document.addEventListener('click', e => this._handleGlobalClick(e));
 
-    // Browser back/forward button support
     window.addEventListener('popstate', e => {
       if (e.state && e.state.page) {
         this._navigateWithoutHistory(e.state.page, e.state.params || {});
@@ -81,7 +79,6 @@ const App = {
     this._renderPage(page, params);
   },
 
-  // Navigate without pushing a new history entry (used by popstate)
   _navigateWithoutHistory(page, params = {}) {
     this.currentPage   = page;
     this.currentParams = params;
@@ -112,7 +109,7 @@ const App = {
         break;
       }
 
-      // Subject page now shows sub-subjects instead of going straight to exam
+      // Subject page: shows sub-subjects + a "Start Subject Exam" button
       case 'subject': {
         const mod     = this._getModule(params.moduleId);
         const subject = params.subject;
@@ -123,10 +120,11 @@ const App = {
         UI.loading('Loading…');
         const countMap = await this._buildCountMap(this.config, mod);
         UI.setContent(UI.renderSubject(mod, et, subject, subSubjects, progress, this.config, countMap));
+        this._bindSubjectPageEvents(mod, et, subject, subSubjects, countMap);
         break;
       }
 
-      // New page: sub-subject (shows exam start for a specific sub-subject)
+      // Sub-subject page (individual topic exam start)
       case 'subsubject': {
         const mod        = this._getModule(params.moduleId);
         const subject    = params.subject;
@@ -141,10 +139,32 @@ const App = {
         break;
       }
 
+      // ── NEW: Wide exam start screen (subject-level or examtype-level) ──
+      case 'wide-exam-start': {
+        const mod = this._getModule(params.moduleId);
+        if (!mod) { this.navigate('dashboard'); break; }
+        UI.loading('Loading…');
+        const countMap  = await this._buildCountMap(this.config, mod);
+        const totalCount = await this._getWideQuestionCount(mod, params.examType, params.subject, params.scope, countMap);
+        UI.setContent(UI.renderWideExamStart(mod, params, totalCount, this.config));
+        this._bindWideExamStartEvents(mod, params);
+        break;
+      }
+
       case 'exam': {
         UI.loading('Preparing exam…');
         const started = await this._startExam(params);
-        if (!started) { this.navigate('subsubject', params); break; }
+        if (!started) {
+          // Go back to appropriate page
+          if (params.scope === 'examtype') {
+            this.navigate('module', { moduleId: params.moduleId });
+          } else if (params.scope === 'subject') {
+            this.navigate('subject', { moduleId: params.moduleId, examType: params.examType, subject: params.subject });
+          } else {
+            this.navigate('subsubject', params);
+          }
+          break;
+        }
         UI.setContent(UI.renderExam(ExamEngine, this.config));
         this._bindExamEvents();
         break;
@@ -165,7 +185,7 @@ const App = {
       }
 
       case 'scoped-review': {
-        const filter   = params;
+        const filter    = params;
         const incorrect = Storage.getIncorrect().filter(q =>
           q.module     === filter.moduleId   &&
           q.examType   === filter.examType   &&
@@ -211,7 +231,6 @@ const App = {
   // ─── Global click delegation ─────────────────────────────────────────────
 
   _handleGlobalClick(e) {
-    // Theme toggle — check before data-nav routing
     if (e.target.closest('#theme-toggle')) {
       this._toggleTheme();
       return;
@@ -223,6 +242,29 @@ const App = {
     let params = {};
     try { params = JSON.parse(el.dataset.params || '{}'); } catch {}
     this.navigate(page, params);
+  },
+
+  // ─── Subject page events (adds "Start Subject Exam" button) ──────────────
+
+  _bindSubjectPageEvents(mod, examType, subject, subSubjects, countMap) {
+    const btn = document.getElementById('start-subject-exam-btn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const visibleSubSubs = subSubjects.filter(ss =>
+          (countMap[`${mod.id}|${examType}|${subject}|${ss.id}`] || 0) > 0
+        );
+        if (visibleSubSubs.length === 0) {
+          UI.toast('No questions available for this subject yet.', 'info');
+          return;
+        }
+        this.navigate('wide-exam-start', {
+          moduleId:  mod.id,
+          examType,
+          subject,
+          scope:     'subject',
+        });
+      });
+    }
   },
 
   // ─── Sub-subject page events ──────────────────────────────────────────────
@@ -258,11 +300,25 @@ const App = {
     }
   },
 
+  // ─── Wide exam start page events ─────────────────────────────────────────
+
+  _bindWideExamStartEvents(mod, params) {
+    const startBtn = document.getElementById('start-wide-exam-btn');
+    if (startBtn) {
+      startBtn.addEventListener('click', () => {
+        this.navigate('exam', {
+          ...params,
+          immediateFeedback:  true,
+          randomize:          true,
+          retryIncorrectOnly: false,
+        });
+      });
+    }
+  },
+
   // ─── Exam events ──────────────────────────────────────────────────────────
 
   _bindExamEvents() {
-    // Remove any previously-attached handler before adding a new one,
-    // so clicks on Next/Prev don't stack up duplicate listeners.
     if (this._examClickHandler) {
       document.removeEventListener('click', this._examClickHandler);
       this._examClickHandler = null;
@@ -286,10 +342,18 @@ const App = {
             if (!existing) {
               const box = document.createElement('div');
               box.className = `explanation-box ${result.correct ? 'explanation-box--correct' : 'explanation-box--wrong'}`;
+
+              // Show topic label for wide exams
+              const q = ExamEngine.getCurrent();
+              const topicBadge = (ExamEngine.config.scope && q._subSubjectLabel)
+                ? `<div class="explanation-box__topic">📌 ${q._subSubjectLabel}</div>`
+                : '';
+
               box.innerHTML = `
                 <div class="explanation-box__header">
                   ${result.correct ? '✅ Correct!' : `❌ Incorrect — Correct answer: <strong>${['A','B','C','D'][result.correctIndex]}</strong>`}
                 </div>
+                ${topicBadge}
                 <p class="explanation-box__text">${result.explanation}</p>`;
               document.querySelector('.options-list').after(box);
             }
@@ -301,18 +365,15 @@ const App = {
       if (palBtn && palBtn.dataset.goto !== undefined) {
         ExamEngine.goTo(parseInt(palBtn.dataset.goto, 10));
         UI.setContent(UI.renderExam(ExamEngine, this.config));
-        // No need to re-bind — the existing listener on document is still active.
       }
 
       if (e.target.id === 'next-btn') {
         ExamEngine.next();
         UI.setContent(UI.renderExam(ExamEngine, this.config));
-        // No need to re-bind — the existing listener on document is still active.
       }
       if (e.target.id === 'prev-btn') {
         ExamEngine.prev();
         UI.setContent(UI.renderExam(ExamEngine, this.config));
-        // No need to re-bind — the existing listener on document is still active.
       }
 
       if (e.target.id === 'flag-btn' || e.target.closest('#flag-btn')) {
@@ -386,10 +447,11 @@ const App = {
         this.navigate('exam', {
           moduleId:           btn.dataset.module,
           examType:           btn.dataset.examType,
-          subject:            btn.dataset.subject,
-          subSubject:         btn.dataset.subSubject,
+          subject:            btn.dataset.subject || null,
+          subSubject:         btn.dataset.subSubject || null,
+          scope:              btn.dataset.scope || null,
           immediateFeedback:  true,
-          randomize:          false,
+          randomize:          true,
           retryIncorrectOnly: false,
         });
       }
@@ -608,6 +670,49 @@ const App = {
       return true;
     }
 
+    // Wide exam (subject or exam-type scope)
+    if (params.scope === 'subject' || params.scope === 'examtype') {
+      const mod = this._getModule(params.moduleId);
+      if (!mod) return false;
+
+      let examConfig;
+      if (params.scope === 'subject') {
+        const subSubjectList = (mod.subSubjects?.[params.examType]?.[params.subject]) || [];
+        examConfig = {
+          module:            params.moduleId,
+          examType:          params.examType,
+          subject:           params.subject,
+          scope:             'subject',
+          subSubjectList,
+          immediateFeedback: true,
+          randomize:         true,
+        };
+      } else {
+        // examtype scope — collect all subjects and their sub-subjects
+        const subjectMap = {};
+        (this.config.subjects || []).forEach(sub => {
+          const ssList = (mod.subSubjects?.[params.examType]?.[sub.id]) || [];
+          if (ssList.length > 0) subjectMap[sub.id] = ssList;
+        });
+        examConfig = {
+          module:            params.moduleId,
+          examType:          params.examType,
+          scope:             'examtype',
+          subjectMap,
+          immediateFeedback: true,
+          randomize:         true,
+        };
+      }
+
+      const count = await ExamEngine.init(examConfig);
+      if (count === 0) {
+        UI.toast('No questions available yet.', 'info');
+        return false;
+      }
+      return true;
+    }
+
+    // Standard single sub-subject exam
     const count = await ExamEngine.init({
       module:            params.moduleId,
       examType:          params.examType,
@@ -632,8 +737,6 @@ const App = {
     return await res.json();
   },
 
-  // Build a map of { 'modId|examType|subject|ssId': questionCount }
-  // Pass a specific mod to limit fetches to that module only
   async _buildCountMap(config, mod = null) {
     const mods = mod ? [mod] : (config.modules || []);
     const entries = [];
@@ -661,6 +764,19 @@ const App = {
       const data = await res.json();
       return Array.isArray(data.questions) ? data.questions.length : 0;
     } catch { return 0; }
+  },
+
+  // Get total question count for wide exams using already-built countMap
+  async _getWideQuestionCount(mod, examType, subject, scope, countMap) {
+    if (scope === 'subject') {
+      const ssList = (mod.subSubjects?.[examType]?.[subject]) || [];
+      return ssList.reduce((acc, ss) => acc + (countMap[`${mod.id}|${examType}|${subject}|${ss.id}`] || 0), 0);
+    } else if (scope === 'examtype') {
+      return Object.entries(countMap)
+        .filter(([k]) => k.startsWith(`${mod.id}|${examType}|`))
+        .reduce((acc, [, n]) => acc + n, 0);
+    }
+    return 0;
   },
 
   _getModule(id) {
