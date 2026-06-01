@@ -33,14 +33,14 @@ const UI = {
       return `<a class="breadcrumb__link" data-nav="${c.nav}" data-params='${JSON.stringify(c.params || {})}'>${c.label}</a>`;
     });
     return `<nav class="breadcrumb" aria-label="Breadcrumb">
-      <span class="breadcrumb__home"><svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
-      ${items.join('<span class="breadcrumb__sep"><svg class="icon icon--sm" viewBox="0 0 24 24" style="opacity:.5"><polyline points="9 18 15 12 9 6"/></svg></span>')}
+      <span class="breadcrumb__home">🏠</span>
+      ${items.join('<span class="breadcrumb__sep">›</span>')}
     </nav>`;
   },
 
   backBtn(nav, params = {}) {
     return `<button class="btn btn--ghost btn--sm back-btn" data-nav="${nav}" data-params='${JSON.stringify(params)}'>
-      <svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back
+      <span class="btn__icon">←</span> Back
     </button>`;
   },
 
@@ -101,14 +101,14 @@ const UI = {
     const flagged   = Storage.getFlagged();
 
     const statsHTML = [
-      { label: 'Attempted',  value: stats.totalAttempted },
-      { label: 'Correct',    value: stats.totalCorrect },
-      { label: 'Incorrect',  value: stats.totalIncorrect },
-      { label: 'Accuracy',   value: `${accuracy}%` },
-      { label: 'Exams',      value: stats.completedExams },
-      { label: 'Flagged',    value: flagged.length },
-      { label: 'For Review', value: incorrect.length },
-    ].map(s => `<div class="stat-pill"><div class="stat-pill__value">${s.value}</div><div class="stat-pill__label">${s.label}</div></div>`).join('');
+      this.statCard('Questions Attempted', stats.totalAttempted,  '📝', '#2563eb'),
+      this.statCard('Correct Answers',     stats.totalCorrect,    '✅', '#4A9E8E'),
+      this.statCard('Incorrect Answers',   stats.totalIncorrect,  '❌', '#dc2626'),
+      this.statCard('Overall Accuracy',    `${accuracy}%`,        '🎯', '#1B3A6B'),
+      this.statCard('Exams Completed',     stats.completedExams,  '🏆', '#d97706'),
+      this.statCard('Flagged Questions',   flagged.length,        '🚩', '#4A9E8E'),
+      this.statCard('For Review',          incorrect.length,      '🔄', '#be185d'),
+    ].join('');
 
     const modulesHTML = config.modules.filter(mod => {
       if (!countMap) return true;
@@ -122,7 +122,7 @@ const UI = {
             <h3 class="module-card__title">${mod.title}</h3>
             <p class="module-card__subtitle">${mod.fullTitle}</p>
           </div>
-          <span class="module-card__arrow"><svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+          <span class="module-card__arrow">›</span>
         </div>
         <div class="module-card__body">
           <div class="module-card__info">
@@ -136,13 +136,13 @@ const UI = {
 
     const reviewBtn = incorrect.length > 0
       ? `<button class="btn btn--danger review-btn" data-nav="review">
-          <svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg> Review Incorrect
+          <span>🔄</span> Review Incorrect Questions
           <span class="badge">${incorrect.length}</span>
         </button>` : '';
 
     const flaggedBtn = flagged.length > 0
       ? `<button class="btn btn--ghost review-btn" data-nav="flagged-review" style="border-color:#4A9E8E;color:#4A9E8E">
-          <svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> Flagged
+          <span>🚩</span> Review Flagged Questions
           <span class="badge" style="background:#4A9E8E">${flagged.length}</span>
         </button>` : '';
 
@@ -156,13 +156,15 @@ const UI = {
         <div class="dashboard__actions">
           ${reviewBtn}
           ${flaggedBtn}
-          <button class="btn btn--ghost btn--sm wipe-history-btn" id="wipe-history-btn">Reset Progress</button>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
             <span class="theme-toggle__icon">🌙</span>
           </button>
         </div>
       </header>
-      <div class="stats-strip" style="margin-bottom:28px">${statsHTML}</div>
+      <section class="section">
+        <h2 class="section__title">Overview</h2>
+        <div class="stats-grid">${statsHTML}</div>
+      </section>
       <section class="section">
         <h2 class="section__title">Modules</h2>
         <div class="modules-grid">${modulesHTML}</div>
@@ -170,22 +172,7 @@ const UI = {
       <footer class="dashboard__footer">
         <p>Made by <strong>Kareem Farouk</strong> · Questions by Department Heads</p>
       </footer>
-    </div>
-
-    <!-- Wipe History Modal -->
-    <div id="wipe-modal" class="modal-overlay" style="display:none">
-      <div class="modal-box">
-        <div class="modal-divider"></div>
-        <h2 class="modal-title">Reset Progress?</h2>
-        <p class="modal-body">This will permanently delete all exam scores, progress, and incorrect question history.</p>
-        <p class="modal-note">Your flagged questions will not be affected.</p>
-        <div class="modal-actions">
-          <button class="btn btn--ghost" id="wipe-cancel-btn">Cancel</button>
-          <button class="btn btn--danger" id="wipe-confirm-btn">Reset Progress</button>
-        </div>
-      </div>
-    </div>
-    `;
+    </div>`;
   },
 
   // ─── Module page ──────────────────────────────────────────────────────────
@@ -215,7 +202,7 @@ const UI = {
           </div>
           <div class="subject-card__right">
             ${completed === subSubs.length && subSubs.length > 0 ? `<span class="badge badge--success">Done</span>` : ''}
-            <span class="subject-card__arrow"><svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+            <span class="subject-card__arrow">›</span>
           </div>
         </div>`;
       }).join('');
@@ -233,7 +220,7 @@ const UI = {
         ? `<button class="btn btn--primary wide-exam-btn"
             data-nav="wide-exam-start"
             data-params='${JSON.stringify({ moduleId: mod.id, examType: et.id, scope: 'examtype' })}'>
-            Start Full ${et.label} <span class="badge badge--count">${etTotalQ} Q</span>
+            📋 Start Full ${et.label} <span class="badge badge--count">${etTotalQ} Q</span>
           </button>`
         : '';
 
@@ -285,7 +272,7 @@ const UI = {
 
     const subjectExamBtn = totalSubjectQ > 0
       ? `<button class="btn btn--primary wide-exam-btn" id="start-subject-exam-btn">
-          Start Full ${sub.label} Exam <span class="badge badge--count">${totalSubjectQ} Q</span>
+          🧬 Start Full ${sub.label} Exam <span class="badge badge--count">${totalSubjectQ} Q</span>
         </button>`
       : '';
 
@@ -384,18 +371,18 @@ const UI = {
           </div>
           <div class="exam-options-card">
             <div class="exam-actions">
-              <button class="btn btn--primary btn--lg" id="start-exam-btn">Start Exam <svg class="icon icon--sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-              ${progress ? `<button class="btn btn--ghost" id="retry-exam-btn"><svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg> Retry</button>` : ''}
+              <button class="btn btn--primary btn--lg" id="start-exam-btn">Start Exam →</button>
+              ${progress ? `<button class="btn btn--ghost" id="retry-exam-btn">Retry Exam</button>` : ''}
             </div>
             <div class="exam-actions" style="margin-top:.5rem">
               <button class="btn btn--danger btn--sm" data-nav="scoped-review"
                 data-params='${JSON.stringify({ moduleId: mod.id, examType, subject: subjectId, subSubject: subSubjectId, label: ss.label })}'>
-                Incorrect (this topic)
+                🔄 Incorrect (this topic)
               </button>
               <button class="btn btn--ghost btn--sm" data-nav="scoped-flagged"
                 data-params='${JSON.stringify({ moduleId: mod.id, examType, subject: subjectId, subSubject: subSubjectId, label: ss.label })}'
                 style="border-color:#4A9E8E;color:#4A9E8E">
-                Flagged (this topic)
+                🚩 Flagged (this topic)
               </button>
             </div>
           </div>`
@@ -410,7 +397,7 @@ const UI = {
     const isSubjectScope = params.scope === 'subject';
     const sub = isSubjectScope ? config.subjects.find(s => s.id === params.subject) : null;
 
-    const icon     = isSubjectScope ? sub.icon : mod.icon; // kept as data identity
+    const icon     = isSubjectScope ? sub.icon : mod.icon;
     const title    = isSubjectScope ? `${sub.label} — Full Exam` : `${et.label} — Full Exam`;
     const subtitle = isSubjectScope
       ? `${mod.title} · ${et.label} · All ${sub.label} Topics`
@@ -490,8 +477,8 @@ const UI = {
           <div class="exam-options-card">
             <p class="wide-exam-note">Questions from all topics are shuffled together into one randomized exam.</p>
             <div class="exam-actions">
-              <button class="btn btn--primary btn--lg" id="start-wide-exam-btn"><svg class="icon icon--sm" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> 
-                Start Exam (${totalCount} Q) <svg class="icon icon--sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              <button class="btn btn--primary btn--lg" id="start-wide-exam-btn">
+                Start Exam → <span style="opacity:.7;font-size:.85em">${totalCount} questions</span>
               </button>
             </div>
           </div>`
@@ -534,7 +521,7 @@ const UI = {
 
     // Show topic badge for wide exams
     const topicBadge = (isWide && q._subSubjectLabel)
-      ? `<div class="exam-question-topic">${q._subSubjectLabel}</div>`
+      ? `<div class="exam-question-topic">📌 ${q._subSubjectLabel}</div>`
       : '';
 
     const paletteHTML = engine.questions.map((_, i) => {
@@ -562,7 +549,7 @@ const UI = {
           <div class="explanation-box__header">
             ${answered === q.answer ? '✅ Correct!' : `❌ Incorrect — Correct answer: <strong>${['A','B','C','D'][q.answer]}</strong>`}
           </div>
-          ${isWide && q._subSubjectLabel ? `<div class="explanation-box__topic">${q._subSubjectLabel}</div>` : ''}
+          ${isWide && q._subSubjectLabel ? `<div class="explanation-box__topic">📌 ${q._subSubjectLabel}</div>` : ''}
           <p class="explanation-box__text">${q.explanation}</p>
         </div>` : '';
 
@@ -593,7 +580,6 @@ const UI = {
           <span class="legend-item legend-item--answered">Answered</span>
           <span class="legend-item legend-item--flagged">Flagged</span>
         </div>
-        <button class="btn btn--danger btn--sm submit-exam-btn" id="submit-exam-btn"><svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Submit</button>
       </aside>
 
       <main class="exam-main">
@@ -601,7 +587,7 @@ const UI = {
           ${this.backBtn(backNav, backParams)}
           <div class="exam-counter">Question <strong>${idx + 1}</strong> of <strong>${total}</strong></div>
           <button class="flag-btn ${isFlagged ? 'flag-btn--active' : ''}" id="flag-btn" title="${isFlagged ? 'Unflag' : 'Flag'} question">
-            <svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> ${isFlagged ? 'Flagged' : 'Flag'}
+            🚩 ${isFlagged ? 'Flagged' : 'Flag'}
           </button>
         </div>
         <div class="question-card">
@@ -614,6 +600,7 @@ const UI = {
         <div class="exam-nav">
           <button class="btn btn--ghost" id="prev-btn" ${idx === 0 ? 'disabled' : ''}>← Previous</button>
           <button class="btn btn--primary" id="next-btn" ${idx === total - 1 ? 'disabled' : ''}>Next →</button>
+          <button class="btn btn--danger btn--sm submit-exam-btn" id="submit-exam-btn">Submit Exam</button>
         </div>
       </main>
     </div>`;
@@ -676,7 +663,7 @@ const UI = {
       const status = pq.correct ? '✅' : pq.answered ? '❌' : '—';
       // For wide exams show topic badge
       const topicTag = (isWide && pq._subSubjectLabel)
-        ? `<span class="result-item__topic">${pq._subSubjectLabel}</span>` : '';
+        ? `<span class="result-item__topic">📌 ${pq._subSubjectLabel}</span>` : '';
       return `<div class="result-item ${cls}">
         <div class="result-item__header">
           <span class="result-item__num">${status} Q${i + 1}</span>
@@ -715,8 +702,8 @@ const UI = {
           data-exam-type="${results.config.examType}"
           data-subject="${results.config.subject || ''}"
           data-sub-subject="${results.config.subSubject || ''}"
-          data-scope="${results.config.scope || ''}"><svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg> Retry Exam</button>
-        <button class="btn btn--ghost" data-nav="dashboard"><svg class="icon icon--sm" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Dashboard</button>
+          data-scope="${results.config.scope || ''}">Retry Full Exam</button>
+        <button class="btn btn--ghost" data-nav="dashboard">Dashboard</button>
       </div>
       <section class="section">
         <h2 class="section__title">Question Review</h2>
@@ -758,7 +745,7 @@ const UI = {
           ${q.options.map((opt, i) => `<span class="review-opt ${i === q.answer ? 'review-opt--correct' : i === q.userAnswer ? 'review-opt--wrong' : ''}">${['A','B','C','D'][i]}. ${opt}</span>`).join('')}
         </div>
         <div class="review-item__explanation">${q.explanation}</div>
-        <button class="btn btn--ghost btn--sm review-item__remove" data-remove-uid="${q.uid}">Mark as Mastered</button>
+        <button class="btn btn--ghost btn--sm review-item__remove" data-remove-uid="${q.uid}">✓ Mark as Mastered</button>
       </div>`;
     }).join('');
 
@@ -773,7 +760,7 @@ const UI = {
           <option value="">All Subjects</option>
           ${config.subjects.map(s => `<option value="${s.id}">${s.label}</option>`).join('')}
         </select>
-        <button class="btn btn--danger btn--sm" id="clear-all-review">Clear</button>
+        <button class="btn btn--danger btn--sm" id="clear-all-review">Clear All</button>
       </div>`;
 
     return `
@@ -781,7 +768,7 @@ const UI = {
       ${this.backBtn(backPage, backParams)}
       ${this.breadcrumb(crumbs)}
       <header class="page__header" style="--mod-color:#dc2626">
-        <span class="page__icon"><svg class="icon icon--lg" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
+        <span class="page__icon">🔄</span>
         <div>
           <h1 class="page__title">${title}</h1>
           <p class="page__subtitle">${incorrectList.length} questions pending review</p>
@@ -826,7 +813,7 @@ const UI = {
           ${q.options.map((opt, i) => `<span class="review-opt ${i === q.answer ? 'review-opt--correct' : ''}">${['A','B','C','D'][i]}. ${opt}</span>`).join('')}
         </div>
         <div class="review-item__explanation">${q.explanation}</div>
-        <button class="btn btn--ghost btn--sm review-item__remove" data-remove-uid="${q.uid}">Remove Flag</button>
+        <button class="btn btn--ghost btn--sm review-item__remove" data-remove-uid="${q.uid}">🚩 Remove Flag</button>
       </div>`;
     }).join('');
 
@@ -841,7 +828,7 @@ const UI = {
           <option value="">All Subjects</option>
           ${config.subjects.map(s => `<option value="${s.id}">${s.label}</option>`).join('')}
         </select>
-        <button class="btn btn--danger btn--sm" id="clear-all-flagged">Clear All Flags</button>
+        <button class="btn btn--danger btn--sm" id="clear-all-flagged">Remove All Flags</button>
       </div>`;
 
     return `
@@ -849,7 +836,7 @@ const UI = {
       ${this.backBtn(backPage, backParams)}
       ${this.breadcrumb(crumbs)}
       <header class="page__header" style="--mod-color:#4A9E8E">
-        <span class="page__icon"><svg class="icon icon--lg" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
+        <span class="page__icon">🚩</span>
         <div>
           <h1 class="page__title">${title}</h1>
           <p class="page__subtitle">${flaggedList.length} flagged for review</p>
@@ -868,7 +855,7 @@ const UI = {
       ${this.backBtn('dashboard')}
       ${this.breadcrumb([{ label: 'Dashboard', nav: 'dashboard' }, { label: 'Search' }])}
       <header class="page__header" style="--mod-color:#2563eb">
-        <span class="page__icon"><svg class="icon icon--lg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <span class="page__icon">🔍</span>
         <div>
           <h1 class="page__title">Search</h1>
           <p class="page__subtitle">Search across all subjects and modules</p>

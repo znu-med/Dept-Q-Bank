@@ -29,7 +29,7 @@ const ExamEngine = {
     } else {
       data = await this._loadQuestions(config);
     }
-    this.questions = config.randomize ? this._shuffle([...data]) : this._shuffle([...data]);
+    this.questions = config.randomize ? this._shuffle([...data]) : [...data];
     this.state = {
       currentIndex: 0,
       answers: {},
