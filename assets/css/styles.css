@@ -509,9 +509,16 @@ img { max-width: 100%; display: block; }
   flex-wrap:       wrap;
 }
 .dashboard__logo {
-  height:  52px;
+  height:  72px;
   width:   auto;
   display: block;
+}
+.dashboard__title-wrap {
+  background: transparent !important;
+  border:     none !important;
+  box-shadow: none !important;
+  padding:    0 !important;
+  backdrop-filter: none !important;
 }
 .dashboard__actions {
   display:     flex;
