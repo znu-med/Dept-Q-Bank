@@ -27,10 +27,30 @@
     }
   ],
   "subjects": [
-    { "id": "anatomy",      "label": "Anatomy",      "icon": "🦴", "color": "#4A9E8E" },
-    { "id": "physiology",   "label": "Physiology",   "icon": "🫀", "color": "#4A9E8E" },
-    { "id": "biochemistry", "label": "Biochemistry", "icon": "🧬", "color": "#d97706" },
-    { "id": "histology",    "label": "Histology",    "icon": "🔬", "color": "#dc2626" }
+    {
+      "id": "anatomy",
+      "label": "Anatomy",
+      "icon": "🦴",
+      "color": "#4A9E8E"
+    },
+    {
+      "id": "physiology",
+      "label": "Physiology",
+      "icon": "🫀",
+      "color": "#4A9E8E"
+    },
+    {
+      "id": "biochemistry",
+      "label": "Biochemistry",
+      "icon": "🧬",
+      "color": "#d97706"
+    },
+    {
+      "id": "histology",
+      "label": "Histology",
+      "icon": "🔬",
+      "color": "#dc2626"
+    }
   ],
   "modules": [
     {
@@ -44,19 +64,38 @@
       "dataPath": "CPM",
       "subSubjects": {
         "end_module": {
-          "anatomy":      [],
-          "physiology":   [],
+          "anatomy": [],
+          "physiology": [],
           "biochemistry": [],
-          "histology":    []
+          "histology": []
         },
         "final_exam": {
-          "anatomy":      [],
+          "anatomy": [],
           "physiology": [
-            { "id": "cvs",         "label": "CVS",         "icon": "❤️" },
-            { "id": "respiration", "label": "Respiration", "icon": "🫁" }
+            {
+              "id": "cvs",
+              "label": "CVS",
+              "icon": "❤️"
+            },
+            {
+              "id": "respiration",
+              "label": "Respiration",
+              "icon": "🫁"
+            }
           ],
           "biochemistry": [],
-          "histology":    []
+          "histology": [
+            {
+              "id": "lymphatic",
+              "label": "Lymphatic System",
+              "icon": "🔬"
+            },
+            {
+              "id": "respiratory",
+              "label": "Respiratory System",
+              "icon": "🫁"
+            }
+          ]
         }
       }
     },
@@ -71,16 +110,16 @@
       "dataPath": "GIT",
       "subSubjects": {
         "end_module": {
-          "anatomy":      [],
-          "physiology":   [],
+          "anatomy": [],
+          "physiology": [],
           "biochemistry": [],
-          "histology":    []
+          "histology": []
         },
         "final_exam": {
-          "anatomy":      [],
-          "physiology":   [],
+          "anatomy": [],
+          "physiology": [],
           "biochemistry": [],
-          "histology":    []
+          "histology": []
         }
       }
     },
@@ -95,16 +134,16 @@
       "dataPath": "CNS",
       "subSubjects": {
         "end_module": {
-          "anatomy":      [],
-          "physiology":   [],
+          "anatomy": [],
+          "physiology": [],
           "biochemistry": [],
-          "histology":    []
+          "histology": []
         },
         "final_exam": {
-          "anatomy":      [],
-          "physiology":   [],
+          "anatomy": [],
+          "physiology": [],
           "biochemistry": [],
-          "histology":    []
+          "histology": []
         }
       }
     },
@@ -119,16 +158,16 @@
       "dataPath": "ENDO_REPRO",
       "subSubjects": {
         "end_module": {
-          "anatomy":      [],
-          "physiology":   [],
+          "anatomy": [],
+          "physiology": [],
           "biochemistry": [],
-          "histology":    []
+          "histology": []
         },
         "final_exam": {
-          "anatomy":      [],
-          "physiology":   [],
+          "anatomy": [],
+          "physiology": [],
           "biochemistry": [],
-          "histology":    []
+          "histology": []
         }
       }
     },
@@ -143,16 +182,16 @@
       "dataPath": "URINARY",
       "subSubjects": {
         "end_module": {
-          "anatomy":      [],
-          "physiology":   [],
+          "anatomy": [],
+          "physiology": [],
           "biochemistry": [],
-          "histology":    []
+          "histology": []
         },
         "final_exam": {
-          "anatomy":      [],
-          "physiology":   [],
+          "anatomy": [],
+          "physiology": [],
           "biochemistry": [],
-          "histology":    []
+          "histology": []
         }
       }
     }
