@@ -156,6 +156,7 @@ const UI = {
         <div class="dashboard__actions">
           ${reviewBtn}
           ${flaggedBtn}
+          <button class="btn btn--ghost btn--sm wipe-history-btn" id="wipe-history-btn">Reset Progress</button>
           <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
             <span class="theme-toggle__icon">🌙</span>
           </button>
@@ -169,7 +170,22 @@ const UI = {
       <footer class="dashboard__footer">
         <p>Made by <strong>Kareem Farouk</strong> · Questions by Department Heads</p>
       </footer>
-    </div>`;
+    </div>
+
+    <!-- Wipe History Modal -->
+    <div id="wipe-modal" class="modal-overlay" style="display:none">
+      <div class="modal-box">
+        <div class="modal-divider"></div>
+        <h2 class="modal-title">Reset Progress?</h2>
+        <p class="modal-body">This will permanently delete all exam scores, progress, and incorrect question history.</p>
+        <p class="modal-note">Your flagged questions will not be affected.</p>
+        <div class="modal-actions">
+          <button class="btn btn--ghost" id="wipe-cancel-btn">Cancel</button>
+          <button class="btn btn--danger" id="wipe-confirm-btn">Reset Progress</button>
+        </div>
+      </div>
+    </div>
+    `;
   },
 
   // ─── Module page ──────────────────────────────────────────────────────────

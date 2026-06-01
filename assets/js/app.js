@@ -235,6 +235,30 @@ const App = {
       this._toggleTheme();
       return;
     }
+
+    // Wipe history button — show modal
+    if (e.target.closest('#wipe-history-btn')) {
+      const modal = document.getElementById('wipe-modal');
+      if (modal) modal.style.display = 'flex';
+      return;
+    }
+
+    // Wipe modal — cancel
+    if (e.target.closest('#wipe-cancel-btn')) {
+      const modal = document.getElementById('wipe-modal');
+      if (modal) modal.style.display = 'none';
+      return;
+    }
+
+    // Wipe modal — confirm
+    if (e.target.closest('#wipe-confirm-btn')) {
+      Storage.wipeHistory();
+      const modal = document.getElementById('wipe-modal');
+      if (modal) modal.style.display = 'none';
+      UI.toast('Progress reset. Flagged questions kept.', 'success');
+      this.navigate('dashboard');
+      return;
+    }
     const el = e.target.closest('[data-nav]');
     if (!el) return;
     e.preventDefault();
