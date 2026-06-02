@@ -1300,6 +1300,16 @@ img { max-width: 100%; display: block; }
   font-size:   .78rem;
 }
 .dashboard__footer strong { color: var(--text-3); font-weight: 600; }
+.dashboard__footer p { margin: 4px 0; }
+.harvest-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.harvest-link:hover { opacity: .75; }
 
 /* ── Toggle (settings) ────────────────────────────────────── */
 .toggle-row {
