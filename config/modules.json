@@ -70,7 +70,23 @@
           "histology": []
         },
         "final_exam": {
-          "anatomy": [],
+          "anatomy": [
+            {
+              "id": "pharynx",
+              "label": "Pharynx",
+              "icon": "🗣️"
+            },
+            {
+              "id": "larynx",
+              "label": "Larynx",
+              "icon": "🎙️"
+            },
+            {
+              "id": "heart",
+              "label": "Pericardium & Heart",
+              "icon": "🫀"
+            }
+          ],
           "physiology": [
             {
               "id": "cvs",
