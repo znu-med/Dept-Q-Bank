@@ -10,8 +10,8 @@
         "Facial nerve",
         "Maxillary artery"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Soft palate near the uvula",
         "Vestibule opposite the lower 2nd molar"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "The middle third",
         "The anterior third"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "Sublingual papilla",
         "Sublingual fold"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "Glossopharyngeal",
         "Vagus"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "Greater petrosal",
         "Chorda tympani"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     }
   ]
 }
