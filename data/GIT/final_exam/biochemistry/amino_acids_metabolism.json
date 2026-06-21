@@ -10,8 +10,8 @@
         "Heme",
         "Creatine"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Threonine",
         "Glutamic"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "Homocystinuria",
         "Alkaptonuria"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "Cystinosis",
         "Glycinuria"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "Pyruvate",
         "α-Ketoglutarate"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "FAD",
         "Biotin"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 7,
@@ -82,8 +82,8 @@
         "Glycolysis",
         "Fatty acid synthesis"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 8,
@@ -94,8 +94,8 @@
         "Aspartate",
         "Leucine"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 9,
@@ -106,8 +106,8 @@
         "Make alanine",
         "Make aspartate"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 10,
@@ -118,8 +118,8 @@
         "Brain",
         "Kidney"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 11,
@@ -130,8 +130,8 @@
         "Valine",
         "Lysine"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 12,
@@ -142,8 +142,8 @@
         "Glutamine synthetase",
         "Aspartate aminotransferase"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 13,
@@ -154,8 +154,8 @@
         "Glycine, serine, threonine",
         "Methionine, cysteine, homocysteine"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 14,
@@ -166,8 +166,8 @@
         "Valine",
         "Lysine"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 15,
@@ -178,8 +178,8 @@
         "Citrate",
         "Acetyl-CoA"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 16,
@@ -190,8 +190,8 @@
         "Glutamine synthetase",
         "Pyruvate dehydrogenase"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 17,
@@ -202,8 +202,8 @@
         "Ornithine",
         "Glutamine"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 18,
@@ -214,8 +214,8 @@
         "Pyruvate dehydrogenase",
         "Glutamate dehydrogenase"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 19,
@@ -226,8 +226,8 @@
         "UDP-glucuronosyltransferases",
         "N acetyl transferase"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 20,
@@ -238,8 +238,8 @@
         "Hydrolysis",
         "Oxidation"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 21,
@@ -250,8 +250,8 @@
         "lung",
         "heart"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 22,
@@ -262,8 +262,8 @@
         "PAPS",
         "UDP-glucuronic acid"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 23,
@@ -274,8 +274,8 @@
         "PAPS",
         "UDP-glucuronic acid"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     }
   ]
 }
