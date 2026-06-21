@@ -10,8 +10,8 @@
         "In the submucosa",
         "In the muscularis externa"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Submucosa",
         "Muscularis mucosa"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "Jejunum",
         "Transverse colon"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "Presence of enterocytes",
         "Absence of Brunner's glands"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "Brunner's glands",
         "More goblet cells"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "Presence of lamina propria",
         "Absence of villi"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 7,
@@ -82,8 +82,8 @@
         "Chief cells",
         "M cells"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 8,
@@ -94,8 +94,8 @@
         "Mixed acini",
         "Islets of Langerhans"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 9,
@@ -106,8 +106,8 @@
         "Presence of connective tissue septa",
         "Presence of Centroacinar cells"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 10,
@@ -118,8 +118,8 @@
         "Liver",
         "Submandibular gland"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 11,
@@ -130,8 +130,8 @@
         "Portal triad",
         "Hepatic acinus"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 12,
@@ -142,8 +142,8 @@
         "Ito cells",
         "Pit cells"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 13,
@@ -154,8 +154,8 @@
         "Phagocytosis",
         "Plasma protein production"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 14,
@@ -166,8 +166,8 @@
         "Are discontinuous and fenestrated",
         "Lack endothelial cells"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 15,
@@ -178,8 +178,8 @@
         "Ito cells",
         "Pit cells"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 16,
@@ -190,8 +190,8 @@
         "Rosettes",
         "Acini"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 17,
@@ -202,8 +202,8 @@
         "Connective tissue pattern",
         "Central vein location"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 18,
@@ -214,8 +214,8 @@
         "Mucus secreting cells",
         "Cells of islets of Langerhans"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 19,
@@ -226,8 +226,8 @@
         "Interlobular ducts",
         "Striated ducts"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 20,
@@ -238,8 +238,8 @@
         "Basement membrane",
         "Apical cytoplasm"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 21,
@@ -250,8 +250,8 @@
         "Rough endoplasmic reticulum",
         "Lysosome"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 22,
@@ -262,8 +262,8 @@
         "Trypsinogen",
         "Somatostatin"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 23,
@@ -274,8 +274,8 @@
         "Striated ducts",
         "The zymogen granules"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 24,
@@ -286,8 +286,8 @@
         "Simple tubular gland",
         "Mixed tubuloalveolar gland"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 25,
@@ -298,8 +298,8 @@
         "Portal triad and bile canal",
         "Kupffer cells and blood sinusoids"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 26,
@@ -310,8 +310,8 @@
         "From bile duct to central vein",
         "From bile duct to portal vein"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 27,
@@ -322,8 +322,8 @@
         "From bile duct to central vein",
         "From bile duct to portal vein"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 28,
@@ -334,8 +334,8 @@
         "Glycogen storage",
         "Albumin synthesis"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 29,
@@ -346,8 +346,8 @@
         "Portal triad → hepatocytes",
         "Central vein → bile duct"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 30,
@@ -358,8 +358,8 @@
         "Zone 3",
         "Sinusoids only"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     }
   ]
 }
