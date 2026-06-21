@@ -10,8 +10,8 @@
         "Paracolic gutter",
         "Rectouterine pouch"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Right paracolic gutter",
         "Rectouterine pouch"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     }
   ]
 }
