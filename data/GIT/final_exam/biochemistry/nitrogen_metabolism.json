@@ -10,8 +10,8 @@
         "Convalescence",
         "Diabetes mellitus"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Muscle only",
         "Adipose tissue"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "FMN",
         "PLP"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "Vitamin B12",
         "Vitamin K"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "ALP",
         "LDH"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "Transamination + Oxidative deamination",
         "Hydrolysis + Transamination"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 7,
@@ -82,8 +82,8 @@
         "α-ketoisocaproate",
         "Cystathionine"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 8,
@@ -94,8 +94,8 @@
         "Transdeamination",
         "All of the above"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 9,
@@ -106,8 +106,8 @@
         "CoASH",
         "FH4"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     }
   ]
 }
