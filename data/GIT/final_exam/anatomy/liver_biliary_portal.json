@@ -10,8 +10,8 @@
         "Infra-duodenal (pancreatic)",
         "Intra-duodenal (intramural)"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Infra-duodenal (pancreatic)",
         "Intra-duodenal (intramural)"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "Main pancreatic duct and accessory pancreatic duct",
         "Common hepatic duct and cystic duct"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "Caudate lobe",
         "Quadrate lobe"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "Gastroduodenal artery",
         "Common hepatic artery"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "Portal vein",
         "Superior mesenteric vein"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 7,
@@ -82,8 +82,8 @@
         "It contains valves to prevent backflow",
         "It provides about 80% of the blood flow to the liver"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 8,
@@ -94,8 +94,8 @@
         "Splenic vein and superior mesenteric vein",
         "Inferior mesenteric vein and middle rectal vein"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 9,
@@ -106,8 +106,8 @@
         "Left gastric vein and azygos vein",
         "Splenic vein and left renal vein"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 10,
@@ -118,8 +118,8 @@
         "Superior mesenteric vein and left gastric vein",
         "Splenic vein and right gastric vein"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 11,
@@ -130,8 +130,8 @@
         "Inferior mesenteric vein and internal iliac vein",
         "Middle rectal vein and external pudendal vein"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 12,
@@ -142,8 +142,8 @@
         "Hepatic vein",
         "Splenic vein"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 13,
@@ -154,8 +154,8 @@
         "Drain directly into the inferior vena cava",
         "Drain only the lower limbs"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 14,
@@ -166,8 +166,8 @@
         "Superior and inferior branches",
         "Anterior and posterior branches"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 15,
@@ -178,8 +178,8 @@
         "Left gastric vein",
         "Right gastric vein"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 16,
@@ -190,8 +190,8 @@
         "Inferior vena cava",
         "Left and right gastric veins"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     }
   ]
 }
