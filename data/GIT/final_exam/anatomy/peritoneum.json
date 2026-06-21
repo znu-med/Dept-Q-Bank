@@ -1,0 +1,29 @@
+{
+  "subSubjectId": "peritoneum",
+  "questions": [
+    {
+      "id": 1,
+      "question": "A surgeon enters the peritoneal space located anterior to the stomach during an abdominal operation. This space constitutes the main compartment of the peritoneal cavity. Which space has the surgeon entered?",
+      "options": [
+        "Greater sac",
+        "Lesser sac (omental bursa)",
+        "Paracolic gutter",
+        "Rectouterine pouch"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 2,
+      "question": "During abdominal surgery, a surgeon passes through the epiploic (omental) foramen and enters a peritoneal compartment located posterior to the stomach. Which space has been entered?",
+      "options": [
+        "Greater sac",
+        "Lesser sac (omental bursa)",
+        "Right paracolic gutter",
+        "Rectouterine pouch"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

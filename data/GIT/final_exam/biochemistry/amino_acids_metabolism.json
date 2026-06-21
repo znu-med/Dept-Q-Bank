@@ -1,0 +1,281 @@
+{
+  "subSubjectId": "amino_acids_metabolism",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Which of the following compounds is Not formed of glycine :",
+      "options": [
+        "Serine",
+        "Serotonin",
+        "Heme",
+        "Creatine"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 2,
+      "question": "Cysteine can be synthesized from methionine and........... :",
+      "options": [
+        "Serine",
+        "Homoserine",
+        "Threonine",
+        "Glutamic"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 3,
+      "question": "Dislocation of eye lens is a manifestation of which of the following condition?",
+      "options": [
+        "Cystinuria",
+        "Cystinosis",
+        "Homocystinuria",
+        "Alkaptonuria"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 4,
+      "question": "Cysteine becomes essential amino acid in cases of:",
+      "options": [
+        "Cystinuria",
+        "Homocystinuria",
+        "Cystinosis",
+        "Glycinuria"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 5,
+      "question": "Aspartate is directly synthesized from",
+      "options": [
+        "Glutamate",
+        "Oxaloacetate",
+        "Pyruvate",
+        "α-Ketoglutarate"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 6,
+      "question": "The conversion of glutamate to GABA requires:",
+      "options": [
+        "NAD⁺",
+        "Pyridoxal phosphate (PLP)",
+        "FAD",
+        "Biotin"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 7,
+      "question": "Aspartate contributes a nitrogen atom in which cycle?",
+      "options": [
+        "Citric acid cycle",
+        "Urea cycle",
+        "Glycolysis",
+        "Fatty acid synthesis"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 8,
+      "question": "Which amino acid is a direct precursor for ergothionine ?",
+      "options": [
+        "Lysine",
+        "Histidine",
+        "Aspartate",
+        "Leucine"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 9,
+      "question": "Glutamine synthetase uses glutamate to:",
+      "options": [
+        "Make glutamine",
+        "Make GABA",
+        "Make alanine",
+        "Make aspartate"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 10,
+      "question": "Branched-chain amino acids (BCAAs) are primarily metabolized in:",
+      "options": [
+        "Liver",
+        "Muscle",
+        "Brain",
+        "Kidney"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 11,
+      "question": "Which BCAA is exclusively ketogenic?",
+      "options": [
+        "Leucine",
+        "Isoleucine",
+        "Valine",
+        "Lysine"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 12,
+      "question": "Which enzyme converts glutamate to GABA?",
+      "options": [
+        "Glutamate dehydrogenase",
+        "Glutamate decarboxylase",
+        "Glutamine synthetase",
+        "Aspartate aminotransferase"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 13,
+      "question": "Maple syrupe urine disease leads to accumulation of which amino acids in plasma?",
+      "options": [
+        "Phenylalanine, tyrosine, tryptophan",
+        "Leucine, isoleucine, valine",
+        "Glycine, serine, threonine",
+        "Methionine, cysteine, homocysteine"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 14,
+      "question": "Which BCAA is both ketogenic and glucogenic?",
+      "options": [
+        "Leucine",
+        "Isoleucine",
+        "Valine",
+        "Lysine"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 15,
+      "question": "Transamination reactions involving glutamate usually produce:",
+      "options": [
+        "α-Ketoglutarate",
+        "Pyruvate",
+        "Citrate",
+        "Acetyl-CoA"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 16,
+      "question": "The first step in BCAA catabolism is catalyzed by:",
+      "options": [
+        "Branched-chain aminotransferase (BCAT)",
+        "Glutamate dehydrogenase",
+        "Glutamine synthetase",
+        "Pyruvate dehydrogenase"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 17,
+      "question": "The following amino acid is not found normally in proteins:",
+      "options": [
+        "Alanine",
+        "Cysteine",
+        "Ornithine",
+        "Glutamine"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 18,
+      "question": "The primary metabolic defect in Maple syrup urine disease is a deficiency of:",
+      "options": [
+        "Branched-chain aminotransferase (BCAT)",
+        "Branched-chain α-ketoacid dehydrogenase (BCKDH)",
+        "Pyruvate dehydrogenase",
+        "Glutamate dehydrogenase"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 19,
+      "question": "The main enzyme responsible for activation of xenobiotics is:",
+      "options": [
+        "Cytochrome P-450",
+        "Glutathione S-transferase",
+        "UDP-glucuronosyltransferases",
+        "N acetyl transferase"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 20,
+      "question": "In metabolism of xenobiotics all of the following reactions occur in phase one except?",
+      "options": [
+        "Conjugation",
+        "Reduction",
+        "Hydrolysis",
+        "Oxidation"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 21,
+      "question": "Which organ has the greatest xenobiotic metabolism capability?",
+      "options": [
+        "kidney",
+        "liver",
+        "lung",
+        "heart"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 22,
+      "question": "Cofactor for methylation reactions is ……………",
+      "options": [
+        "SAM",
+        "COASH",
+        "PAPS",
+        "UDP-glucuronic acid"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 23,
+      "question": "Cofactor for sulfation reactions is ……………",
+      "options": [
+        "SAM",
+        "COASH",
+        "PAPS",
+        "UDP-glucuronic acid"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

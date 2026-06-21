@@ -1,0 +1,77 @@
+{
+  "subSubjectId": "ammonia_urea_cycle",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Ammonia is transported from muscle to liver in the form of :",
+      "options": [
+        "glutamine",
+        "aspartate",
+        "alanine",
+        "free ammonia"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 2,
+      "question": "NH3 is detoxified in the brain in the form of :",
+      "options": [
+        "ornithine",
+        "glutamine",
+        "asparagine",
+        "alanine"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 3,
+      "question": "The organ which is extremely sensitive to ammonia toxicity is :",
+      "options": [
+        "brain",
+        "liver",
+        "heart",
+        "muscle"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 4,
+      "question": "What is the site of urea cycle?",
+      "options": [
+        "brain",
+        "liver",
+        "heart",
+        "muscle"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 5,
+      "question": "What is the normal level of blood urea?",
+      "options": [
+        "20-40mg/dl",
+        "20-40g/dl",
+        "200-400mg/dl",
+        "200-400g/dl"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 6,
+      "question": "Deficiency of carbomyl phosphate synthase 1 leads to ?",
+      "options": [
+        "hyperammonemia type1",
+        "hyperammonemia type2",
+        "citullinemia",
+        "arginosuccinic acduria"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

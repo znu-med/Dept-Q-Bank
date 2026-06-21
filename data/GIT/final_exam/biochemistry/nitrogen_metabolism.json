@@ -1,0 +1,113 @@
+{
+  "subSubjectId": "nitrogen_metabolism",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Negative nitrogen balance is seen in:",
+      "options": [
+        "Growth",
+        "Muscular training",
+        "Convalescence",
+        "Diabetes mellitus"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "id": 2,
+      "question": "Oxidative deamination mainly occurs in:",
+      "options": [
+        "Brain only",
+        "Liver and kidney",
+        "Muscle only",
+        "Adipose tissue"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 3,
+      "question": "L-amino acid oxidase requires:",
+      "options": [
+        "FAD",
+        "NAD",
+        "FMN",
+        "PLP"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 4,
+      "question": "Transamination requires:",
+      "options": [
+        "Vitamin B1",
+        "Vitamin B6",
+        "Vitamin B12",
+        "Vitamin K"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 5,
+      "question": "GPT is also called:",
+      "options": [
+        "AST",
+        "ALT",
+        "ALP",
+        "LDH"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 6,
+      "question": "Transdeamination is a combination of:",
+      "options": [
+        "Decarboxylation + Transamination",
+        "Oxidative deamination + Reduction",
+        "Transamination + Oxidative deamination",
+        "Hydrolysis + Transamination"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 7,
+      "question": "The predominant amino group acceptor in human intermediary metabolism is :",
+      "options": [
+        "α-ketoglutarate",
+        "Arginosccinate",
+        "α-ketoisocaproate",
+        "Cystathionine"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 8,
+      "question": "Which of the following reaction does not liberate NH3 ?",
+      "options": [
+        "Oxidative deamination",
+        "Transamination",
+        "Transdeamination",
+        "All of the above"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 9,
+      "question": "The coenzyme of transaminases enzyme is:",
+      "options": [
+        "TPP",
+        "PLP",
+        "CoASH",
+        "FH4"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

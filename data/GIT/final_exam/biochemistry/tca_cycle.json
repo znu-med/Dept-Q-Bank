@@ -1,0 +1,233 @@
+{
+  "subSubjectId": "tca_cycle",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Carbon dioxide is a product of the following enzyme:",
+      "options": [
+        "Aconitase.",
+        "Fumarase.",
+        "α-ketoglutarate dehydrogenase.",
+        "Succinate dehydrogenase."
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 2,
+      "question": "The following enzyme participates in substrate level phosphorylation:",
+      "options": [
+        "Isocitrate dehydrogenase",
+        "Malate dehydrogenase",
+        "Aconitase",
+        "Succinate thiokinase"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "id": 3,
+      "question": "Thiamine is important for conversion of :",
+      "options": [
+        "Pyruvate to acetyl CoA",
+        "α- ketoglutarate to susscinyl CoA",
+        "all of the above",
+        "None of the above"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 4,
+      "question": "Conversion of succinyl COA to succinate requires:",
+      "options": [
+        "CDP",
+        "ADP",
+        "GDP",
+        "NADP+"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 5,
+      "question": "Dehydrogenation of succinic acid to fumaric acid requires the following hydrogen carrier:",
+      "options": [
+        "NAD+",
+        "NADP+",
+        "FAD",
+        "Glutathione"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 6,
+      "question": "Positive nitrogen balance occurs in:",
+      "options": [
+        "Starvation",
+        "Burns",
+        "Pregnancy",
+        "Cancer"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 7,
+      "question": "The Krebs cycle occurs in which cellular location in eukaryotic cells?",
+      "options": [
+        "Cytosol",
+        "Inner mitochondrial membrane",
+        "Mitochondrial matrix",
+        "Intermembrane spac"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 8,
+      "question": "The enzyme that catalyzes the conversion of pyruvate to acetyl-CoA before entry into the Krebs cycle is:",
+      "options": [
+        "Pyruvate carboxylase",
+        "Pyruvate kinase",
+        "Pyruvate dehydrogenase complex",
+        "Citrate synthase"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 9,
+      "question": "Which of the following enzymes of the Krebs cycle is embedded in the inner mitochondrial membrane?",
+      "options": [
+        "Aconitase",
+        "Succinate dehydrogenase",
+        "Isocitrate dehydrogenase",
+        "Malate dehydrogenase"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 10,
+      "question": "How many NADH molecules are generated per turn of the Krebs cycle (per acetyl-CoA)?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "id": 11,
+      "question": "The Krebs cycle is described as amphibolic because it:",
+      "options": [
+        "Requires oxygen directly",
+        "Functions in both catabolic and anabolic processes",
+        "Produces only ATP",
+        "Occurs only in liver cells"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 12,
+      "question": "Which step produces CO₂?",
+      "options": [
+        "Citrate → Isocitrate",
+        "Isocitrate → α-Ketoglutarate",
+        "Succinate → Fumarate",
+        "Malate → Oxaloacetate"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 13,
+      "question": "An infant presents with developmental delay and persistent lactic acidosis. Genetic testing reveals pyruvate dehydrogenase complex deficiency. Which metabolite cannot effectively enter the Krebs cycle?",
+      "options": [
+        "Lactate",
+        "Pyruvate",
+        "Citrate",
+        "Oxaloacetate"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 14,
+      "question": "A 3-month-old infant presents with severe developmental delay, hypotonia, and seizures. MRI shows brain abnormalities. Lab testing reveals elevated fumarate levels. Genetic testing confirms fumarase deficiency. Which step of the Krebs cycle is impaired?",
+      "options": [
+        "Succinate → Fumarate",
+        "Fumarate → Malate",
+        "Malate → Oxaloacetate",
+        "α-Ketoglutarate → Succinyl-CoA"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 15,
+      "question": "What is the Product formed by malate dehydrogenase?",
+      "options": [
+        "Oxaloacetate",
+        "Succinate",
+        "Fumarate",
+        "Malate"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "id": 16,
+      "question": "A patient with prolonged starvation has low protein intake and reduced amino acid availability. Which TCA intermediate is most dependent on amino acid metabolism for replenishment?",
+      "options": [
+        "Citrate",
+        "α-Ketoglutarate",
+        "Succinate",
+        "Fumarate"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 17,
+      "question": "Malate dehydrogenase produces:",
+      "options": [
+        "FADH₂",
+        "NADH",
+        "GTP",
+        "CO₂"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 18,
+      "question": "A patient with chronic alcoholism presents with confusion and lactic acidosis. Thiamine (TPP) is administered, and symptoms improve rapidly. Which combined metabolic processes were impaired?",
+      "options": [
+        "Glycolysis and β-oxidation",
+        "Pyruvate dehydrogenase and α-ketoglutarate dehydrogenase",
+        "Electron transport chain and ATP synthase",
+        "Pentose phosphate pathway and gluconeogenesis"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "id": 19,
+      "question": "Acetyl CoA is formed from pyruvate by__________ reaction",
+      "options": [
+        "Dehydration",
+        "Reduction",
+        "Oxidative decarboxylation",
+        "Dephosphorylation"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
