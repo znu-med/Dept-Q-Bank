@@ -10,8 +10,8 @@
         "Absorption of nutrients in the intestine",
         "Formation of saliva"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Medulla oblongata",
         "Cerebral cortex"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "Buccal phase",
         "Gastric phase"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "Relaxation of the LES",
         "Closure of the glottis"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "Glossopharyngeal nerve",
         "Hypoglossal nerve"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "Contraction of the LES",
         "Opening of the pylorus"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 7,
@@ -82,8 +82,8 @@
         "Swallowing apnea",
         "Hyperventilation"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 8,
@@ -94,8 +94,8 @@
         "Food entering the mouth",
         "Duodenal reflux"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 9,
@@ -106,8 +106,8 @@
         "Present only in the lower esophagus",
         "Controlled solely by local reflexes"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 10,
@@ -118,8 +118,8 @@
         "Swallowing center stimulation",
         "LES contraction"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 11,
@@ -130,8 +130,8 @@
         "Cardiac sphincter",
         "Ileocecal sphincter"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 12,
@@ -142,8 +142,8 @@
         "Gastrin",
         "Coffee"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 13,
@@ -154,8 +154,8 @@
         "Secondary peristalsis",
         "Mass movement"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 14,
@@ -166,8 +166,8 @@
         "Myenteric excitatory stimulation",
         "Chocolate"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 15,
@@ -178,8 +178,8 @@
         "Gastrin-induced LES contraction",
         "Relaxed LES tone"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 16,
@@ -190,8 +190,8 @@
         "Excessive swallowing",
         "Absence of swallowing"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 17,
@@ -202,8 +202,8 @@
         "Chocolate",
         "Coffee"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 18,
@@ -214,8 +214,8 @@
         "NO and VIP",
         "Secretin and CCK"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 19,
@@ -226,8 +226,8 @@
         "Achalasia",
         "Hiatal hernia"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 20,
@@ -238,8 +238,8 @@
         "Parietal cells",
         "D cells"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 21,
@@ -250,8 +250,8 @@
         "Histamine",
         "Somatostatin"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 22,
@@ -262,8 +262,8 @@
         "Intrinsic factor",
         "Pepsin"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 23,
@@ -274,8 +274,8 @@
         "CCK-B receptors",
         "β2 receptors"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 24,
@@ -286,8 +286,8 @@
         "Cimetidine",
         "Misoprostol"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 25,
@@ -298,8 +298,8 @@
         "CCK-B receptors",
         "α receptors"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 26,
@@ -310,8 +310,8 @@
         "Secretion of pepsin",
         "Gastrin release"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 27,
@@ -322,8 +322,8 @@
         "1.8–3.5",
         "8–9"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 28,
@@ -334,8 +334,8 @@
         "Short-chain fats",
         "Cholesterol"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 29,
@@ -346,8 +346,8 @@
         "G cells",
         "D cells"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 30,
@@ -358,8 +358,8 @@
         "Pyloric antrum G cells",
         "Duodenum"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 31,
@@ -370,8 +370,8 @@
         "Gastrin",
         "GIP"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 32,
@@ -382,8 +382,8 @@
         "Histamine on H2 receptors",
         "Somatostatin receptors"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 33,
@@ -394,8 +394,8 @@
         "Increasing alkaline mucus and reducing acid secretion",
         "Relaxing the LES"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 34,
@@ -406,8 +406,8 @@
         "VIP",
         "Dopamine"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 35,
@@ -418,8 +418,8 @@
         "Duodenum",
         "Fundus"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 36,
@@ -430,8 +430,8 @@
         "Hypercalcemia",
         "Hyperlipidemia"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 37,
@@ -442,8 +442,8 @@
         "Atropine or vagotomy",
         "Gastrin"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 38,
@@ -454,8 +454,8 @@
         "Adrenergic",
         "Absent"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 39,
@@ -466,8 +466,8 @@
         "Inhibitory",
         "Mixed"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 40,
@@ -478,8 +478,8 @@
         "Water",
         "Proteins"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 41,
@@ -490,8 +490,8 @@
         "CCK release",
         "Sympathetic stimulation"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 42,
@@ -502,8 +502,8 @@
         "Bile",
         "Pancreatic enzymes"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 43,
@@ -514,8 +514,8 @@
         "Receptive relaxation",
         "Mass movement"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 44,
@@ -526,8 +526,8 @@
         "Alcohol",
         "Smoking"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 45,
@@ -538,8 +538,8 @@
         "Atropine",
         "Cholinergic drugs"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 46,
@@ -550,8 +550,8 @@
         "Medulla oblongata",
         "Cerebral cortex"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 47,
@@ -562,8 +562,8 @@
         "In the hypothalamus",
         "In the cerebellum"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 48,
@@ -574,8 +574,8 @@
         "Liver receptors",
         "Pancreatic receptors"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 49,
@@ -586,8 +586,8 @@
         "Glossopharyngeal nerve",
         "Optic nerve"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 50,
@@ -598,8 +598,8 @@
         "Absent",
         "Dilated"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 51,
@@ -610,8 +610,8 @@
         "Emptying by peristalsis only",
         "Contracting rhythmically"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 52,
@@ -622,8 +622,8 @@
         "Relaxation of pharynx",
         "Increased respiration"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 53,
@@ -634,8 +634,8 @@
         "Decreased ionized calcium secondary to alkalemia",
         "Hypermagnesemia"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 54,
@@ -646,8 +646,8 @@
         "Hypokalemia",
         "Hyperphosphatemia"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 55,
@@ -658,8 +658,8 @@
         "Motilin",
         "CCK"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 56,
@@ -670,8 +670,8 @@
         "Gastric slow waves",
         "BER generation"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 57,
@@ -682,8 +682,8 @@
         "Both enterogastric reflex and gastric inhibitory hormones",
         "Gastrin release"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 58,
@@ -694,8 +694,8 @@
         "3 hours",
         "8 hours"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 59,
@@ -706,8 +706,8 @@
         "Antiperistalsis",
         "Mass movements"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 60,
@@ -718,8 +718,8 @@
         "Antiperistalsis",
         "Vomiting reflex"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 61,
@@ -730,8 +730,8 @@
         "Vitamin K",
         "Vitamin E"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 62,
@@ -742,8 +742,8 @@
         "Bile secretion",
         "Gastrin release"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 63,
@@ -754,8 +754,8 @@
         "External anal sphincter",
         "Sigmoid colon"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 64,
@@ -766,8 +766,8 @@
         "Sacral segments S2–S4",
         "Medulla only"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 65,
@@ -778,8 +778,8 @@
         "Cortical inhibition of the defecation center associated with rectal relaxation and contraction of the internal anal sphincter",
         "Relaxation of the external anal sphincter through pudendal nerve stimulation"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 66,
@@ -790,8 +790,8 @@
         "Voluntary relaxation of external anal sphincter",
         "Closure of internal sphincter"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 67,
@@ -802,8 +802,8 @@
         "Secretin",
         "Histamine"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 68,
@@ -814,8 +814,8 @@
         "Alpha cells",
         "Goblet cells"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 69,
@@ -826,8 +826,8 @@
         "Histamine",
         "Somatostatin"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 70,
@@ -838,8 +838,8 @@
         "Increased Cl⁻ secretion",
         "Increased Na⁺ absorption"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 71,
@@ -850,8 +850,8 @@
         "Sodium only",
         "Vitamin B12 only"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 72,
@@ -861,8 +861,8 @@
         "To neutralize acidic chyme entering the duodenum",
         "To regulate blood glucose levels"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 73,
@@ -873,8 +873,8 @@
         "CCK",
         "Somatostatin"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 74,
@@ -885,8 +885,8 @@
         "Bile synthesis in the liver",
         "Intrinsic factor secretion"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 75,
@@ -897,8 +897,8 @@
         "Increased insulin secretion",
         "Increased glucagon secretion"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 76,
@@ -909,8 +909,8 @@
         "Lipogenesis",
         "Ketogenesis"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 77,
@@ -921,8 +921,8 @@
         "Gamma globulin",
         "Prothrombin"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 78,
@@ -933,8 +933,8 @@
         "Renin production",
         "Pepsin secretion"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 79,
@@ -945,8 +945,8 @@
         "Ferritin",
         "Transferrin"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 80,
@@ -957,8 +957,8 @@
         "Factors II, V, VII, XI",
         "Factors VIII, IX, XI, XII"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 81,
@@ -969,8 +969,8 @@
         "450 mL",
         "900 mL"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 82,
@@ -981,8 +981,8 @@
         "Glycogenolysis",
         "Cholesterol synthesis"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 83,
@@ -993,8 +993,8 @@
         "VIII, IX, XI, XII",
         "I, II, V, VIII"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 84,
@@ -1005,8 +1005,8 @@
         "Storage of vitamin B12",
         "Formation of bile pigments"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 85,
@@ -1017,8 +1017,8 @@
         "Protein digestion",
         "Bile secretion"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 86,
@@ -1029,8 +1029,8 @@
         "Calcium oxalate",
         "Uric acid"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 87,
@@ -1041,8 +1041,8 @@
         "Bile salts",
         "Magnesium sulfate"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 88,
@@ -1053,8 +1053,8 @@
         "Cholecystokinin (CCK)",
         "Somatostatin"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 89,
@@ -1065,8 +1065,8 @@
         "Increased bile salt synthesis only",
         "Gallbladder enlargement"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 90,
@@ -1077,8 +1077,8 @@
         "Stimulate HCl secretion",
         "Convert bilirubin into urobilinogen"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 91,
@@ -1089,8 +1089,8 @@
         "Enterokinase",
         "Lipase"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 92,
@@ -1101,8 +1101,8 @@
         "Acidic chyme in the duodenum",
         "Distension of stomach"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 93,
@@ -1113,8 +1113,8 @@
         "Gastrin",
         "Somatostatin"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 94,
@@ -1125,8 +1125,8 @@
         "Gastrin secretion",
         "Pepsin activation"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 95,
@@ -1137,8 +1137,8 @@
         "Urobilinogen",
         "Stercobilin"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 96,
@@ -1149,8 +1149,8 @@
         "Decreased insulin with increased glucagon",
         "Increased insulin and catecholamines"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 97,
@@ -1161,8 +1161,8 @@
         "β-oxidation of fatty acids",
         "Calcium metabolism"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 98,
@@ -1173,8 +1173,8 @@
         "Increased urinary sodium excretion",
         "Metabolic alkalosis"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 99,
@@ -1185,8 +1185,8 @@
         "Hypoglycemia",
         "Increased bile salt secretion"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 100,
@@ -1197,8 +1197,8 @@
         "Liver",
         "Adrenal cortex"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 101,
@@ -1209,8 +1209,8 @@
         "Bradycardia",
         "Heart block"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 102,
@@ -1221,8 +1221,8 @@
         "Increase ketogenesis",
         "Increase cholesterol synthesis"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     }
   ]
 }
