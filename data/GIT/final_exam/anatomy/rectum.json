@@ -10,8 +10,8 @@
         "Lateral flexure",
         "Sigmoid flexure"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "All are convex to the right",
         "Only the middle is convex to the right"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "Superior rectal vein",
         "External pudendal vein"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "Middle rectal artery",
         "Inferior mesenteric artery"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "Inferior rectal artery",
         "Inferior mesenteric artery"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "Portal vein",
         "Inferior vena cava"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 7,
@@ -82,8 +82,8 @@
         "Inferior rectal artery",
         "Internal pudendal artery"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 8,
@@ -94,8 +94,8 @@
         "Sigmoid flexure",
         "Lateral flexure"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 9,
@@ -106,8 +106,8 @@
         "Superior and middle rectal veins",
         "Inferior rectal and external pudendal veins"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 10,
@@ -118,8 +118,8 @@
         "Common iliac",
         "Ileocolic colic"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 11,
@@ -130,8 +130,8 @@
         "Rectum",
         "Sigmoid colon"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     }
   ]
 }
