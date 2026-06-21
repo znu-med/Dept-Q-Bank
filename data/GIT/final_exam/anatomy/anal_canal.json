@@ -10,8 +10,8 @@
         "Superior rectal vein",
         "Internal pudendal vein"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Anal verge",
         "Anorectal junction"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "It is continuous with the circular muscle layer of the gut.",
         "It is supplied by the inferior rectal nerve."
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "S2–S4",
         "S5–Co1"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "External anal sphincter",
         "Obturator internus"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "Lower part below the pectinate line",
         "Anal columns"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 7,
@@ -82,8 +82,8 @@
         "Sacrotuberous ligament",
         "External anal sphincter"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 8,
@@ -94,8 +94,8 @@
         "Subcutaneous part",
         "Internal part"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 9,
@@ -106,8 +106,8 @@
         "Levator ani",
         "Subcutaneous external sphincter"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 10,
@@ -118,8 +118,8 @@
         "External anal sphincter",
         "Longitudinal muscle of rectum"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 11,
@@ -130,8 +130,8 @@
         "Internal anal sphincter",
         "Subcutaneous external sphincter"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 12,
@@ -142,8 +142,8 @@
         "Deep part",
         "Internal part"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 13,
@@ -154,8 +154,8 @@
         "Subcutaneous part",
         "Superficial part"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 14,
@@ -166,8 +166,8 @@
         "Internal anal sphincter",
         "Coccygeus"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 15,
@@ -178,8 +178,8 @@
         "Internal sphincter – smooth muscle",
         "External sphincter – involuntary smooth muscle"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 16,
@@ -190,8 +190,8 @@
         "Superior rectal artery",
         "Anal columns"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     }
   ]
 }
