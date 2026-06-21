@@ -10,8 +10,8 @@
         "α-ketoglutarate dehydrogenase.",
         "Succinate dehydrogenase."
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Aconitase",
         "Succinate thiokinase"
       ],
-      "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "answer": 3
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "all of the above",
         "None of the above"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "GDP",
         "NADP+"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "FAD",
         "Glutathione"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "Pregnancy",
         "Cancer"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 7,
@@ -82,8 +82,8 @@
         "Mitochondrial matrix",
         "Intermembrane spac"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 8,
@@ -94,8 +94,8 @@
         "Pyruvate dehydrogenase complex",
         "Citrate synthase"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 9,
@@ -106,8 +106,8 @@
         "Isocitrate dehydrogenase",
         "Malate dehydrogenase"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 10,
@@ -118,8 +118,8 @@
         "3",
         "4"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 11,
@@ -130,8 +130,8 @@
         "Produces only ATP",
         "Occurs only in liver cells"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 12,
@@ -142,8 +142,8 @@
         "Succinate → Fumarate",
         "Malate → Oxaloacetate"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 13,
@@ -154,8 +154,8 @@
         "Citrate",
         "Oxaloacetate"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 14,
@@ -166,8 +166,8 @@
         "Malate → Oxaloacetate",
         "α-Ketoglutarate → Succinyl-CoA"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 15,
@@ -178,8 +178,8 @@
         "Fumarate",
         "Malate"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 16,
@@ -190,8 +190,8 @@
         "Succinate",
         "Fumarate"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 17,
@@ -202,8 +202,8 @@
         "GTP",
         "CO₂"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 18,
@@ -214,8 +214,8 @@
         "Electron transport chain and ATP synthase",
         "Pentose phosphate pathway and gluconeogenesis"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 19,
@@ -226,8 +226,8 @@
         "Oxidative decarboxylation",
         "Dephosphorylation"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     }
   ]
 }
