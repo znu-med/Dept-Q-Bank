@@ -10,8 +10,8 @@
         "Right gastroepiploic artery",
         "Superior mesenteric artery"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 2,
@@ -22,8 +22,8 @@
         "Left gastric artery",
         "Inferior mesenteric artery"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 3,
@@ -34,8 +34,8 @@
         "Middle colic artery",
         "Inferior mesenteric artery"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 4,
@@ -46,8 +46,8 @@
         "Inferior mesenteric artery",
         "Splenic artery"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 5,
@@ -58,8 +58,8 @@
         "Splenic artery",
         "Inferior mesenteric artery"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 6,
@@ -70,8 +70,8 @@
         "Right colic artery",
         "Middle colic artery"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 7,
@@ -82,8 +82,8 @@
         "Stomach",
         "Sigmoid colon"
       ],
-      "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "answer": 2
     },
     {
       "id": 8,
@@ -94,8 +94,8 @@
         "Right colic artery",
         "Ileocolic artery"
       ],
-      "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "answer": 0
     },
     {
       "id": 9,
@@ -106,8 +106,8 @@
         "Middle rectal artery",
         "Sigmoidal arteries"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     },
     {
       "id": 10,
@@ -118,8 +118,8 @@
         "Inferior mesenteric artery",
         "Internal iliac artery"
       ],
-      "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "answer": 1
     }
   ]
 }
