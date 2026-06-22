@@ -198,6 +198,16 @@
               "id": "intestine_liver_pancreas",
               "label": "Small & Large Intestine, Liver & Pancreas",
               "icon": "🔬"
+            },
+            {
+              "id": "large_intestine",
+              "label": "Large Intestine",
+              "icon": "🔬"
+            },
+            {
+              "id": "small_intestine",
+              "label": "Small Intestine",
+              "icon": "🔬"
             }
           ]
         }
