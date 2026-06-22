@@ -219,63 +219,99 @@
     },
     {
       "id": 19,
-      "question": "The main enzyme responsible for activation of xenobiotics is:",
+      "question": "Cysteine can be synthesized from methionine and:",
       "options": [
-        "Cytochrome P-450",
-        "Glutathione S-transferase",
-        "UDP-glucuronosyltransferases",
-        "N acetyl transferase"
+        "Serine",
+        "Homoserine",
+        "Threonine",
+        "Glutamic acid"
       ],
-      "explanation": "",
-      "answer": 0
+      "answer": 0,
+      "explanation": ""
     },
     {
       "id": 20,
-      "question": "In metabolism of xenobiotics all of the following reactions occur in phase one except?",
+      "question": "Dislocation of the eye lens (ectopia lentis) and skeletal abnormalities are characteristic manifestations of:",
       "options": [
-        "Conjugation",
-        "Reduction",
-        "Hydrolysis",
-        "Oxidation"
+        "Cystinuria",
+        "Cystinosis",
+        "Homocystinuria",
+        "Albinism"
       ],
-      "explanation": "",
-      "answer": 0
+      "answer": 2,
+      "explanation": ""
     },
     {
       "id": 21,
-      "question": "Which organ has the greatest xenobiotic metabolism capability?",
+      "question": "Homocystinuria is an inborn error of metabolism most commonly caused by a genetic deficiency of:",
       "options": [
-        "kidney",
-        "liver",
-        "lung",
-        "heart"
+        "Tyrosinase",
+        "Cystathionine β-synthase",
+        "Phenylalanine hydroxylase",
+        "Homogentisate oxidase"
       ],
-      "explanation": "",
-      "answer": 1
+      "answer": 1,
+      "explanation": ""
     },
     {
       "id": 22,
-      "question": "Cofactor for methylation reactions is ……………",
+      "question": "Albinism is due to a congenital deficiency of which enzyme activity in melanocytes?",
       "options": [
-        "SAM",
-        "COASH",
-        "PAPS",
-        "UDP-glucuronic acid"
+        "Tyrosinase",
+        "Cystathionine synthase",
+        "Homogentisate oxidase",
+        "Phenylalanine hydroxylase"
       ],
-      "explanation": "",
-      "answer": 0
+      "answer": 0,
+      "explanation": ""
     },
     {
       "id": 23,
-      "question": "Cofactor for sulfation reactions is ……………",
+      "question": "Phenylketonuria (PKU) is caused by the deficiency of Phenylalanine hydroxylase, leading to the accumulation of phenylalanine which is converted into:",
       "options": [
-        "SAM",
-        "COASH",
-        "PAPS",
-        "UDP-glucuronic acid"
+        "Tyrosine",
+        "Phenylpyruvate",
+        "Homogentisate",
+        "Melanin"
       ],
-      "explanation": "",
-      "answer": 2
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "id": 24,
+      "question": "Primary hyperoxaluria is an inborn error of glycine metabolism characterized by high urinary excretion of oxalate and recurrent calcium oxalate stones, caused by a defect in:",
+      "options": [
+        "Glycine cleavage system",
+        "Alanine-glyoxylate aminotransferase",
+        "Serine hydroxymethyltransferase",
+        "Glycine oxidase"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "id": 25,
+      "question": "Alkaptonuria is an autosomal recessive disorder caused by a deficiency of homogentisate oxidase, leading to the excretion of urine that turns black upon standing due to oxidation of accumulated:",
+      "options": [
+        "Phenylpyruvate",
+        "Homogentisate",
+        "Tyrosine",
+        "Melanin"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "id": 26,
+      "question": "The restriction of which two dietary amino acids is the primary management strategy for patients diagnosed with classic Phenylketonuria (PKU) and Homocystinuria respectively?",
+      "options": [
+        "Tyrosine and Cysteine",
+        "Phenylalanine and Methionine",
+        "Alanine and Glycine",
+        "Tryptophan and Lysine"
+      ],
+      "answer": 1,
+      "explanation": ""
     }
   ]
 }
