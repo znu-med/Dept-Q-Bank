@@ -191,6 +191,11 @@
               "id": "amino_acids_metabolism",
               "label": "Amino Acids Metabolism",
               "icon": "🧬"
+            },
+            {
+              "id": "xenobiotic_metabolism",
+              "label": "Xenobiotic Metabolism",
+              "icon": "🧬"
             }
           ],
           "histology": [
@@ -201,12 +206,12 @@
             },
             {
               "id": "large_intestine",
-              "label": "Large Intestine (Dr. Hala)",
+              "label": "Large Intestine",
               "icon": "🔬"
             },
             {
               "id": "small_intestine",
-              "label": "Small Intestine (Dr. Hala)",
+              "label": "Small Intestine",
               "icon": "🔬"
             }
           ]
