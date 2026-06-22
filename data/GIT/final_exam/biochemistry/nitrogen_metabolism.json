@@ -108,6 +108,78 @@
       ],
       "explanation": "",
       "answer": 1
+    },
+    {
+      "id": 10,
+      "question": "Transdeamination is defined as:",
+      "options": [
+        "Transfer of amino group only",
+        "Removal of NH3 without transamination",
+        "Combination of transamination and oxidative deamination",
+        "Non-oxidative deamination of amino acids"
+      ],
+      "answer": 2,
+      "explanation": ""
+    },
+    {
+      "id": 11,
+      "question": "The major enzyme responsible for the oxidative deamination of amino acids in the liver mitochondria is:",
+      "options": [
+        "L-Amino acid oxidase",
+        "L-Glutamate dehydrogenase",
+        "Glutaminase",
+        "Aspartate transaminase"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "id": 12,
+      "question": "The reaction in which an amino group is removed from an amino acid with neither production nor consumption of free ammonia is called:",
+      "options": [
+        "Oxidative Deamination",
+        "Transamination",
+        "Non-oxidative Deamination",
+        "Decarboxylation"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "id": 13,
+      "question": "The coenzyme required for all transamination reactions by transaminases enzyme is:",
+      "options": [
+        "Thiamine pyrophosphate (TPP)",
+        "Pyridoxal phosphate (PLP)",
+        "Coenzyme A (CoASH)",
+        "Tetrahydrofolate (FH4)"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "id": 14,
+      "question": "All amino acids undergo transamination EXCEPT:",
+      "options": [
+        "Alanine and Aspartate",
+        "Lysine and Threonine",
+        "Leucine and Isoleucine",
+        "Glycine and Glutamate"
+      ],
+      "answer": 1,
+      "explanation": ""
+    },
+    {
+      "id": 15,
+      "question": "Which amino acid acts as the primary carrier of amino groups from all other amino acids during transamination before entering oxidative deamination?",
+      "options": [
+        "Alanine",
+        "Aspartate",
+        "Glutamate",
+        "Glutamine"
+      ],
+      "answer": 2,
+      "explanation": ""
     }
   ]
 }
