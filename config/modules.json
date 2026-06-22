@@ -201,12 +201,12 @@
             },
             {
               "id": "large_intestine",
-              "label": "Large Intestine",
+              "label": "Large Intestine (Dr. Hala)",
               "icon": "🔬"
             },
             {
               "id": "small_intestine",
-              "label": "Small Intestine",
+              "label": "Small Intestine (Dr. Hala)",
               "icon": "🔬"
             }
           ]
