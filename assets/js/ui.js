@@ -77,7 +77,7 @@ const UI = {
   scoreRing(percent) {
     const r = 52, circ = 2 * Math.PI * r;
     const offset = circ - (percent / 100) * circ;
-    const color  = percent >= 70 ? '#4A9E8E' : percent >= 50 ? '#d97706' : '#dc2626';
+    const color  = percent >= 70 ? 'var(--success)' : percent >= 50 ? 'var(--warning)' : 'var(--danger)';
     return `<div class="score-ring">
       <svg viewBox="0 0 120 120" width="120" height="120">
         <circle cx="60" cy="60" r="${r}" fill="none" stroke="var(--border)" stroke-width="10"/>
@@ -137,31 +137,31 @@ const UI = {
     const reviewBtn = incorrect.length > 0
       ? `<button class="btn btn--danger review-btn" data-nav="review">
           <svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg> Review Incorrect
-          <span class="badge">${incorrect.length}</span>
+          <span class="badge badge--count">${incorrect.length}</span>
         </button>` : '';
 
     const flaggedBtn = flagged.length > 0
-      ? `<button class="btn btn--ghost review-btn" data-nav="flagged-review" style="border-color:#4A9E8E;color:#4A9E8E">
+      ? `<button class="btn btn--ghost review-btn" data-nav="flagged-review" style="border-color:var(--success);color:var(--success)">
           <svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> Flagged
-          <span class="badge" style="background:#4A9E8E">${flagged.length}</span>
+          <span class="badge" style="background:var(--success);color:#fff">${flagged.length}</span>
         </button>` : '';
 
     return `
     <div class="dashboard">
-      <header class="dashboard__header">
-        <div class="dashboard__title-wrap">
-          <img src="assets/images/logo.svg"      alt="${config.siteTitle}" class="dashboard__logo dashboard__logo--light" />
-          <img src="assets/images/logo-dark.svg" alt="${config.siteTitle}" class="dashboard__logo dashboard__logo--dark" />
+      <div class="dashboard__intro">
+        <div>
+          <h1 class="dashboard__greeting">Welcome back</h1>
+          <p class="dashboard__subgreeting">Pick up where you left off, or start something new.</p>
         </div>
         <div class="dashboard__actions">
           ${reviewBtn}
           ${flaggedBtn}
-          <button class="btn btn--ghost btn--sm wipe-history-btn" id="wipe-history-btn">Reset Progress</button>
-          <button class="theme-toggle" id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
-            <span class="theme-toggle__icon">🌙</span>
+          <button class="btn btn--ghost btn--sm wipe-history-btn" id="wipe-history-btn">
+            <svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+            Reset Progress
           </button>
         </div>
-      </header>
+      </div>
       <div class="stats-strip" style="margin-bottom:28px">${statsHTML}</div>
       <section class="section">
         <h2 class="section__title">Modules</h2>
@@ -305,7 +305,7 @@ const UI = {
               <div class="subsubject-card__name">${ss.label}</div>
               ${qCount ? `<div class="subsubject-card__qcount">${qCount} Q</div>` : ''}
               ${prog.completed
-                ? `<div class="subsubject-card__score" style="color:${pct >= 70 ? '#4A9E8E' : pct >= 50 ? '#d97706' : '#dc2626'}">${pct}%</div>
+                ? `<div class="subsubject-card__score" style="color:${pct >= 70 ? 'var(--success)' : pct >= 50 ? 'var(--warning)' : 'var(--danger)'}">${pct}%</div>
                    <span class="badge badge--success" style="font-size:.7rem">Done</span>`
                 : `<div class="subsubject-card__score" style="color:var(--text-4)">Not attempted</div>`
               }
@@ -376,7 +376,7 @@ const UI = {
             ${progress ? `
             <div class="info-card">
               <div class="info-card__label">Last Score</div>
-              <div class="info-card__value" style="color:${pct >= 70 ? '#4A9E8E' : pct >= 50 ? '#d97706' : '#dc2626'}">${pct}%</div>
+              <div class="info-card__value" style="color:${pct >= 70 ? 'var(--success)' : pct >= 50 ? 'var(--warning)' : 'var(--danger)'}">${pct}%</div>
             </div>
             <div class="info-card">
               <div class="info-card__label">Last Attempt</div>
@@ -395,7 +395,7 @@ const UI = {
               </button>
               <button class="btn btn--ghost btn--sm" data-nav="scoped-flagged"
                 data-params='${JSON.stringify({ moduleId: mod.id, examType, subject: subjectId, subSubject: subSubjectId, label: ss.label })}'
-                style="border-color:#4A9E8E;color:#4A9E8E">
+                style="border-color:var(--success);color:var(--success)">
                 Flagged (this topic)
               </button>
             </div>
@@ -704,10 +704,10 @@ const UI = {
           <h2 class="results-summary__title">Exam Complete</h2>
           <p class="results-summary__subtitle">${titleLabel} · ${subtitleLabel}</p>
           <div class="results-summary__grid">
-            ${this.statCard('Correct',   results.correct,    '✅', '#4A9E8E')}
-            ${this.statCard('Incorrect', results.incorrect,  '❌', '#dc2626')}
+            ${this.statCard('Correct',   results.correct,    '✅', 'var(--success)')}
+            ${this.statCard('Incorrect', results.incorrect,  '❌', 'var(--danger)')}
             ${this.statCard('Skipped',   results.unanswered, '—',  '#6b7280')}
-            ${this.statCard('Time',      ExamEngine.formatTime(results.timeSec), '⏱', '#2563eb')}
+            ${this.statCard('Time',      ExamEngine.formatTime(results.timeSec), '⏱', 'var(--info)')}
           </div>
         </div>
       </div>
@@ -782,7 +782,7 @@ const UI = {
     <div class="page review-page">
       ${this.backBtn(backPage, backParams)}
       ${this.breadcrumb(crumbs)}
-      <header class="page__header" style="--mod-color:#dc2626">
+      <header class="page__header" style="--mod-color:var(--danger)">
         <span class="page__icon"><svg class="icon icon--lg" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg></span>
         <div>
           <h1 class="page__title">${title}</h1>
@@ -821,7 +821,7 @@ const UI = {
           <span class="badge badge--ghost">${q.module}</span>
           ${q.subSubjectLabel ? `<span class="badge badge--ghost">${q.subSubjectLabel}</span>` : ''}
           <span class="badge badge--ghost">${et?.label}</span>
-          <span class="badge" style="background:#4A9E8E20;color:#4A9E8E">🚩 Flagged</span>
+          <span class="badge" style="background:var(--success-bg);color:var(--success)">🚩 Flagged</span>
         </div>
         <p class="review-item__question">${q.question}</p>
         <div class="review-item__options">
@@ -850,7 +850,7 @@ const UI = {
     <div class="page review-page">
       ${this.backBtn(backPage, backParams)}
       ${this.breadcrumb(crumbs)}
-      <header class="page__header" style="--mod-color:#4A9E8E">
+      <header class="page__header" style="--mod-color:var(--success)">
         <span class="page__icon"><svg class="icon icon--lg" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
         <div>
           <h1 class="page__title">${title}</h1>
@@ -869,7 +869,7 @@ const UI = {
     <div class="page search-page">
       ${this.backBtn('dashboard')}
       ${this.breadcrumb([{ label: 'Dashboard', nav: 'dashboard' }, { label: 'Search' }])}
-      <header class="page__header" style="--mod-color:#2563eb">
+      <header class="page__header" style="--mod-color:var(--info)">
         <span class="page__icon"><svg class="icon icon--lg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
         <div>
           <h1 class="page__title">Search</h1>

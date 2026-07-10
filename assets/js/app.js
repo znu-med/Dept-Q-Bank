@@ -57,8 +57,7 @@ const App = {
   _applyThemeIcon(theme) {
     const btn = document.getElementById('theme-toggle');
     if (!btn) return;
-    const icon = btn.querySelector('.theme-toggle__icon');
-    if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    btn.classList.toggle('theme-toggle--dark', theme === 'dark');
   },
 
   _toggleTheme() {
