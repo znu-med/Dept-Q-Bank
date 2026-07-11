@@ -151,7 +151,7 @@ const UI = {
       <div class="dashboard__intro">
         <div>
           <h1 class="dashboard__greeting">Welcome back</h1>
-          <p class="dashboard__subgreeting">Pick up where you left off, or start something new.</p>
+          <p class="dashboard__subgreeting">ZNU medical students, the A⁺ is waiting...</p>
         </div>
         <div class="dashboard__actions">
           ${reviewBtn}
@@ -165,7 +165,7 @@ const UI = {
       </section>
       <footer class="dashboard__footer">
         <p>Made by <strong>Kareem Farouk</strong> · Questions by Department Heads</p>
-        <p>Visit the <a href="https://harvest-programme.web.app/index.html" target="_blank" rel="noopener noreferrer" class="harvest-link">Harvest Programme</a> for exam simulation</p>
+        <p>Visit the <a href="https://harvest-programme.web.app/index.html" target="_blank" rel="noopener noreferrer" class="harvest-link">Harvest Programme</a> for exam simulation & more</p>
       </footer>
     </div>
     `;
