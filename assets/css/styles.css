@@ -953,6 +953,8 @@ img { max-width: 100%; display: block; }
   font-weight:     500;
 }
 
+.exam-sidebar > .progress-bar { margin-top: 0; margin-bottom: 12px; }
+
 /* ── Palette ──────────────────────────────────────────────── */
 .palette {
   display:               grid;
@@ -984,7 +986,7 @@ img { max-width: 100%; display: block; }
   display:   flex;
   flex-wrap: wrap;
   gap:       5px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .legend-item {
   font-size:    .65rem;
@@ -997,7 +999,21 @@ img { max-width: 100%; display: block; }
 .legend-item--answered { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); }
 .legend-item--flagged  { background: var(--warning-bg); color: var(--warning); border: 1px solid var(--warning-border); }
 
-.submit-exam-btn { width: 100%; margin-top: 6px; }
+.submit-exam-trigger#submit-exam-btn {
+  width:       100%;
+  padding-top: 8px;
+  margin-top:  6px;
+  border-top:  1px dashed var(--border);
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  color:       var(--text-3);
+}
+.submit-exam-trigger#submit-exam-btn:hover {
+  color:       var(--danger);
+  background:  transparent;
+}
 
 /* ── Exam Main ────────────────────────────────────────────── */
 .exam-main { display: flex; flex-direction: column; gap: 14px; }
@@ -1155,6 +1171,16 @@ img { max-width: 100%; display: block; }
   display:         flex;
   justify-content: space-between;
   gap:             10px;
+}
+.exam-nav .btn { min-width: 130px; }
+.exam-nav #next-btn,
+.exam-nav #finish-exam-btn { flex: 1; max-width: 340px; }
+.exam-nav #finish-exam-btn {
+  display:      flex;
+  align-items:  center;
+  justify-content: center;
+  gap:          8px;
+  box-shadow:   0 0 0 3px var(--info-bg);
 }
 
 /* ── Results ──────────────────────────────────────────────── */
@@ -1480,16 +1506,10 @@ img { max-width: 100%; display: block; }
 /* ── (legacy logo swap removed — badge mark now theme-agnostic) ── */
 
 /* ── Wipe History Modal ───────────────────────────────────── */
-.wipe-history-btn {
-  border-color: var(--border-strong);
-  color:        var(--text-3);
-  font-size:    .8rem;
-  transition:   border-color .15s, color .15s;
-}
-.wipe-history-btn:hover {
+.icon-btn--danger:hover {
   border-color: var(--danger);
   color:        var(--danger);
-  background:   transparent;
+  background:   var(--danger-bg);
 }
 
 .modal-overlay {

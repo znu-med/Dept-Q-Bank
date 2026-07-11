@@ -156,10 +156,6 @@ const UI = {
         <div class="dashboard__actions">
           ${reviewBtn}
           ${flaggedBtn}
-          <button class="btn btn--ghost btn--sm wipe-history-btn" id="wipe-history-btn">
-            <svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
-            Reset Progress
-          </button>
         </div>
       </div>
       <div class="stats-strip" style="margin-bottom:28px">${statsHTML}</div>
@@ -171,20 +167,6 @@ const UI = {
         <p>Made by <strong>Kareem Farouk</strong> · Questions by Department Heads</p>
         <p>Visit the <a href="https://harvest-programme.web.app/index.html" target="_blank" rel="noopener noreferrer" class="harvest-link">Harvest Programme</a> for exam simulation</p>
       </footer>
-    </div>
-
-    <!-- Wipe History Modal -->
-    <div id="wipe-modal" class="modal-overlay" style="display:none">
-      <div class="modal-box">
-        <div class="modal-divider"></div>
-        <h2 class="modal-title">Reset Progress?</h2>
-        <p class="modal-body">This will permanently delete all exam scores, progress, and incorrect question history.</p>
-        <p class="modal-note">Your flagged questions will not be affected.</p>
-        <div class="modal-actions">
-          <button class="btn btn--ghost" id="wipe-cancel-btn">Cancel</button>
-          <button class="btn btn--danger" id="wipe-confirm-btn">Reset Progress</button>
-        </div>
-      </div>
     </div>
     `;
   },
@@ -577,6 +559,9 @@ const UI = {
       ? (engine.config.scope === 'subject' ? 'subject' : 'module')
       : 'subject';
 
+    const progressPct = total ? Math.round((progress.answered / total) * 100) : 0;
+    const isLastQuestion = idx === total - 1;
+
     return `
     <div class="exam-layout">
       <aside class="exam-sidebar">
@@ -588,13 +573,16 @@ const UI = {
           <span>${progress.answered}/${total} answered</span>
           ${progress.flagged > 0 ? `<span>🚩 ${progress.flagged}</span>` : ''}
         </div>
+        ${this.progressBar(progressPct)}
         <div class="palette">${paletteHTML}</div>
         <div class="palette-legend">
           <span class="legend-item legend-item--current">Current</span>
           <span class="legend-item legend-item--answered">Answered</span>
           <span class="legend-item legend-item--flagged">Flagged</span>
         </div>
-        <button class="btn btn--danger btn--sm submit-exam-btn" id="submit-exam-btn"><svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Submit</button>
+        <button class="btn btn--ghost btn--sm submit-exam-trigger" id="submit-exam-btn">
+          <svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Submit Exam
+        </button>
       </aside>
 
       <main class="exam-main">
@@ -602,7 +590,8 @@ const UI = {
           ${this.backBtn(backNav, backParams)}
           <div class="exam-counter">Question <strong>${idx + 1}</strong> of <strong>${total}</strong></div>
           <button class="flag-btn ${isFlagged ? 'flag-btn--active' : ''}" id="flag-btn" title="${isFlagged ? 'Unflag' : 'Flag'} question">
-            <svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> ${isFlagged ? 'Flagged' : 'Flag'}
+            <svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            <span class="flag-btn__label">${isFlagged ? 'Flagged' : 'Flag'}</span>
           </button>
         </div>
         <div class="question-card">
@@ -614,8 +603,9 @@ const UI = {
         ${explanationHTML}
         <div class="exam-nav">
           <button class="btn btn--ghost" id="prev-btn" ${idx === 0 ? 'disabled' : ''}>← Previous</button>
-          <button class="btn btn--primary" id="next-btn" ${idx === total - 1 ? 'disabled' : ''}>Next →</button>
-          <button class="btn btn--danger btn--sm submit-exam-btn" id="submit-exam-btn"><svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Submit</button>
+          ${isLastQuestion
+            ? `<button class="btn btn--primary submit-exam-trigger" id="finish-exam-btn">Finish Exam <svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></button>`
+            : `<button class="btn btn--primary" id="next-btn">Next →</button>`}
         </div>
       </main>
     </div>`;

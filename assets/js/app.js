@@ -404,13 +404,14 @@ const App = {
         const btn = document.getElementById('flag-btn');
         if (btn) {
           btn.classList.toggle('flag-btn--active', nowFlagged);
-          btn.textContent = `🚩 ${nowFlagged ? 'Flagged' : 'Flag'}`;
+          const label = btn.querySelector('.flag-btn__label');
+          if (label) label.textContent = nowFlagged ? 'Flagged' : 'Flag';
         }
         this._updatePalette();
         UI.toast(nowFlagged ? 'Question flagged.' : 'Flag removed.', 'info', 1500);
       }
 
-      if (e.target.id === 'submit-exam-btn' || e.target.closest('#submit-exam-btn')) {
+      if (e.target.closest('.submit-exam-trigger')) {
         const unanswered = ExamEngine.getProgress().unanswered;
         if (unanswered > 0) {
           const ok = confirm(`You have ${unanswered} unanswered question${unanswered > 1 ? 's' : ''}. Submit anyway?`);
@@ -440,6 +441,11 @@ const App = {
     if (info) {
       const p = ExamEngine.getProgress();
       info.innerHTML = `<span>${p.answered}/${p.total} answered</span>${p.flagged > 0 ? `<span>🚩 ${p.flagged}</span>` : ''}`;
+    }
+    const fill = document.querySelector('.exam-sidebar .progress-bar__fill');
+    if (fill) {
+      const p = ExamEngine.getProgress();
+      fill.style.width = `${p.total ? Math.round((p.answered / p.total) * 100) : 0}%`;
     }
   },
 
