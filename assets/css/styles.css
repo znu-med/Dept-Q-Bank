@@ -333,6 +333,7 @@ img { max-width: 100%; display: block; }
   vertical-align: middle;
 }
 .icon--sm { width: 15px; height: 15px; }
+.icon--xs { width: 12px; height: 12px; }
 .icon--lg { width: 22px; height: 22px; }
 
 /* ── Buttons ──────────────────────────────────────────────── */
@@ -428,6 +429,33 @@ img { max-width: 100%; display: block; }
   color:      rgba(255,255,255,.9);
   border:     none;
   font-size:  .7rem;
+}
+.badge--professor {
+  background: var(--info-bg);
+  color:      var(--info);
+  border-color: var(--info-border);
+}
+.badge--unverified {
+  background: var(--warning-bg);
+  color:      var(--warning);
+  border-color: var(--warning-border);
+}
+
+/* Question-card badges (professor attribution / unverified answer) */
+.question-meta-badges {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       6px;
+  margin-bottom: 12px;
+}
+@keyframes badgePop {
+  from { opacity: 0; transform: translateY(-3px) scale(.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.question-meta-badges .badge { animation: badgePop .22s var(--ease-out) both; }
+.question-meta-badges .badge--unverified { animation-delay: .05s; }
+@media (prefers-reduced-motion: reduce) {
+  .question-meta-badges .badge { animation: none; }
 }
 
 /* ── Inputs ───────────────────────────────────────────────── */
