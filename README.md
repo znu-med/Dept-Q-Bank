@@ -215,39 +215,6 @@ Simply add multiple objects to the array, separated by commas:
 
 ---
 
-## Converting a Professor's PDF Into Questions
-
-The usual workflow when a professor hands out a guidance-question PDF:
-
-1. Extract the PDF's text into a plain `.txt` file, one question per block, in this format:
-   ```
-   What is the main artery supplying the liver?
-   A) Splenic artery
-   B) Hepatic artery
-   C) Gastric artery
-   D) Renal artery
-   Answer: B
-   ```
-   Separate each question with a blank line. If a PDF has no answer key, guess and mark it `Answer: B?` (keeps the question but flags it as unconfirmed), or leave `Answer: ?` if you have no idea (the question is skipped and reported so you can fill it in by hand).
-
-2. Run the converter, pointing it at the target topic file:
-   ```bash
-   python3 tools/txt_to_json.py batch1.txt data/CNS/final_exam/anatomy/brainstem.json --professor "Dr. Hassan"
-   ```
-   This creates the file (and folders) if they don't exist yet, or merges in and auto-increments IDs if they do. Add `--dry-run` to preview without writing.
-
-3. Push the updated JSON file(s) to GitHub.
-
-`tools/txt_to_json.py` is a local dev script — it isn't loaded by the site itself.
-
----
-
-## Progressive Web App (Offline Support)
-
-The site is installable and works offline after the first visit, via `manifest.json` and `sw.js`. Question data (`data/*.json`, `config/modules.json`) is cached with a network-first strategy, so you always get the newest questions when online, and whatever you've already opened stays available offline. The app shell (HTML/CSS/JS/icons) is cached with cache-first + background refresh.
-
----
-
 ## JSON Question Format
 
 | Field | Type | Required | Description |
@@ -257,8 +224,6 @@ The site is installable and works offline after the first visit, via `manifest.j
 | `options` | string[] | ✅ | Exactly 4 answer options (A, B, C, D) |
 | `answer` | integer | ✅ | Index of the correct option: `0`=A, `1`=B, `2`=C, `3`=D |
 | `explanation` | string | ✅ | Detailed explanation shown after answering |
-| `professor` | string | optional | Name of the professor this guidance question came from. Shown as a badge on the question card. |
-| `answerVerified` | boolean | optional | Set to `false` if the professor's PDF didn't include an official answer key and this answer is a best guess. Shows an "Unconfirmed answer" badge. Omit (or `true`) for confirmed answers. |
 
 ---
 
@@ -407,13 +372,11 @@ Future features planned:
 
 - [ ] Timed exam mode
 - [ ] Question difficulty tags
-- [x] Dark mode
+- [ ] Dark mode
 - [ ] Notes on individual questions
 - [ ] PDF export of results
-- [x] Offline PWA support
+- [ ] Offline PWA support
 - [ ] Cloud sync (optional)
-- [x] Professor attribution + unconfirmed-answer badges
-- [x] Reusable `.txt` → JSON question converter
 
 ---
 

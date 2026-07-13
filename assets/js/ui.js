@@ -44,25 +44,6 @@ const UI = {
     </button>`;
   },
 
-  // Professor attribution + unverified-answer badges for a question object.
-  questionMetaBadges(q) {
-    if (!q) return '';
-    const profBadge = q.professor
-      ? `<span class="badge badge--professor" title="Guidance question from this professor">
-          <svg class="icon icon--xs" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          ${q.professor}
-        </span>`
-      : '';
-    const unverifiedBadge = (q.answerVerified === false)
-      ? `<span class="badge badge--unverified" title="No official answer key was given for this question — double-check this one">
-          <svg class="icon icon--xs" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Unconfirmed answer
-        </span>`
-      : '';
-    if (!profBadge && !unverifiedBadge) return '';
-    return `<div class="question-meta-badges">${profBadge}${unverifiedBadge}</div>`;
-  },
-
   loading(message = 'Loading…') {
     this.setContent(`<div class="loading-screen">
       <div class="spinner"></div>
@@ -616,7 +597,6 @@ const UI = {
         <div class="question-card">
           <div class="question-card__number">Q${idx + 1}</div>
           ${topicBadge}
-          ${this.questionMetaBadges(q)}
           <p class="question-card__text">${q.question}</p>
         </div>
         <div class="options-list">${optionsHTML}</div>
@@ -695,7 +675,6 @@ const UI = {
           ${topicTag}
           ${pq.flagged ? '<span class="result-item__flag">🚩</span>' : ''}
         </div>
-        ${this.questionMetaBadges(pq)}
         <p class="result-item__question">${pq.question}</p>
         <div class="result-item__answers">
           ${pq.answered ? `<span class="result-item__user ${pq.correct ? 'result-item__user--correct' : 'result-item__user--wrong'}">Your answer: ${['A','B','C','D','E','F','G','H'][pq.userAnswer]}. ${pq.options[pq.userAnswer]}</span>` : '<span class="result-item__skipped">Not answered</span>'}
