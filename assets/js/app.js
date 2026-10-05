@@ -187,7 +187,7 @@ const App = {
           }
           break;
         }
-        UI.setContent(UI.renderExam(ExamEngine, this.config));
+        this._renderExam();
         this._bindExamEvents();
         break;
       }
@@ -196,7 +196,7 @@ const App = {
         UI.setContent(UI.skeletonExam());
         const resumed = await ExamEngine.resume();
         if (!resumed) { this.navigate('dashboard'); break; }
-        UI.setContent(UI.renderExam(ExamEngine, this.config));
+        this._renderExam();
         this._bindExamEvents();
         break;
       }
@@ -395,33 +395,25 @@ const App = {
         const idx    = parseInt(optBtn.dataset.option, 10);
         const result = ExamEngine.answer(idx);
         if (result) {
-          const opts = document.querySelectorAll('.option');
-          opts.forEach((btn, i) => {
+          document.querySelectorAll('.exam-layout .option').forEach((btn, i) => {
             btn.disabled = true;
-            if (i === result.correctIndex)         btn.classList.add('option--correct');
-            else if (i === idx && !result.correct) btn.classList.add('option--wrong');
+            let status = null;
+            if (i === result.correctIndex)           { btn.classList.add('option--correct'); status = 'check'; }
+            else if (i === idx && !result.correct)   { btn.classList.add('option--wrong');   status = 'x'; }
+            if (status) btn.insertAdjacentHTML('beforeend', `<span class="option__status">${UI.examIcon(status)}</span>`);
           });
           this._updatePalette();
-          if (ExamEngine.config.immediateFeedback) {
-            const existing = document.querySelector('.explanation-box');
-            if (!existing) {
-              const box = document.createElement('div');
-              box.className = `explanation-box ${result.correct ? 'explanation-box--correct' : 'explanation-box--wrong'}`;
-
-              // Show topic label for wide exams
-              const q = ExamEngine.getCurrent();
-              const topicBadge = (ExamEngine.config.scope && q._subSubjectLabel)
-                ? `<div class="explanation-box__topic">📌 ${q._subSubjectLabel}</div>`
-                : '';
-
-              box.innerHTML = `
-                <div class="explanation-box__header">
-                  ${result.correct ? '✅ Correct!' : `❌ Incorrect — Correct answer: <strong>${['A','B','C','D'][result.correctIndex]}</strong>`}
-                </div>
-                ${topicBadge}
-                <p class="explanation-box__text">${result.explanation}</p>`;
-              document.querySelector('.options-list').after(box);
-            }
+          if (ExamEngine.config.immediateFeedback && !document.querySelector('.explanation-box')) {
+            const q = ExamEngine.getCurrent();
+            const topic = (ExamEngine.config.scope && q._subSubjectLabel) ? q._subSubjectLabel : '';
+            document.querySelector('.options-list').insertAdjacentHTML('afterend', UI.examExplanation({
+              correct:      result.correct,
+              correctIndex: result.correctIndex,
+              explanation:  result.explanation,
+              topic,
+            }));
+            const box = document.querySelector('.explanation-box');
+            if (box) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
         }
       }
@@ -429,16 +421,16 @@ const App = {
       const palBtn = e.target.closest('.palette-btn');
       if (palBtn && palBtn.dataset.goto !== undefined) {
         ExamEngine.goTo(parseInt(palBtn.dataset.goto, 10));
-        UI.setContent(UI.renderExam(ExamEngine, this.config));
+        this._renderExam();
       }
 
-      if (e.target.id === 'next-btn') {
+      if (e.target.closest('#next-btn')) {
         ExamEngine.next();
-        UI.setContent(UI.renderExam(ExamEngine, this.config));
+        this._renderExam();
       }
-      if (e.target.id === 'prev-btn') {
+      if (e.target.closest('#prev-btn')) {
         ExamEngine.prev();
-        UI.setContent(UI.renderExam(ExamEngine, this.config));
+        this._renderExam();
       }
 
       if (e.target.id === 'flag-btn' || e.target.closest('#flag-btn')) {
@@ -468,6 +460,20 @@ const App = {
     };
   },
 
+  // Single entry point for (re)drawing the exam screen. Always lands at the top of the
+  // new question and keeps the current palette chip in view (palette scrolls on long exams
+  // and is a horizontal strip on mobile).
+  _renderExam() {
+    UI.setContent(UI.renderExam(ExamEngine, this.config));
+    window.scrollTo(0, 0);
+    const pal = document.querySelector('.exam-layout .palette');
+    const cur = pal && pal.querySelector('.palette-btn--current');
+    if (pal && cur) {
+      pal.scrollTop  = cur.offsetTop  - pal.clientHeight / 2 + cur.offsetHeight / 2;
+      pal.scrollLeft = cur.offsetLeft - pal.clientWidth  / 2 + cur.offsetWidth  / 2;
+    }
+  },
+
   _updatePalette() {
     const palette = document.querySelector('.palette');
     if (!palette) return;
@@ -482,7 +488,7 @@ const App = {
     const info = document.querySelector('.exam-progress-info');
     if (info) {
       const p = ExamEngine.getProgress();
-      info.innerHTML = `<span>${p.answered}/${p.total} answered</span>${p.flagged > 0 ? `<span>🚩 ${p.flagged}</span>` : ''}`;
+      info.innerHTML = UI.examProgressInfo(p);
     }
     const fill = document.querySelector('.exam-sidebar .progress-bar__fill');
     if (fill) {
