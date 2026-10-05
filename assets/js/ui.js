@@ -388,7 +388,7 @@ const UI = {
         </div>
       </div>
       <div class="resume-banner__actions">
-        <button class="btn btn--primary btn--sm" data-nav="resume-exam">Resume <span aria-hidden="true">→</span></button>
+        <button class="btn btn--primary btn--sm" data-nav="resume-exam">Resume <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
         <button class="icon-btn resume-banner__dismiss" id="resume-dismiss-btn" aria-label="Abandon exam">
           <svg class="icon icon--sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
@@ -821,14 +821,17 @@ const UI = {
   },
 
   // Explanation panel — single source of truth for both full render and live answer update
+  // Returns '' when the question has no explanation text — the option check/cross already
+  // signals correctness, so an empty card would only be noise.
   examExplanation({ correct, correctIndex, explanation, topic }) {
+    if (!explanation || !String(explanation).trim()) return '';
     return `<div class="explanation-box ${correct ? 'explanation-box--correct' : 'explanation-box--wrong'}">
       <div class="explanation-box__header">
         ${this.examIcon(correct ? 'check' : 'x')}
         <span>${correct ? 'Correct' : `Incorrect — correct answer: <strong>${this.examLetter(correctIndex)}</strong>`}</span>
       </div>
       ${topic ? `<div class="explanation-box__topic">${topic}</div>` : ''}
-      ${explanation ? `<p class="explanation-box__text">${explanation}</p>` : ''}
+      <p class="explanation-box__text">${explanation}</p>
     </div>`;
   },
 
@@ -947,11 +950,14 @@ const UI = {
         </div>
         <div class="options-list">${optionsHTML}</div>
         ${explanationHTML}
-        <div class="exam-nav">
-          <button class="btn btn--ghost" id="prev-btn" ${idx === 0 ? 'disabled' : ''}>${this.examIcon('prev')} Previous</button>
-          ${isLastQuestion
-            ? `<button class="btn btn--primary submit-exam-trigger" id="finish-exam-btn">Finish Exam ${this.examIcon('check')}</button>`
-            : `<button class="btn btn--primary" id="next-btn">Next ${this.examIcon('next')}</button>`}
+        <div class="exam-dock">
+          <div class="palette palette--strip">${paletteHTML}</div>
+          <div class="exam-nav">
+            <button class="btn btn--ghost" id="prev-btn" ${idx === 0 ? 'disabled' : ''}>${this.examIcon('prev')} Previous</button>
+            ${isLastQuestion
+              ? `<button class="btn btn--primary submit-exam-trigger" id="finish-exam-btn">Finish Exam ${this.examIcon('check')}</button>`
+              : `<button class="btn btn--primary" id="next-btn">Next ${this.examIcon('next')}</button>`}
+          </div>
         </div>
       </main>
     </div>`;
