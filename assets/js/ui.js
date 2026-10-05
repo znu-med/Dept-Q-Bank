@@ -189,9 +189,10 @@ const UI = {
     </div>`;
   },
 
-  // Exam page — sidebar palette + question card
+  // Exam page — sidebar palette + question card + options + nav
   skeletonExam() {
-    const paletteCell = this._skel('30px', '30px', 'var(--radius-sm)');
+    const paletteCell = this._skel('100%', '30px', 'var(--radius-sm)');
+    const option = this._skel('100%', '52px', 'var(--radius)');
     return `<div class="exam-layout">
       <aside class="exam-sidebar">
         <div class="exam-sidebar__header">
@@ -199,18 +200,23 @@ const UI = {
           <div style="margin-top:6px">${this._skel('50%', '10px', '4px')}</div>
         </div>
         ${this._skel('100%', '6px', '999px', 'margin:14px 0')}
-        <div class="palette">${Array(12).fill(paletteCell).join('')}</div>
+        <div class="palette">${Array(10).fill(paletteCell).join('')}</div>
       </aside>
       <div class="exam-main">
+        <div class="exam-topbar">
+          ${this._skel('72px', '30px', 'var(--radius)')}
+          ${this._skel('84px', '30px', 'var(--radius)', 'margin-left:auto')}
+        </div>
         <div class="question-card">
-          ${this._skel('90%', '15px', '4px')}
-          <div style="margin-top:8px">${this._skel('75%', '15px', '4px')}</div>
-          <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px">
-            ${this._skel('100%', '46px', 'var(--radius)')}
-            ${this._skel('100%', '46px', 'var(--radius)')}
-            ${this._skel('100%', '46px', 'var(--radius)')}
-            ${this._skel('100%', '46px', 'var(--radius)')}
-          </div>
+          ${this._skel('110px', '10px', '4px', 'margin-bottom:16px')}
+          ${this._skel('92%', '15px', '4px')}
+          <div style="margin-top:8px">${this._skel('78%', '15px', '4px')}</div>
+          <div style="margin-top:8px">${this._skel('55%', '15px', '4px')}</div>
+        </div>
+        <div class="options-list">${Array(4).fill(option).join('')}</div>
+        <div class="exam-nav">
+          ${this._skel('120px', '38px', 'var(--radius)')}
+          ${this._skel('180px', '38px', 'var(--radius)', 'margin-left:auto')}
         </div>
       </div>
     </div>`;
@@ -794,12 +800,46 @@ const UI = {
 
   // ─── Exam interface ───────────────────────────────────────────────────────
 
+  // Inline SVG glyphs for exam chrome (no emoji in UI chrome — see DESIGN_STANDARDS §1/§4)
+  examIcon(name) {
+    const paths = {
+      flag:  '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>',
+      check: '<polyline points="20 6 9 17 4 12"/>',
+      x:     '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+      prev:  '<polyline points="15 18 9 12 15 6"/>',
+      next:  '<polyline points="9 18 15 12 9 6"/>',
+    };
+    return `<svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">${paths[name] || ''}</svg>`;
+  },
+
+  examLetter(i) { return 'ABCDEFGH'[i] || String(i + 1); },
+
+  // Sidebar "X/Y answered · flag count" row — shared by renderExam and the live palette updater
+  examProgressInfo(p) {
+    return `<span>${p.answered}/${p.total} answered</span>${p.flagged > 0
+      ? `<span class="exam-progress-info__flag">${this.examIcon('flag')}${p.flagged}</span>` : ''}`;
+  },
+
+  // Explanation panel — single source of truth for both full render and live answer update
+  examExplanation({ correct, correctIndex, explanation, topic }) {
+    return `<div class="explanation-box ${correct ? 'explanation-box--correct' : 'explanation-box--wrong'}">
+      <div class="explanation-box__header">
+        ${this.examIcon(correct ? 'check' : 'x')}
+        <span>${correct ? 'Correct' : `Incorrect — correct answer: <strong>${this.examLetter(correctIndex)}</strong>`}</span>
+      </div>
+      ${topic ? `<div class="explanation-box__topic">${topic}</div>` : ''}
+      ${explanation ? `<p class="explanation-box__text">${explanation}</p>` : ''}
+    </div>`;
+  },
+
   renderExam(engine, config) {
-    const q        = engine.getCurrent();
-    const idx      = engine.state.currentIndex;
-    const total    = engine.questions.length;
-    const et       = config.examTypes.find(e => e.id === engine.config.examType);
+    const q         = engine.getCurrent();
+    const idx       = engine.state.currentIndex;
+    const total     = engine.questions.length;
+    const et        = config.examTypes.find(e => e.id === engine.config.examType);
+    const modObj    = config.modules.find(m => m.id === engine.config.module);
     const answered  = engine.getCurrentAnswer();
+    const isAnswered = answered !== undefined;
     const isFlagged = engine.isFlagged(idx);
     const progress  = engine.getProgress();
 
@@ -808,7 +848,6 @@ const UI = {
     let sidebarTitle, sidebarSub;
 
     if (isWide) {
-      const modObj = config.modules.find(m => m.id === engine.config.module);
       if (engine.config.scope === 'subject') {
         const sub = config.subjects.find(s => s.id === engine.config.subject);
         sidebarTitle = `${sub?.icon} ${sub?.label}`;
@@ -819,45 +858,44 @@ const UI = {
       }
     } else {
       const sub   = config.subjects.find(s => s.id === engine.config.subject);
-      const subSubs = (config.modules.find(m => m.id === engine.config.module)?.subSubjects?.[engine.config.examType]?.[engine.config.subject]) || [];
+      const subSubs = (modObj?.subSubjects?.[engine.config.examType]?.[engine.config.subject]) || [];
       const ss    = subSubs.find(s => s.id === engine.config.subSubject) || { label: engine.config.subSubject, icon: '📄' };
       sidebarTitle = `${ss.icon} ${ss.label}`;
       sidebarSub   = `${sub?.icon} ${sub?.label} · ${et?.label}`;
     }
 
-    // Show topic badge for wide exams
-    const topicBadge = (isWide && q._subSubjectLabel)
-      ? `<div class="exam-question-topic">${q._subSubjectLabel}</div>`
-      : '';
+    const topicLabel = (isWide && q._subSubjectLabel) ? q._subSubjectLabel : '';
 
     const paletteHTML = engine.questions.map((_, i) => {
       let cls = 'palette-btn';
       if (i === idx)                 cls += ' palette-btn--current';
       else if (engine.isAnswered(i)) cls += ' palette-btn--answered';
       if (engine.isFlagged(i))       cls += ' palette-btn--flagged';
-      return `<button class="${cls}" data-goto="${i}" title="Question ${i + 1}">${i + 1}</button>`;
+      return `<button class="${cls}" data-goto="${i}" title="Question ${i + 1}" aria-label="Question ${i + 1}"${i === idx ? ' aria-current="true"' : ''}>${i + 1}</button>`;
     }).join('');
 
     const optionsHTML = q.options.map((opt, i) => {
       let cls = 'option';
-      if (answered !== undefined) {
-        if (i === q.answer)      cls += ' option--correct';
-        else if (i === answered) cls += ' option--wrong';
+      let status = '';
+      if (isAnswered) {
+        if (i === q.answer)      { cls += ' option--correct'; status = 'check'; }
+        else if (i === answered) { cls += ' option--wrong';   status = 'x'; }
       }
-      return `<button class="${cls}" data-option="${i}" ${answered !== undefined ? 'disabled' : ''}>
-        <span class="option__letter">${['A','B','C','D','E','F','G','H'][i]}</span>
+      return `<button class="${cls}" data-option="${i}" ${isAnswered ? 'disabled' : ''}>
+        <span class="option__letter">${this.examLetter(i)}</span>
         <span class="option__text">${opt}</span>
+        ${status ? `<span class="option__status">${this.examIcon(status)}</span>` : ''}
       </button>`;
     }).join('');
 
-    const explanationHTML = (answered !== undefined && engine.config.immediateFeedback)
-      ? `<div class="explanation-box ${answered === q.answer ? 'explanation-box--correct' : 'explanation-box--wrong'}">
-          <div class="explanation-box__header">
-            ${answered === q.answer ? '✅ Correct!' : `❌ Incorrect — Correct answer: <strong>${['A','B','C','D','E','F','G','H'][q.answer]}</strong>`}
-          </div>
-          ${isWide && q._subSubjectLabel ? `<div class="explanation-box__topic">${q._subSubjectLabel}</div>` : ''}
-          <p class="explanation-box__text">${q.explanation}</p>
-        </div>` : '';
+    const explanationHTML = (isAnswered && engine.config.immediateFeedback)
+      ? this.examExplanation({
+          correct: answered === q.answer,
+          correctIndex: q.answer,
+          explanation: q.explanation,
+          topic: topicLabel,
+        })
+      : '';
 
     // Back nav for wide exams goes to the right place
     const backParams = isWide
@@ -873,49 +911,47 @@ const UI = {
     const isLastQuestion = idx === total - 1;
 
     return `
-    <div class="exam-layout">
+    <div class="exam-layout" style="--mod-color:${modObj?.color || 'var(--primary)'}">
       <aside class="exam-sidebar">
         <div class="exam-sidebar__header">
           <div class="exam-sidebar__title">${sidebarTitle}</div>
           <div class="exam-sidebar__sub">${sidebarSub}</div>
         </div>
-        <div class="exam-progress-info">
-          <span>${progress.answered}/${total} answered</span>
-          ${progress.flagged > 0 ? `<span>🚩 ${progress.flagged}</span>` : ''}
-        </div>
-        ${this.progressBar(progressPct)}
+        <div class="exam-progress-info">${this.examProgressInfo(progress)}</div>
+        ${this.progressBar(progressPct, 'var(--mod-color, var(--primary))')}
         <div class="palette">${paletteHTML}</div>
         <div class="palette-legend">
           <span class="legend-item legend-item--current">Current</span>
           <span class="legend-item legend-item--answered">Answered</span>
           <span class="legend-item legend-item--flagged">Flagged</span>
         </div>
-        <button class="btn btn--ghost btn--sm submit-exam-trigger" id="submit-exam-btn">
-          <svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Submit Exam
+        <button class="btn btn--ghost btn--sm exam-submit-btn submit-exam-trigger">
+          ${this.examIcon('check')} Submit Exam
         </button>
       </aside>
 
       <main class="exam-main">
         <div class="exam-topbar">
           ${this.backBtn(backNav, backParams)}
-          <div class="exam-counter">Question <strong>${idx + 1}</strong> of <strong>${total}</strong></div>
-          <button class="flag-btn ${isFlagged ? 'flag-btn--active' : ''}" id="flag-btn" title="${isFlagged ? 'Unflag' : 'Flag'} question">
-            <svg class="icon icon--sm" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          <button class="flag-btn ${isFlagged ? 'flag-btn--active' : ''}" id="flag-btn" title="${isFlagged ? 'Unflag' : 'Flag'} question" aria-pressed="${isFlagged}">
+            ${this.examIcon('flag')}
             <span class="flag-btn__label">${isFlagged ? 'Flagged' : 'Flag'}</span>
           </button>
         </div>
         <div class="question-card">
-          <div class="question-card__number">Q${idx + 1}</div>
-          ${topicBadge}
+          <div class="question-card__meta">
+            <span class="question-card__number">Question ${idx + 1} <span class="question-card__of">/ ${total}</span></span>
+            ${topicLabel ? `<span class="exam-question-topic">${topicLabel}</span>` : ''}
+          </div>
           <p class="question-card__text">${q.question}</p>
         </div>
         <div class="options-list">${optionsHTML}</div>
         ${explanationHTML}
         <div class="exam-nav">
-          <button class="btn btn--ghost" id="prev-btn" ${idx === 0 ? 'disabled' : ''}>← Previous</button>
+          <button class="btn btn--ghost" id="prev-btn" ${idx === 0 ? 'disabled' : ''}>${this.examIcon('prev')} Previous</button>
           ${isLastQuestion
-            ? `<button class="btn btn--primary submit-exam-trigger" id="finish-exam-btn">Finish Exam <svg class="icon icon--sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></button>`
-            : `<button class="btn btn--primary" id="next-btn">Next →</button>`}
+            ? `<button class="btn btn--primary submit-exam-trigger" id="finish-exam-btn">Finish Exam ${this.examIcon('check')}</button>`
+            : `<button class="btn btn--primary" id="next-btn">Next ${this.examIcon('next')}</button>`}
         </div>
       </main>
     </div>`;
