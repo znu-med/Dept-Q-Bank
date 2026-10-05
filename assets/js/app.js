@@ -466,24 +466,26 @@ const App = {
   _renderExam() {
     UI.setContent(UI.renderExam(ExamEngine, this.config));
     window.scrollTo(0, 0);
-    const pal = document.querySelector('.exam-layout .palette');
-    const cur = pal && pal.querySelector('.palette-btn--current');
-    if (pal && cur) {
+    document.querySelectorAll('.exam-layout .palette').forEach(pal => {
+      const cur = pal.querySelector('.palette-btn--current');
+      if (!cur || !pal.clientWidth) return;   // skip the palette hidden at this breakpoint
       pal.scrollTop  = cur.offsetTop  - pal.clientHeight / 2 + cur.offsetHeight / 2;
       pal.scrollLeft = cur.offsetLeft - pal.clientWidth  / 2 + cur.offsetWidth  / 2;
-    }
+    });
   },
 
   _updatePalette() {
-    const palette = document.querySelector('.palette');
-    if (!palette) return;
-    ExamEngine.questions.forEach((_, i) => {
-      const btn = palette.querySelector(`[data-goto="${i}"]`);
-      if (!btn) return;
-      btn.className = 'palette-btn';
-      if (i === ExamEngine.state.currentIndex) btn.classList.add('palette-btn--current');
-      else if (ExamEngine.isAnswered(i))       btn.classList.add('palette-btn--answered');
-      if (ExamEngine.isFlagged(i))             btn.classList.add('palette-btn--flagged');
+    const palettes = document.querySelectorAll('.exam-layout .palette');
+    if (!palettes.length) return;
+    palettes.forEach(palette => {
+      ExamEngine.questions.forEach((_, i) => {
+        const btn = palette.querySelector(`[data-goto="${i}"]`);
+        if (!btn) return;
+        btn.className = 'palette-btn';
+        if (i === ExamEngine.state.currentIndex) btn.classList.add('palette-btn--current');
+        else if (ExamEngine.isAnswered(i))       btn.classList.add('palette-btn--answered');
+        if (ExamEngine.isFlagged(i))             btn.classList.add('palette-btn--flagged');
+      });
     });
     const info = document.querySelector('.exam-progress-info');
     if (info) {
