@@ -411,6 +411,7 @@ const App = {
               correctIndex: result.correctIndex,
               explanation:  result.explanation,
               topic,
+              correctText:  q.options[result.correctIndex],
             }));
             const box = document.querySelector('.explanation-box');
             if (box) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
