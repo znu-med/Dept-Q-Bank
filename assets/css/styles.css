@@ -2022,24 +2022,30 @@ img { max-width: 100%; display: block; }
 
 /* ── Options ─────────────────────────────────────────────── */
 .exam-layout .options-list {
-  gap:           2px;
-  background:    var(--border);
-  border-radius: var(--radius-lg);
-  overflow:      hidden;
-  box-shadow:    var(--shadow-sm);
+  gap:             0;
+  background:      var(--surface);          /* same surface as .question-card, so the two read as one family */
+  backdrop-filter: var(--glass-blur);
+  border:          1px solid var(--border);
+  border-radius:   var(--radius-lg);
+  overflow:        hidden;
+  box-shadow:      var(--shadow-sm);
 }
 .exam-layout .option {
-  align-items:   center;
-  padding:       15px 18px;
-  border:        0;
-  border-radius: 0;
-  box-shadow:    none;
-  transform:     none;
-  transition:    background var(--dur), opacity var(--dur);
+  align-items:     center;
+  padding:         15px 18px;
+  background:      transparent;
+  backdrop-filter: none;
+  border:          0;
+  border-radius:   0;
+  box-shadow:      none;
+  transform:       none;
+  transition:      background var(--dur), opacity var(--dur);
 }
+.exam-layout .option + .option { border-top: 1px solid var(--border); }
 .exam-layout .option:hover:not([disabled]) {
-  background: var(--surface-solid);
-  transform:  none;
+  background:   var(--primary-50);
+  border-color: var(--border);
+  transform:    none;
 }
 .exam-layout .option__letter { width: 28px; height: 28px; }
 .exam-layout .option__text   { min-width: 0; overflow-wrap: break-word; }
@@ -2050,8 +2056,21 @@ img { max-width: 100%; display: block; }
 }
 .option--correct .option__status { color: var(--success); }
 .option--wrong   .option__status { color: var(--danger); }
+/* Result rows: soft tint over the surface (translucent tokens, no solid fills) */
 .exam-layout .option--correct,
-.exam-layout .option--wrong { border-color: transparent !important; }
+.exam-layout .option--wrong { border-color: var(--border) !important; }
+.exam-layout .option--correct { background: var(--success-bg) !important; }
+.exam-layout .option--wrong   { background: var(--danger-bg)  !important; }
+.exam-layout .option--correct .option__letter {
+  background:   color-mix(in srgb, var(--success) 20%, transparent);
+  border-color: var(--success-border);
+  color:        var(--success);
+}
+.exam-layout .option--wrong .option__letter {
+  background:   color-mix(in srgb, var(--danger) 20%, transparent);
+  border-color: var(--danger-border);
+  color:        var(--danger);
+}
 .exam-layout .option[disabled]:not(.option--correct):not(.option--wrong) { opacity: .6; }
 
 /* ── Explanation ─────────────────────────────────────────── */
