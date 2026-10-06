@@ -821,10 +821,23 @@ const UI = {
   },
 
   // Explanation panel — single source of truth for both full render and live answer update
+  // True when there is nothing worth showing: empty text, or boilerplate that only restates
+  // the correct option ("The correct answer is B. Neurogenic shock") — the option colours and
+  // check/cross already say that.
+  isRedundantExplanation(text, correctText) {
+    const norm = v => String(v ?? '').replace(/<[^>]*>/g, ' ').toLowerCase()
+      .replace(/[^\p{L}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ').trim();
+    const t = norm(text);
+    if (!t) return true;
+    const rest = t.replace(/^(the )?(correct )?(answer|option|choice)( is)?\s*/, '')
+                  .replace(/^[a-h](\s+|$)/, '').trim();
+    return rest === '' || rest === norm(correctText);
+  },
+
   // Returns '' when the question has no explanation text — the option check/cross already
   // signals correctness, so an empty card would only be noise.
-  examExplanation({ correct, correctIndex, explanation, topic }) {
-    if (!explanation || !String(explanation).trim()) return '';
+  examExplanation({ correct, correctIndex, explanation, topic, correctText }) {
+    if (this.isRedundantExplanation(explanation, correctText)) return '';
     return `<div class="explanation-box ${correct ? 'explanation-box--correct' : 'explanation-box--wrong'}">
       <div class="explanation-box__header">
         ${this.examIcon(correct ? 'check' : 'x')}
@@ -897,6 +910,7 @@ const UI = {
           correctIndex: q.answer,
           explanation: q.explanation,
           topic: topicLabel,
+          correctText: q.options[q.answer],
         })
       : '';
 
