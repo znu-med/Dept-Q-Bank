@@ -951,7 +951,7 @@ const UI = {
         <div class="options-list">${optionsHTML}</div>
         ${explanationHTML}
         <div class="exam-dock">
-          <div class="palette palette--strip">${paletteHTML}</div>
+          <div class="palette palette--strip">${paletteHTML}<button class="palette-submit submit-exam-trigger" aria-label="Submit exam">${this.examIcon('check')}Submit</button></div>
           <div class="exam-nav">
             <button class="btn btn--ghost" id="prev-btn" ${idx === 0 ? 'disabled' : ''}>${this.examIcon('prev')} Previous</button>
             ${isLastQuestion
